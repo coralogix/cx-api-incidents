@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v3;
+
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/incidents/v3/incident_query_filters.proto";
+
+message IncidentQuery {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+  IncidentQueryFilters filters = 3;
+}

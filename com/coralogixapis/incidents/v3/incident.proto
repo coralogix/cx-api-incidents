@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v3;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/incidents/v3/incident_state.proto";
+import "com/coralogixapis/incidents/v3/incident_severity.proto";
+import "com/coralogixapis/incidents/v3/incident_event.proto";
+import "com/coralogixapis/incidents/v3/snooze_info.proto";
+import "com/coralogixapis/incidents/v3/source_alert.proto";
+import "com/coralogixapis/incidents/v3/source_multiple.proto";
+import "com/coralogixapis/incidents/v3/source_type.proto";
+import "com/coralogixapis/incidents/v3/assignee.proto";
+
+message Incident {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue name = 2;
+  IncidentState state = 3;
+  Assignee assigned_to = 4;
+  Assignee assigned_by = 5;
+  google.protobuf.StringValue description = 6;
+  IncidentSeverity severity = 7;
+  SourceType source_type = 8;
+  oneof source {
+    SourceAlert alert = 9;
+    SourceMultiple multiple = 10;
+  };
+  map<string, string> labels = 11;
+  repeated IncidentEvent events = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp closed_at = 14;
+  google.protobuf.UInt64Value duration = 15;
+  SnoozeInfo snooze_info = 16;
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v3;
+
+enum IncidentSeverity {
+  INCIDENT_SEVERITY_INFO_OR_UNSPECIFIED = 0;
+  INCIDENT_SEVERITY_WARNING = 1;
+  INCIDENT_SEVERITY_ERROR = 2;
+  INCIDENT_SEVERITY_CRITICAL = 3;
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v3;
+
+import "google/protobuf/wrappers.proto";
+
+message SourceAlert {
+    google.protobuf.StringValue id = 1;
+    google.protobuf.StringValue notification_group_id = 2;
+}

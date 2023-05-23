@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v3;
+
+import "google/protobuf/wrappers.proto";
+
+message Assignee {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue email = 2;
+}

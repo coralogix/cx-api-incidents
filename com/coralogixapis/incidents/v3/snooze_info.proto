@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v3;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+
+message SnoozeInfo {
+  google.protobuf.StringValue user = 1;
+  google.protobuf.Timestamp end_time = 2;
+  google.protobuf.BoolValue snoozed = 3;
+}

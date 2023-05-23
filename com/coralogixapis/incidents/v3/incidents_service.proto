@@ -1,0 +1,237 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v3;
+
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/incidents/v3/incident.proto";
+import "com/coralogixapis/incidents/v3/incident_query.proto";
+import "com/coralogixapis/incidents/v3/incident_timeline_event.proto";
+
+message AuditLogDescription {
+  optional string description = 1;
+}
+
+extend google.protobuf.MethodOptions {
+  optional AuditLogDescription audit_log_description = 5000;
+}
+
+service IncidentsService {
+
+  rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {
+    option (audit_log_description).description = "get incident";
+    option (google.api.http) = {
+      get: "/v3/incidents/{id}"
+    };
+  }
+
+  rpc CreateIncident(CreateIncidentRequest) returns (CreateIncidentResponse){
+    option (audit_log_description).description = "create incident";
+    option (google.api.http) = {
+      post: "/v3/incidents"
+      body: "Incident"
+    };
+  }
+
+  rpc ReplaceIncident(ReplaceIncidentRequest) returns (ReplaceIncidentResponse){
+    option (audit_log_description).description = "replace incident";
+    option (google.api.http) = {
+      put: "/v3/incidents"
+      body: "Incident"
+    };
+  }
+
+  rpc DeleteIncident(DeleteIncidentRequest) returns (DeleteIncidentResponse){
+    option (audit_log_description).description = "delete incident";
+    option (google.api.http) = {
+      delete: "/v3/incidents/{id}"
+    };
+  }
+
+  rpc BatchGetIncident(BatchGetIncidentRequest) returns (BatchGetIncidentResponse){
+    option (audit_log_description).description = "batch get incidents";
+    option (google.api.http) = {
+      get: "/v3/incidents/incidents:batchGet"
+    };
+  }
+
+  rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse){
+    option (audit_log_description).description = "get incidents list";
+    option (google.api.http) = {
+      get: "/v3/incidents"
+      body: "*"
+    };
+  }
+
+  rpc ListTimelines(ListTimelinesRequest) returns (ListTimelinesResponse){
+    option (audit_log_description).description = "get timelines list";
+    option (google.api.http) = {
+      get: "/v3/incidents/timelines"
+      body: "*"
+    };
+  }
+
+  rpc GetTriggeredAlertsTimeline(GetTriggeredAlertsTimelineRequest) returns (GetTriggeredAlertsTimelineResponse){
+    option (audit_log_description).description = "get triggered alerts timelines";
+    option (google.api.http) = {
+      get: "/v3/incidents/triggered_alerts_timeline"
+      body: "*"
+    };
+  }
+
+//  rpc DeleteIncident(DeleteIncidentRequest) returns (DeleteIncidentResponse){
+//    option (audit_log_description).description = "delete incident";
+//    option (google.api.http) = {
+//      delete: "/v3/incidents/{id}"
+//    };
+//  }
+
+  rpc AtomicBatchExecuteIncident(AtomicBatchExecuteIncidentRequest) returns (AtomicBatchExecuteIncidentResponse) {
+    option (audit_log_description).description = "atomic batch execute incident";
+    option (google.api.http) = {
+      post: "/v3/incidents:atomicBatchExecute"
+      body: "*"
+    };
+  }
+}
+
+enum OrderByDirection {
+  ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED = 0;
+  ORDER_BY_DIRECTION_DESC = 1;
+}
+
+// TODO: We can add more fields here
+enum OrderByFields {
+  ORDER_BY_FIELDS_UNSPECIFIED = 0;
+  ORDER_BY_FIELDS_ID = 1;
+  ORDER_BY_FIELDS_SEVERITY = 2;
+  ORDER_BY_FIELDS_NAME = 3;
+  ORDER_BY_FIELDS_CREATED_TIME = 4;
+  ORDER_BY_FIELDS_CLOSED_TIME = 5;
+}
+
+message OrderBy {
+  OrderByFields field_name = 1;
+  OrderByDirection direction = 2;
+}
+
+enum TimelinesGroupByFields {
+  TIMELINES_GROUP_BY_FIELDS_NONE_OR_UNSPECIFIED = 0;
+  TIMELINES_GROUP_BY_FIELDS_ALERT = 1;
+  TIMELINES_GROUP_BY_FIELDS_NOTIFICATION_GROUP = 2;
+}
+
+message GetIncidentRequest {
+  google.protobuf.StringValue id = 1;
+  IncidentQuery query = 2;
+}
+
+message GetIncidentResponse {
+  Incident incident = 1;
+}
+
+message ListIncidentsResponse {
+  repeated Incident incidents = 1;
+  google.protobuf.UInt32Value total_size = 2;
+  google.protobuf.StringValue next_page_token = 3;
+}
+
+message ListIncidentsRequest {
+  IncidentQuery query = 1;
+  google.protobuf.UInt32Value page_size = 2;
+  google.protobuf.StringValue page_token = 3;
+  repeated OrderBy order_bys = 4;
+}
+
+message ListTimelinesRequest {
+  IncidentQuery query = 1;
+  google.protobuf.UInt32Value granularity_seconds = 2;
+  repeated google.protobuf.StringValue incident_ids = 3;
+  TimelinesGroupByFields group_by = 4;
+}
+
+message ListTimelinesResponse {
+  map<string, TimelineEventList> events = 1;
+  TimelinesGroupByFields group_by = 2;
+}
+
+message GetTriggeredAlertsTimelineRequest {
+  IncidentQuery query = 1;
+  google.protobuf.UInt32Value granularity_seconds = 2;
+}
+
+message GetTriggeredAlertsTimelineResponse {
+  repeated TriggeredAlertsPerTimestamp events = 1;
+}
+
+message TriggeredAlertsPerTimestamp {
+  google.protobuf.UInt32Value number_of_alerts = 1;
+  google.protobuf.Timestamp timestamp = 2;
+}
+
+message TimelineEventList {
+  repeated IncidentTimelineEvent events = 1;
+}
+
+message BatchGetIncidentRequest {
+  repeated google.protobuf.StringValue ids = 1 ;
+  IncidentQuery query = 2;
+}
+
+message BatchGetIncidentResponse {
+  map<string, Incident> incidents = 1;
+  repeated google.protobuf.StringValue not_found_ids =2;
+}
+
+message DeleteIncidentRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message DeleteIncidentResponse {
+}
+
+message ReplaceIncidentRequest {
+  Incident incident = 1;
+}
+
+message ReplaceIncidentResponse {
+  Incident incident = 1;
+}
+
+message CreateIncidentRequest{
+  Incident incident = 1;
+}
+
+message CreateIncidentResponse {
+  Incident incident = 1;
+}
+
+message AtomicBatchExecuteIncidentRequest {
+  repeated IncidentExecutionRequest requests = 1;
+}
+
+message AtomicBatchExecuteIncidentResponse {
+  repeated IncidentExecutionResponse matching_responses = 1;
+  //  com.coralogix.api.ResponseStatus status = 2;
+}
+
+message IncidentExecutionRequest {
+  oneof request {
+    CreateIncidentRequest create = 1;
+    ReplaceIncidentRequest replace = 2;
+  }
+}
+
+message IncidentExecutionResponse {
+  oneof response {
+    CreateIncidentResponse create = 1;
+    ReplaceIncidentResponse replace = 2;
+  }
+}
+
+message GetIncidentEventsRequest {
+  google.protobuf.Timestamp from = 2;
+  google.protobuf.Timestamp to = 3;
+}
