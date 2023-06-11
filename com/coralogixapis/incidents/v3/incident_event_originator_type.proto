@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v3;
+
+enum OriginatorType {
+    ORIGINATOR_TYPE_OPERATIONAL_OR_UNSPECIFIED = 0;
+    ORIGINATOR_TYPE_ADMINISTRATIVE = 1;
+}
