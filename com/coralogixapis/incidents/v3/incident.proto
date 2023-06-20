@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 import "com/coralogixapis/incidents/v3/incident_state.proto";
 import "com/coralogixapis/incidents/v3/incident_status.proto";
 import "com/coralogixapis/incidents/v3/incident_severity.proto";
-import "com/coralogixapis/incidents/v3/incident_event.proto";
+import "com/coralogixapis/incidents/v3/incident_event/incident_event.proto";
 import "com/coralogixapis/incidents/v3/snooze_info.proto";
 import "com/coralogixapis/incidents/v3/source_alert.proto";
 import "com/coralogixapis/incidents/v3/source_multiple.proto";

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v3;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/incidents/v3/incident_event/incident_event_type.proto";
+import "com/coralogixapis/incidents/v3/incident_event/incident_event_originator_type.proto";
+
+message IncidentEvent {
+  IncidentEventType type = 1;
+  OriginatorType originator_type = 2;
+  oneof originator {
+    // types TBD
+    google.protobuf.StringValue administrative_event = 3;
+    google.protobuf.StringValue operational_event = 4;
+  }
+  google.protobuf.StringValue id = 5;
+  oneof incident_event_payload {
+    // Add event payloads per event type
+    google.protobuf.StringValue cx_key_value = 6;
+    google.protobuf.StringValue user_id = 7;
+  }
+  // payload + type TBD
+}
