@@ -8,7 +8,6 @@ import "com/coralogixapis/incidents/v3/incident_state.proto";
 import "com/coralogixapis/incidents/v3/incident_status.proto";
 import "com/coralogixapis/incidents/v3/incident_severity.proto";
 import "com/coralogixapis/incidents/v3/incident_event/incident_event.proto";
-import "com/coralogixapis/incidents/v3/snooze_info.proto";
 import "com/coralogixapis/incidents/v3/source_single_alert.proto";
 import "com/coralogixapis/incidents/v3/source_type.proto";
 import "com/coralogixapis/incidents/v3/assignee.proto";
@@ -30,6 +29,4 @@ message Incident {
   repeated IncidentEvent events = 11;
   google.protobuf.Timestamp created_at = 12;
   google.protobuf.Timestamp closed_at = 13;
-  google.protobuf.UInt64Value duration = 14;
-  SnoozeInfo snooze_information = 15;
 }

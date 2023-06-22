@@ -5,6 +5,6 @@ package com.coralogixapis.incidents.v3;
 import "google/protobuf/wrappers.proto";
 
 message SourceSingleAlert {
-    google.protobuf.StringValue id = 1;
+    google.protobuf.StringValue alert_id = 1;
     google.protobuf.StringValue notification_group_id = 2;
 }

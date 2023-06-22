@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v3;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/incidents/v3/incident_event/incident_event_type.proto";
+import "com/coralogixapis/incidents/v3/incident_event/incident_event_originator_type.proto";
+
+message IncidentEventOriginatorOperational {
+  google.protobuf.StringValue system_name = 1;
+}
