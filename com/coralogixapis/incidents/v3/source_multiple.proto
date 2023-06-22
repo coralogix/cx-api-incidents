@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.incidents.v3;
-
-message SourceMultiple {
-    
-}

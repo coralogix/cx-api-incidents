@@ -7,18 +7,18 @@ import "com/coralogixapis/incidents/v3/incident_event/incident_event_type.proto"
 import "com/coralogixapis/incidents/v3/incident_event/incident_event_originator_type.proto";
 
 message IncidentEvent {
-  IncidentEventType type = 1;
+  IncidentEventType incident_event_type = 1;
   OriginatorType originator_type = 2;
+  google.protobuf.StringValue id = 3;
   oneof originator {
     // types TBD
-    google.protobuf.StringValue administrative_event = 3;
-    google.protobuf.StringValue operational_event = 4;
+    google.protobuf.StringValue administrative_event = 100;
+    google.protobuf.StringValue operational_event = 101;
   }
-  google.protobuf.StringValue id = 5;
   oneof incident_event_payload {
     // Add event payloads per event type
-    google.protobuf.StringValue cx_key_value = 6;
-    google.protobuf.StringValue user_id = 7;
+    google.protobuf.StringValue cx_key_value = 200;
+    google.protobuf.StringValue user_id = 201;
   }
   // payload + type TBD
 }
