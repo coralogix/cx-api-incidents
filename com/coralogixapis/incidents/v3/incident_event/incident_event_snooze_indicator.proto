@@ -4,8 +4,8 @@ package com.coralogixapis.incidents.v3;
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
-import "com/coralogixapis/incidents/v3/incident_event/incident_event_type.proto";
-import "com/coralogixapis/incidents/v3/incident_event/incident_event_originator_type.proto";
+//import "com/coralogixapis/incidents/v3/incident_event/incident_event_type.proto";
+//import "com/coralogixapis/incidents/v3/incident_event/incident_event_originator_type.proto";
 
 message IncidentEventSnoozeIndicator {
   google.protobuf.Timestamp start_time = 1;
