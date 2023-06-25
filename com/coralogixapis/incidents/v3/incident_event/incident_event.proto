@@ -8,14 +8,15 @@ import "com/coralogixapis/incidents/v3/incident_event/incident_event_originator_
 import "com/coralogixapis/incidents/v3/incident_event/incident_event_snooze_indicator.proto";
 import "com/coralogixapis/incidents/v3/incident_event/incident_event_originator_administrative.proto";
 import "com/coralogixapis/incidents/v3/incident_event/incident_event_originator_operational.proto";
+import "com/coralogixapis/incidents/v3/incident_event/incident_event_assign.proto";
 
 message IncidentEvent {
   google.protobuf.StringValue id = 1;
   IncidentEventType incident_event_type = 2;
   oneof incident_event_payload {
    IncidentEventSnoozeIndicator snooze_indicator = 200;
-   //TODO: Continue writing every event
-//   IncidentEventAssign assignment = 201;
+   IncidentEventAssign assignment = 201;
+   //TODO: Continue
   }
   OriginatorType originator_type = 3;
   oneof originator {
