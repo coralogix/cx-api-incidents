@@ -2,6 +2,6 @@ name: cx-api-incidents
 CX_PRODUCT: apis
 deployable_type: library
 code_language: protobuf
-tests: true
+#tests: true
 publish: false
-lifecycle_status: production
+lifecycle_status: development

@@ -27,29 +27,6 @@ service IncidentsService {
     };
   }
 
-  rpc CreateIncident(CreateIncidentRequest) returns (CreateIncidentResponse){
-    option (audit_log_description).description = "create incident";
-    option (google.api.http) = {
-      post: "/v3/incidents"
-      body: "Incident"
-    };
-  }
-
-  rpc ReplaceIncident(ReplaceIncidentRequest) returns (ReplaceIncidentResponse){
-    option (audit_log_description).description = "replace incident";
-    option (google.api.http) = {
-      put: "/v3/incidents"
-      body: "Incident"
-    };
-  }
-
-  rpc DeleteIncident(DeleteIncidentRequest) returns (DeleteIncidentResponse){
-    option (audit_log_description).description = "delete incident";
-    option (google.api.http) = {
-      delete: "/v3/incidents/{id}"
-    };
-  }
-
   rpc BatchGetIncident(BatchGetIncidentRequest) returns (BatchGetIncidentResponse){
     option (audit_log_description).description = "batch get incidents";
     option (google.api.http) = {
@@ -73,20 +50,6 @@ service IncidentsService {
     };
   }
 
-  rpc GetTriggeredAlertsTimeline(GetTriggeredAlertsTimelineRequest) returns (GetTriggeredAlertsTimelineResponse){
-    option (audit_log_description).description = "get triggered alerts timelines";
-    option (google.api.http) = {
-      get: "/v3/incidents/triggered_alerts_timeline"
-      body: "*"
-    };
-  }
-
-//  rpc DeleteIncident(DeleteIncidentRequest) returns (DeleteIncidentResponse){
-//    option (audit_log_description).description = "delete incident";
-//    option (google.api.http) = {
-//      delete: "/v3/incidents/{id}"
-//    };
-//  }
 
   rpc AtomicBatchExecuteIncident(AtomicBatchExecuteIncidentRequest) returns (AtomicBatchExecuteIncidentResponse) {
     option (audit_log_description).description = "atomic batch execute incident";
@@ -98,8 +61,9 @@ service IncidentsService {
 }
 
 enum OrderByDirection {
-  ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED = 0;
-  ORDER_BY_DIRECTION_DESC = 1;
+  ORDER_BY_DIRECTION_UNSPECIFIED = 0;
+  ORDER_BY_DIRECTION_ASC = 1;
+  ORDER_BY_DIRECTION_DESC = 2;
 }
 
 // TODO: We can add more fields here
@@ -118,14 +82,14 @@ message OrderBy {
 }
 
 enum TimelinesGroupByFields {
-  TIMELINES_GROUP_BY_FIELDS_NONE_OR_UNSPECIFIED = 0;
-  TIMELINES_GROUP_BY_FIELDS_ALERT = 1;
-  TIMELINES_GROUP_BY_FIELDS_NOTIFICATION_GROUP = 2;
+  TIMELINES_GROUP_BY_FIELDS_UNSPECIFIED = 0;
+  TIMELINES_GROUP_BY_FIELDS_NONE = 1;
+  TIMELINES_GROUP_BY_FIELDS_ALERT = 2;
+  TIMELINES_GROUP_BY_FIELDS_NOTIFICATION_GROUP = 3;
 }
 
 message GetIncidentRequest {
   google.protobuf.StringValue id = 1;
-  IncidentQuery query = 2;
 }
 
 message GetIncidentResponse {

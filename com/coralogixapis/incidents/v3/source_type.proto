@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogixapis.incidents.v3;
 
 enum SourceType {
-  SOURCE_TYPE_ALERT_OR_UNSPECIFIED = 0;
-  SOURCE_TYPE_MULTIPLE = 1;
+  SOURCE_TYPE_UNSPECIFIED = 0;
+  SOURCE_TYPE_ALERT = 1;
+  SOURCE_TYPE_MULTIPLE = 2;
 }

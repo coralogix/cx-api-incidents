@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v3;
+
+enum IncidentStatus {
+  INCIDENT_STATUS_UNSPECIFIED = 0;
+  INCIDENT_STATUS_OPEN = 1;
+  INCIDENT_STATUS_CLOSED = 2;
+}
