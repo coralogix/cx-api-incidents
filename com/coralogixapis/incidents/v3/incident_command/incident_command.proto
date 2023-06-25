@@ -6,12 +6,13 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/incidents/v3/incident_state.proto";
 import "com/coralogixapis/incidents/v3/source_single_alert.proto";
 import "com/coralogixapis/incidents/v3/source_type.proto";
-import "com/coralogixapis/incidents/v3/incident_command_payload.proto";
+import "com/coralogixapis/incidents/v3/incident_command/incident_command_payload.proto";
+import "com/coralogixapis/incidents/v3/incident_command/incident_command_action_type.proto";
 
 message IncidentCommand {
   google.protobuf.StringValue correlation_key = 1;
   google.protobuf.StringValue company_id = 2;
-  IncidentState state = 3;
+  IncidentCommandActionType action_type = 3;
   SourceType source_type = 8;
   oneof source {
     SourceSingleAlert single_alert = 100;
