@@ -5,5 +5,4 @@ package com.coralogixapis.incidents.v3;
 enum IncidentState {
   INCIDENT_STATE_UNSPECIFIED = 0;
   INCIDENT_STATE_ACKNOWLEDGED = 1;
-  INCIDENT_STATE_SNOOZED = 2;
 }

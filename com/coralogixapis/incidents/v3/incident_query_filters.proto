@@ -5,7 +5,6 @@ package com.coralogixapis.incidents.v3;
 import "google/protobuf/wrappers.proto";
 
 message IncidentQueryFilters {
-  repeated google.protobuf.StringValue severity = 1;
-  repeated google.protobuf.StringValue assignee = 2;
-  repeated google.protobuf.StringValue status = 3;
+  repeated google.protobuf.StringValue assignee = 1;
+  repeated google.protobuf.StringValue status = 2;
 }

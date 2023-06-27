@@ -6,7 +6,6 @@ import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 import "com/coralogixapis/incidents/v3/incident_state.proto";
 import "com/coralogixapis/incidents/v3/incident_status.proto";
-import "com/coralogixapis/incidents/v3/incident_severity.proto";
 import "com/coralogixapis/incidents/v3/incident_event/incident_event.proto";
 import "com/coralogixapis/incidents/v3/source_single_alert.proto";
 import "com/coralogixapis/incidents/v3/source_type.proto";
@@ -17,16 +16,14 @@ message Incident {
   google.protobuf.StringValue name = 2;
   IncidentState state = 3;
   IncidentStatus status = 4;
-  Assignee assigned_to = 5;
-  Assignee assigned_by = 6;
-  google.protobuf.StringValue description = 7;
-  IncidentSeverity severity = 8;
-  SourceType source_type = 9;
+  repeated Assignment assignments = 5;
+  google.protobuf.StringValue description = 6;
+  SourceType source_type = 7;
   oneof source {
     SourceSingleAlert alert = 100;
   };
-  map<string, string> labels = 10;
-  repeated IncidentEvent events = 11;
-  google.protobuf.Timestamp created_at = 12;
-  google.protobuf.Timestamp closed_at = 13;
+  map<string, string> labels = 8;
+  repeated IncidentEvent events = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp closed_at = 11;
 }
