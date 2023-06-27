@@ -10,6 +10,7 @@ import "com/coralogixapis/incidents/v3/incident_event/incident_event.proto";
 import "com/coralogixapis/incidents/v3/source_single_alert.proto";
 import "com/coralogixapis/incidents/v3/source_type.proto";
 import "com/coralogixapis/incidents/v3/assignee.proto";
+import "com/coralogixapis/incidents/v3/incident_severity.proto";
 
 message Incident {
   google.protobuf.StringValue id = 1;
@@ -18,12 +19,13 @@ message Incident {
   IncidentStatus status = 4;
   repeated Assignment assignments = 5;
   google.protobuf.StringValue description = 6;
-  SourceType source_type = 7;
+  IncidentSeverity severity = 7;
+  SourceType source_type = 8;
   oneof source {
     SourceSingleAlert alert = 100;
   };
-  map<string, string> labels = 8;
-  repeated IncidentEvent events = 9;
-  google.protobuf.Timestamp created_at = 10;
-  google.protobuf.Timestamp closed_at = 11;
+  map<string, string> labels = 9;
+  repeated IncidentEvent events = 10;
+  google.protobuf.Timestamp created_at = 11;
+  google.protobuf.Timestamp closed_at = 12;
 }
