@@ -4,7 +4,11 @@ package com.coralogixapis.incidents.v3;
 
 import "google/protobuf/wrappers.proto";
 
-message Assignee {
-  google.protobuf.StringValue name = 1;
-  google.protobuf.StringValue email = 2;
+message Assignment {
+  AssignDetails assigned_to = 1;
+  AssignDetails assigned_by = 2;
 }
+
+message AssignDetails {
+  google.protobuf.StringValue user_id = 1;
+  }
