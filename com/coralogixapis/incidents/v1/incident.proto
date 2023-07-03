@@ -1,16 +1,16 @@
 syntax = "proto3";
 
-package com.coralogixapis.incidents.v3;
+package com.coralogixapis.incidents.v1;
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
-import "com/coralogixapis/incidents/v3/incident_state.proto";
-import "com/coralogixapis/incidents/v3/incident_status.proto";
-import "com/coralogixapis/incidents/v3/incident_event/incident_event.proto";
-import "com/coralogixapis/incidents/v3/source_single_alert.proto";
-import "com/coralogixapis/incidents/v3/source_type.proto";
-import "com/coralogixapis/incidents/v3/assignee.proto";
-import "com/coralogixapis/incidents/v3/incident_severity.proto";
+import "com/coralogixapis/incidents/v1/incident_state.proto";
+import "com/coralogixapis/incidents/v1/incident_status.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
+import "com/coralogixapis/incidents/v1/source_single_alert.proto";
+import "com/coralogixapis/incidents/v1/source_type.proto";
+import "com/coralogixapis/incidents/v1/assignee.proto";
+import "com/coralogixapis/incidents/v1/incident_severity.proto";
 
 message Incident {
   google.protobuf.StringValue id = 1;
