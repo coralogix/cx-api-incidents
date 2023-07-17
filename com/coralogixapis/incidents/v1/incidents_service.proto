@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
+import "com/coralogixapis/incidents/v1/incident_alert/incident_alert.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
@@ -9,6 +10,7 @@ import "google/protobuf/timestamp.proto";
 import "com/coralogixapis/incidents/v1/incident.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
 import "com/coralogixapis/incidents/v1/incident_timeline_event.proto";
+import "com/coralogixapis/incidents/v1/incident_action/incident_action.proto";
 
 message AuditLogDescription {
   optional string description = 1;
@@ -41,34 +43,21 @@ service IncidentsService {
     };
   }
 
-  rpc ListTimelines(ListTimelinesRequest) returns (ListTimelinesResponse){
-    option (audit_log_description).description = "get timelines list";
+  rpc CreateIncidentAction(CreateIncidentActionRequest) returns (CreateIncidentActionResponse) {
+    option (audit_log_description).description = "create incident action";
     option (google.api.http) = {
-      get: "/v1/incidents/timelines"
+      get: "/v1/incidents/action"
       body: "*"
     };
   }
-}
 
-enum OrderByDirection {
-  ORDER_BY_DIRECTION_UNSPECIFIED = 0;
-  ORDER_BY_DIRECTION_ASC = 1;
-  ORDER_BY_DIRECTION_DESC = 2;
-}
-
-// TODO: We can add more fields here
-enum OrderByFields {
-  ORDER_BY_FIELDS_UNSPECIFIED = 0;
-  ORDER_BY_FIELDS_ID = 1;
-  ORDER_BY_FIELDS_SEVERITY = 2;
-  ORDER_BY_FIELDS_NAME = 3;
-  ORDER_BY_FIELDS_CREATED_TIME = 4;
-  ORDER_BY_FIELDS_CLOSED_TIME = 5;
-}
-
-message OrderBy {
-  OrderByFields field_name = 1;
-  OrderByDirection direction = 2;
+  rpc ListIncidentAlerts(ListIncidentAlertsRequest) returns (ListIncidentAlertsResponse) {
+    option (audit_log_description).description = "list incident alerts";
+    option (google.api.http) = {
+      get: "/v1/incidents/alerts"
+      body: "*"
+    };
+  }
 }
 
 enum TimelinesGroupByFields {
@@ -96,7 +85,6 @@ message ListIncidentsRequest {
   IncidentQuery query = 1;
   google.protobuf.UInt32Value page_size = 2;
   google.protobuf.StringValue page_token = 3;
-  repeated OrderBy order_bys = 4;
 }
 
 message ListTimelinesRequest {
@@ -143,6 +131,26 @@ message DeleteIncidentRequest {
   google.protobuf.StringValue id = 1;
 }
 
+message CreateIncidentActionRequest {
+  IncidentAction action = 1;
+}
+
+message CreateIncidentActionResponse {
+  IncidentAction action = 1;
+}
+
+message ListIncidentAlertsRequest {
+  IncidentQuery query = 1;
+  google.protobuf.UInt32Value page_size = 2;
+  google.protobuf.StringValue page_token = 3;
+}
+
+message ListIncidentAlertsResponse {
+  repeated IncidentAlert alerts = 1;
+  google.protobuf.UInt32Value total_size = 2;
+  google.protobuf.StringValue next_page_token = 3;
+}
+
 message DeleteIncidentResponse {
 }
 
@@ -184,6 +192,7 @@ message IncidentExecutionResponse {
     ReplaceIncidentResponse replace = 2;
   }
 }
+
 
 message GetIncidentEventsRequest {
   google.protobuf.Timestamp from = 2;

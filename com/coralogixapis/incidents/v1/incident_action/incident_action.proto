@@ -1,0 +1,28 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+enum IncidentActionType {
+    INCIDENT_ACTION_TYPE_UNSPECIFIED = 0;
+    INCIDENT_ACTION_TYPE_CLOSE = 1;
+    INCIDENT_ACTION_TYPE_ACKNOWLEDGE = 2;
+    INCIDENT_ACTION_TYPE_ASSIGN = 3;
+}
+
+message CloseIncident {
+}
+
+message AcknowledgeIncident {
+}
+
+message AssignIncident {
+    google.protobuf.StringValue assignee = 1;
+}
+
+message IncidentAction {
+    IncidentActionType action_type = 1;
+    oneof payload {
+        CloseIncident close = 2;
+        AcknowledgeIncident acknowledge = 3;
+        AssignIncident assign = 4;
+    }
+}
