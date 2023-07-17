@@ -1,0 +1,23 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+
+message IncidentAlert {
+    google.protobuf.StringValue name = 1;
+    google.protobuf.StringValue description = 2;
+    repeated google.protobuf.StringValue group_by = 3;
+    google.protobuf.UInt32Value alert_type = 4;
+    google.protobuf.StringValue severity = 5;
+    repeated NotificationGroup notification_groups = 6;
+    google.protobuf.StringValue id = 7;
+}
+
+message NotificationGroup {
+    google.protobuf.StringValue id = 1;
+    repeated NotificationGroupIntegration integrations = 2;
+    repeated google.protobuf.StringValue group_by = 3;
+}
+
+message NotificationGroupIntegration {
+    google.protobuf.UInt32Value integration_id = 1;
+}
