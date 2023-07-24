@@ -58,6 +58,15 @@ service IncidentsService {
       body: "*"
     };
   }
+
+
+  rpc ListNotificationGroups(ListNotificationGroupsRequest) returns (ListNotificationGroupsResponse) {
+    option (audit_log_description).description = "list notification groups";
+    option (google.api.http) = {
+      get: "/v1/incidents/notification-groups"
+      body: "*"
+    };
+  }
 }
 
 enum TimelinesGroupByFields {
@@ -146,9 +155,17 @@ message ListIncidentAlertsRequest {
 }
 
 message ListIncidentAlertsResponse {
-  repeated SourceSingleAlertSnapshot alerts = 1;
+  repeated AlertDef alerts = 1;
   google.protobuf.UInt32Value total_size = 2;
   google.protobuf.StringValue next_page_token = 3;
+}
+
+message ListNotificationGroupsRequest {
+  google.protobuf.StringValue alert_id = 1;
+}
+
+message ListNotificationGroupsResponse {
+  repeated NotificationGroup notification_groups = 1;
 }
 
 message DeleteIncidentResponse {
