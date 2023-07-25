@@ -4,6 +4,6 @@ package com.coralogixapis.incidents.v1;
 
 import "google/protobuf/wrappers.proto";
 
-message IncidentCommandPayload {
+message UpsertIncidentStatePayload {
   google.protobuf.StringValue cx_event_key = 1;
 }

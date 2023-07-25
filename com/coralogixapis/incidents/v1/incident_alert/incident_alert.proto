@@ -1,7 +1,6 @@
 syntax = "proto3";
 import "google/protobuf/wrappers.proto";
 
-
 message IncidentAlert {
     google.protobuf.StringValue name = 1;
     google.protobuf.StringValue description = 2;
