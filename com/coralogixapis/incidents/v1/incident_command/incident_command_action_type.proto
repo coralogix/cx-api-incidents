@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.incidents.v1;
-
-enum IncidentCommandActionType {
-  INCIDENT_COMMAND_ACTION_TYPE_UNSCPECIFIED = 0;
-  INCIDENT_COMMAND_ACTION_TYPE_TRIGGERED = 1;
-  INCIDENT_COMMAND_ACTION_TYPE_RESOLVED = 2;
-}
