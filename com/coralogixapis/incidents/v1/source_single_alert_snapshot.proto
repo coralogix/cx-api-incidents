@@ -1,16 +1,22 @@
 syntax = "proto3";
+
+package com.coralogixapis.incidents.v1;
+
 import "google/protobuf/wrappers.proto";
 
-message IncidentAlert {
+message AlertDef {
     google.protobuf.StringValue name = 1;
     google.protobuf.StringValue description = 2;
     repeated google.protobuf.StringValue group_by = 3;
     google.protobuf.UInt32Value alert_type = 4;
     google.protobuf.StringValue severity = 5;
-    repeated NotificationGroup notification_groups = 6;
     google.protobuf.StringValue id = 7;
 }
-
+message SourceSingleAlertSnapshot {
+    AlertDef alert_def = 1;
+    NotificationGroup notification_group = 2;
+    repeated NotificationGroupIntegration notification_group_integrations = 3 ;
+}
 message NotificationGroup {
     google.protobuf.StringValue id = 1;
     repeated NotificationGroupIntegration integrations = 2;

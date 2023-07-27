@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
-import "com/coralogixapis/incidents/v1/incident_alert/incident_alert.proto";
+import "com/coralogixapis/incidents/v1/source_single_alert_snapshot.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
@@ -146,7 +146,7 @@ message ListIncidentAlertsRequest {
 }
 
 message ListIncidentAlertsResponse {
-  repeated IncidentAlert alerts = 1;
+  repeated SourceSingleAlertSnapshot alerts = 1;
   google.protobuf.UInt32Value total_size = 2;
   google.protobuf.StringValue next_page_token = 3;
 }
