@@ -20,6 +20,7 @@ message NotificationGroup {
     google.protobuf.StringValue id = 1;
     repeated NotificationGroupIntegration integrations = 2;
     repeated google.protobuf.StringValue group_by = 3;
+    google.protobuf.UInt32Value num_of_incidents = 4;
 }
 
 message NotificationGroupIntegration {
