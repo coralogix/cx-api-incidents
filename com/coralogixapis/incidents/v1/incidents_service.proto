@@ -67,6 +67,15 @@ service IncidentsService {
       body: "*"
     };
   }
+
+
+  rpc GetTriggeredAlertsTimeline(GetTriggeredAlertsTimelineRequest) returns (GetTriggeredAlertsTimelineResponse) {
+    option (audit_log_description).description = "get triggered alerts timeline";
+    option (google.api.http) = {
+      get: "/v1/incidents/triggered-alerts-timeline"
+      body: "*"
+    };
+  }
 }
 
 enum TimelinesGroupByFields {
