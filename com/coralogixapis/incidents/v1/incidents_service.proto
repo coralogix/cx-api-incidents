@@ -182,6 +182,7 @@ message ListNotificationGroupsRequest {
 }
 
 message ListFiltersRequest {
+  IncidentQuery query = 1;
 }
 
 message ListFiltersResponse {
