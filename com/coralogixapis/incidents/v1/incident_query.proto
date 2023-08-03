@@ -31,5 +31,4 @@ message IncidentQuery {
   google.protobuf.Timestamp end_time = 2;
   IncidentQueryFilters filters = 3;
   repeated OrderBy order_bys = 4;
-  map<string, string> custom_metadata = 5;
 }
