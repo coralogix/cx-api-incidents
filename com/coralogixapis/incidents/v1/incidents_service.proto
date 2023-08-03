@@ -68,6 +68,14 @@ service IncidentsService {
     };
   }
 
+  rpc ListFilters(ListFiltersRequest) returns (ListFiltersResponse) {
+    option (audit_log_description).description = "ListFilters";
+    option (google.api.http) = {
+      get: "/v1/incidents/list-filters"
+      body: "*"
+    };
+  }
+
 
   rpc GetTriggeredAlertsTimeline(GetTriggeredAlertsTimelineRequest) returns (GetTriggeredAlertsTimelineResponse) {
     option (audit_log_description).description = "get triggered alerts timeline";
@@ -172,6 +180,18 @@ message ListIncidentAlertsResponse {
 message ListNotificationGroupsRequest {
   google.protobuf.StringValue alert_id = 1;
 }
+
+message ListFiltersRequest {
+}
+
+message ListFiltersResponse {
+  message Filter {
+    map<string, google.protobuf.UInt32Value> values = 1;
+    google.protobuf.StringValue name = 2;
+  }
+  repeated Filter filters = 1;
+}
+
 
 message ListNotificationGroupsResponse {
   repeated NotificationGroup notification_groups = 1;
