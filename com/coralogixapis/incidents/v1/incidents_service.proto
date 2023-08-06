@@ -43,14 +43,21 @@ service IncidentsService {
   rpc CreateIncidentAction(CreateIncidentActionRequest) returns (CreateIncidentActionResponse) {
     option (audit_log_description).description = "create incident action";
     option (google.api.http) = {
-      get: "/v1/incidents/action"
+      get: "/v1/incidents/incident-action"
       body: "*"
     };
   }
 
   rpc AtomicBatchExecuteIncidentAction(AtomicBatchExecuteIncidentActionRequest) returns (AtomicBatchExecuteIncidentActionResponse) {
     option (audit_log_description).description = "Atomic Batch execute incident action";
-    option (google.api.http) = {get: "/v1/incidents/action:atomicBatchExecute"};
+    option (google.api.http) = {get: "/v1/incidents/incident-action:atomicBatchExecute"};
+  }
+  rpc CreateAlertIncidentsAction(CreateAlertIncidentsActionRequest) returns (CreateAlertIncidentsActionResponse) {
+    option (audit_log_description).description = "create alert incidents action";
+    option (google.api.http) = {
+      get: "/v1/incidents/alert-incident-action"
+      body: "*"
+    };
   }
 
   rpc ListIncidentAlerts(ListIncidentAlertsRequest) returns (ListIncidentAlertsResponse) {
@@ -179,7 +186,12 @@ message IncidentActionExecutionRequest {
     CreateIncidentActionRequest create = 1;
   }
 }
-
+message CreateAlertIncidentsActionRequest {
+  IncidentAction alert_incident_action = 1;
+}
+message CreateAlertIncidentsActionResponse {
+  IncidentAction alert_incident_action = 1;
+}
 message IncidentActionExecutionResponse {
   oneof response {
     CreateIncidentActionResponse create = 1;
