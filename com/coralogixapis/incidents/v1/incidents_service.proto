@@ -2,16 +2,16 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
-import "com/coralogixapis/incidents/v1/source_single_alert_snapshot.proto";
-import "google/protobuf/descriptor.proto";
-import "google/api/annotations.proto";
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/timestamp.proto";
 import "com/coralogixapis/incidents/v1/incident.proto";
-import "com/coralogixapis/incidents/v1/incident_query.proto";
-import "com/coralogixapis/incidents/v1/incident_timeline_event.proto";
 import "com/coralogixapis/incidents/v1/incident_action/incident_action.proto";
+import "com/coralogixapis/incidents/v1/incident_query.proto";
+import "com/coralogixapis/incidents/v1/source_single_alert_snapshot.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/incidents/v1/incident_timeline_event.proto";
 import "com/coralogixapis/incidents/v1/incident_filters.proto";
+import "google/protobuf/wrappers.proto";
 
 message AuditLogDescription {
   optional string description = 1;
@@ -24,19 +24,15 @@ extend google.protobuf.MethodOptions {
 service IncidentsService {
   rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {
     option (audit_log_description).description = "get incident";
-    option (google.api.http) = {
-      get: "/v1/incidents/{id}"
-    };
+    option (google.api.http) = {get: "/v1/incidents/{id}"};
   }
 
-  rpc BatchGetIncident(BatchGetIncidentRequest) returns (BatchGetIncidentResponse){
+  rpc BatchGetIncident(BatchGetIncidentRequest) returns (BatchGetIncidentResponse) {
     option (audit_log_description).description = "batch get incidents";
-    option (google.api.http) = {
-      get: "/v1/incidents/incidents:batchGet"
-    };
+    option (google.api.http) = {get: "/v1/incidents/incidents:batchGet"};
   }
 
-  rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse){
+  rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse) {
     option (audit_log_description).description = "get incidents list";
     option (google.api.http) = {
       get: "/v1/incidents"
@@ -47,7 +43,19 @@ service IncidentsService {
   rpc CreateIncidentAction(CreateIncidentActionRequest) returns (CreateIncidentActionResponse) {
     option (audit_log_description).description = "create incident action";
     option (google.api.http) = {
-      get: "/v1/incidents/action"
+      get: "/v1/incidents/incident-action"
+      body: "*"
+    };
+  }
+
+  rpc AtomicBatchExecuteIncidentAction(AtomicBatchExecuteIncidentActionRequest) returns (AtomicBatchExecuteIncidentActionResponse) {
+    option (audit_log_description).description = "Atomic Batch execute incident action";
+    option (google.api.http) = {get: "/v1/incidents/incident-action:atomicBatchExecute"};
+  }
+  rpc CreateAlertIncidentsAction(CreateAlertIncidentsActionRequest) returns (CreateAlertIncidentsActionResponse) {
+    option (audit_log_description).description = "create alert incidents action";
+    option (google.api.http) = {
+      get: "/v1/incidents/alert-incident-action"
       body: "*"
     };
   }
@@ -59,7 +67,6 @@ service IncidentsService {
       body: "*"
     };
   }
-
 
   rpc ListNotificationGroups(ListNotificationGroupsRequest) returns (ListNotificationGroupsResponse) {
     option (audit_log_description).description = "list notification groups";
@@ -76,7 +83,6 @@ service IncidentsService {
       body: "*"
     };
   }
-
 
   rpc GetTriggeredAlertsTimeline(GetTriggeredAlertsTimelineRequest) returns (GetTriggeredAlertsTimelineResponse) {
     option (audit_log_description).description = "get triggered alerts timeline";
@@ -145,13 +151,13 @@ message TimelineEventList {
 }
 
 message BatchGetIncidentRequest {
-  repeated google.protobuf.StringValue ids = 1 ;
+  repeated google.protobuf.StringValue ids = 1;
   IncidentQuery query = 2;
 }
 
 message BatchGetIncidentResponse {
   map<string, Incident> incidents = 1;
-  repeated google.protobuf.StringValue not_found_ids =2;
+  repeated google.protobuf.StringValue not_found_ids = 2;
 }
 
 message DeleteIncidentRequest {
@@ -159,11 +165,37 @@ message DeleteIncidentRequest {
 }
 
 message CreateIncidentActionRequest {
-  IncidentAction action = 1;
+  IncidentAction incident_action = 1;
 }
 
 message CreateIncidentActionResponse {
-  IncidentAction action = 1;
+  IncidentAction incident_action = 1;
+}
+
+message AtomicBatchExecuteIncidentActionRequest {
+  repeated IncidentActionExecutionRequest requests = 1;
+}
+
+message AtomicBatchExecuteIncidentActionResponse {
+  repeated IncidentActionExecutionResponse matching_responses = 1;
+  //  com.coralogix.api.ResponseStatus status = 2;
+}
+
+message IncidentActionExecutionRequest {
+  oneof request {
+    CreateIncidentActionRequest create = 1;
+  }
+}
+message CreateAlertIncidentsActionRequest {
+  IncidentAction alert_incident_action = 1;
+}
+message CreateAlertIncidentsActionResponse {
+  IncidentAction alert_incident_action = 1;
+}
+message IncidentActionExecutionResponse {
+  oneof response {
+    CreateIncidentActionResponse create = 1;
+  }
 }
 
 message ListIncidentAlertsRequest {
@@ -194,8 +226,7 @@ message ListNotificationGroupsResponse {
   repeated NotificationGroup notification_groups = 1;
 }
 
-message DeleteIncidentResponse {
-}
+message DeleteIncidentResponse {}
 
 message ReplaceIncidentRequest {
   Incident incident = 1;
@@ -204,38 +235,6 @@ message ReplaceIncidentRequest {
 message ReplaceIncidentResponse {
   Incident incident = 1;
 }
-
-message CreateIncidentRequest{
-  Incident incident = 1;
-}
-
-message CreateIncidentResponse {
-  Incident incident = 1;
-}
-
-message AtomicBatchExecuteIncidentRequest {
-  repeated IncidentExecutionRequest requests = 1;
-}
-
-message AtomicBatchExecuteIncidentResponse {
-  repeated IncidentExecutionResponse matching_responses = 1;
-  //  com.coralogix.api.ResponseStatus status = 2;
-}
-
-message IncidentExecutionRequest {
-  oneof request {
-    CreateIncidentRequest create = 1;
-    ReplaceIncidentRequest replace = 2;
-  }
-}
-
-message IncidentExecutionResponse {
-  oneof response {
-    CreateIncidentResponse create = 1;
-    ReplaceIncidentResponse replace = 2;
-  }
-}
-
 
 message GetIncidentEventsRequest {
   google.protobuf.Timestamp from = 2;
