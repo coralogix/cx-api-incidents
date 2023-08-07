@@ -11,6 +11,7 @@ import "com/coralogixapis/incidents/v1/incident.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
 import "com/coralogixapis/incidents/v1/incident_timeline_event.proto";
 import "com/coralogixapis/incidents/v1/incident_action/incident_action.proto";
+import "com/coralogixapis/incidents/v1/incident_filters.proto";
 
 message AuditLogDescription {
   optional string description = 1;
@@ -186,13 +187,8 @@ message ListFiltersRequest {
 }
 
 message ListFiltersResponse {
-  message Filter {
-    map<string, google.protobuf.UInt32Value> values = 1;
-    google.protobuf.StringValue name = 2;
-  }
   repeated Filter filters = 1;
 }
-
 
 message ListNotificationGroupsResponse {
   repeated NotificationGroup notification_groups = 1;
