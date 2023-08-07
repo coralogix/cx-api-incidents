@@ -180,6 +180,7 @@ message ListIncidentAlertsResponse {
 
 message ListNotificationGroupsRequest {
   google.protobuf.StringValue alert_id = 1;
+  IncidentQuery query = 2;
 }
 
 message ListFiltersRequest {
