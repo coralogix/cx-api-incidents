@@ -31,14 +31,14 @@ message AssignIncident {
 }
 
 message IncidentAction {
-  optional IncidentActionType action_type = 1;
+  IncidentActionType action_type = 1;
   oneof action {
     CloseIncident close = 101;
     AcknowledgeIncident acknowledge = 102;
     AssignIncident assign = 103;
     UpsertIncidentState upsert_state = 104;
   }
-  google.protobuf.StringValue incident_id = 3;
+  optional google.protobuf.StringValue incident_id = 3;
 }
 
 message AlertIncidentAction {
