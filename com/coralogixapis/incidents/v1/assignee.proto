@@ -5,10 +5,10 @@ package com.coralogixapis.incidents.v1;
 import "google/protobuf/wrappers.proto";
 
 message Assignment {
-  AssignDetails assigned_to = 1;
-  AssignDetails assigned_by = 2;
+  UserDetails assigned_to = 1;
+  UserDetails assigned_by = 2;
 }
 
-message AssignDetails {
+message UserDetails {
   google.protobuf.StringValue user_id = 1;
   }
