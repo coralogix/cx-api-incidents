@@ -4,6 +4,7 @@ package com.coralogixapis.incidents.v1;
 
 import "com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state.proto";
 import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/incidents/v1/assignee.proto";
 
 enum AlertIncidentActionType {
   ALERT_INCIDENT_ACTION_TYPE_UNSPECIFIED = 0;
@@ -19,12 +20,14 @@ enum IncidentActionType {
   INCIDENT_ACTION_TYPE_UPSERT_STATE = 4;
 }
 
-message CloseIncident {}
+message CloseIncident {
+}
 
-message AcknowledgeIncident {}
+message AcknowledgeIncident {
+}
 
 message AssignIncident {
-  google.protobuf.StringValue assignee = 1;
+  Assignment assignment = 1;
 }
 
 message IncidentAction {
@@ -35,6 +38,7 @@ message IncidentAction {
     AssignIncident assign = 103;
     UpsertIncidentState upsert_state = 104;
   }
+  optional google.protobuf.StringValue incident_id = 3;
 }
 
 message AlertIncidentAction {
