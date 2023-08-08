@@ -43,21 +43,21 @@ message IncidentAction {
   }
 }
 
-message CloseAllIncident {
+message CloseAllIncidents {
 }
 
-message AcknowledgeAllIncident {
+message AcknowledgeAllIncidents {
 }
 
-message AssignAllIncident {
+message AssignAllIncidents {
   Assignment assignment = 1;
 }
 message AlertIncidentAction {
   google.protobuf.StringValue alert_id = 1;
   AlertIncidentActionType alert_incident_action_type = 2;
   oneof action {
-    CloseAllIncident close = 101;
-    AcknowledgeAllIncident acknowledge = 102;
-    AssignAllIncident assign = 103;
+    CloseAllIncidents close = 101;
+    AcknowledgeAllIncidents acknowledge = 102;
+    AssignAllIncidents assign = 103;
   }
 }
