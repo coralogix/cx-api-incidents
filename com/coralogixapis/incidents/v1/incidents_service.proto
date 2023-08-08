@@ -4,13 +4,13 @@ package com.coralogixapis.incidents.v1;
 
 import "com/coralogixapis/incidents/v1/incident.proto";
 import "com/coralogixapis/incidents/v1/incident_action/incident_action.proto";
+import "com/coralogixapis/incidents/v1/incident_filters.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
+import "com/coralogixapis/incidents/v1/incident_timeline_event.proto";
 import "com/coralogixapis/incidents/v1/source_single_alert_snapshot.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
-import "com/coralogixapis/incidents/v1/incident_timeline_event.proto";
-import "com/coralogixapis/incidents/v1/incident_filters.proto";
 import "google/protobuf/wrappers.proto";
 
 message AuditLogDescription {
@@ -52,6 +52,7 @@ service IncidentsService {
     option (audit_log_description).description = "Atomic Batch execute incident action";
     option (google.api.http) = {get: "/v1/incidents/incident-action:atomicBatchExecute"};
   }
+
   rpc CreateAlertIncidentsAction(CreateAlertIncidentsActionRequest) returns (CreateAlertIncidentsActionResponse) {
     option (audit_log_description).description = "create alert incidents action";
     option (google.api.http) = {
@@ -169,7 +170,7 @@ message CreateIncidentActionRequest {
 }
 
 message CreateIncidentActionResponse {
-  IncidentAction incident_action = 1;
+  Incident incident = 1;
 }
 
 message AtomicBatchExecuteIncidentActionRequest {
@@ -190,7 +191,7 @@ message CreateAlertIncidentsActionRequest {
   IncidentAction alert_incident_action = 1;
 }
 message CreateAlertIncidentsActionResponse {
-  IncidentAction alert_incident_action = 1;
+  repeated Incident incident = 1;
 }
 message IncidentActionExecutionResponse {
   oneof response {
