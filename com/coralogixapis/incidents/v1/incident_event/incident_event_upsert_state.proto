@@ -7,5 +7,5 @@ import "com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/ups
 
 message IncidentEventUpsertState {
     UpsertIncidentStateType state_type = 1;
-    UpsertIncidentStatePayload payload = 7;
+    UpsertIncidentStatePayload payload = 2;
 }
