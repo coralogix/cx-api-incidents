@@ -78,6 +78,14 @@ service IncidentsService {
     };
   }
 
+  rpc AssignIncident(AssignIncidentRequest) returns (AssignIncidentResponse) {
+    option (audit_log_description).description = "assign an incident";
+    option (google.api.http) = {
+      get: "/v1/incidents/incident:assign"
+      body: "*"
+    };
+  }
+
   rpc AssignAlertIncidents(AssignAlertIncidentsRequest) returns (AssignAlertIncidentsResponse) {
     option (audit_log_description).description = "assign all incidents of the alert";
     option (google.api.http) = {
@@ -86,13 +94,37 @@ service IncidentsService {
     };
   }
 
-  rpc AssignIncident(AssignIncidentRequest) returns (AssignIncidentResponse) {
-    option (audit_log_description).description = "assign an incident";
+  rpc AcknowledgeIncident(AcknowledgeIncidentRequest) returns (AcknowledgeIncidentResponse) {
+    option (audit_log_description).description = "Acknowledge an incident";
     option (google.api.http) = {
-      get: "/v1/incidents/incident:assign"
+      get: "/v1/incidents/incident:acknowledge"
       body: "*"
     };
   }
+  rpc AcknowledgeAlertIncidents(AcknowledgeAlertIncidentsRequest) returns (AcknowledgeAlertIncidentsResponse) {
+    option (audit_log_description).description = "Acknowledge all incidents of the alert";
+    option (google.api.http) = {
+      get: "/v1/incidents/alert-incidents:acknowledge"
+      body: "*"
+    };
+  }
+
+  rpc CloseIncident(CloseIncidentRequest) returns (CloseIncidentResponse) {
+    option (audit_log_description).description = "close an incident";
+    option (google.api.http) = {
+      get: "/v1/incidents/incident:close"
+      body: "*"
+    };
+  }
+  rpc CloseAlertIncidents(CloseAlertIncidentsRequest) returns (CloseAlertIncidentsResponse) {
+    option (audit_log_description).description = "close all incidents of the alert";
+    option (google.api.http) = {
+      get: "/v1/incidents/alert-incidents:close"
+      body: "*"
+    };
+  }
+
+
 }
 
 enum TimelinesGroupByFields {
@@ -246,10 +278,43 @@ message AssignAlertIncidentsResponse {
 }
 
 message AssignIncidentRequest {
-  google.protobuf.StringValue alert_id = 1;
-  Assignment assignment = 2;
+  google.protobuf.StringValue incident_id = 1;
+  UserDetails assigned_to = 2;
 }
 
 message AssignIncidentResponse {
+  Incident incident = 1;
+}
+
+message AcknowledgeAlertIncidentsRequest {
+  google.protobuf.StringValue alert_id = 1;
+  UserDetails assigned_to = 2;
+}
+
+message AcknowledgeAlertIncidentsResponse {
+  repeated Incident incidents = 1;
+}
+
+message AcknowledgeIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+}
+
+message AcknowledgeIncidentResponse {
+  Incident incident = 1;
+}
+message CloseAlertIncidentsRequest {
+  google.protobuf.StringValue alert_id = 1;
+  UserDetails assigned_to = 2;
+}
+
+message CloseAlertIncidentsResponse {
+  repeated Incident incidents = 1;
+}
+
+message CloseIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+}
+
+message CloseIncidentResponse {
   Incident incident = 1;
 }

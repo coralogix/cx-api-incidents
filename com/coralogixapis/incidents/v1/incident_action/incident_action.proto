@@ -21,11 +21,9 @@ enum IncidentActionType {
 }
 
 message CloseIncident {
-  google.protobuf.StringValue incident_id = 3;
 }
 
 message AcknowledgeIncident {
-  google.protobuf.StringValue incident_id = 3;
 }
 
 message AssignIncident {
