@@ -191,7 +191,7 @@ message CreateAlertIncidentsActionRequest {
   IncidentAction alert_incident_action = 1;
 }
 message CreateAlertIncidentsActionResponse {
-  repeated Incident incident = 1;
+  repeated Incident incidents = 1;
 }
 message IncidentActionExecutionResponse {
   oneof response {
