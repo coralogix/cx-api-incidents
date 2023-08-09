@@ -12,6 +12,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "assignee.proto";
 
 message AuditLogDescription {
   optional string description = 1;
@@ -40,26 +41,11 @@ service IncidentsService {
     };
   }
 
-  rpc CreateIncidentAction(CreateIncidentActionRequest) returns (CreateIncidentActionResponse) {
-    option (audit_log_description).description = "create incident action";
-    option (google.api.http) = {
-      get: "/v1/incidents/incident-action"
-      body: "*"
-    };
-  }
+//  rpc AtomicBatchExecuteIncidentAction(AtomicBatchExecuteIncidentActionRequest) returns (AtomicBatchExecuteIncidentActionResponse) {
+//    option (audit_log_description).description = "Atomic Batch execute incident action";
+//    option (google.api.http) = {get: "/v1/incidents/incident-action:atomicBatchExecute"};
+//  }
 
-  rpc AtomicBatchExecuteIncidentAction(AtomicBatchExecuteIncidentActionRequest) returns (AtomicBatchExecuteIncidentActionResponse) {
-    option (audit_log_description).description = "Atomic Batch execute incident action";
-    option (google.api.http) = {get: "/v1/incidents/incident-action:atomicBatchExecute"};
-  }
-
-  rpc CreateAlertIncidentsAction(CreateAlertIncidentsActionRequest) returns (CreateAlertIncidentsActionResponse) {
-    option (audit_log_description).description = "create alert incidents action";
-    option (google.api.http) = {
-      get: "/v1/incidents/alert-incident-action"
-      body: "*"
-    };
-  }
 
   rpc ListIncidentAlerts(ListIncidentAlertsRequest) returns (ListIncidentAlertsResponse) {
     option (audit_log_description).description = "list incident alerts";
@@ -89,6 +75,22 @@ service IncidentsService {
     option (audit_log_description).description = "get triggered alerts timeline";
     option (google.api.http) = {
       get: "/v1/incidents/triggered-alerts-timeline"
+      body: "*"
+    };
+  }
+
+  rpc AssignAlertIncidents(AssignAlertIncidentsRequest) returns (AssignAlertIncidentsResponse) {
+    option (audit_log_description).description = "assign all incidents of the alert";
+    option (google.api.http) = {
+      get: "/v1/incidents/alert-incidents:assign"
+      body: "*"
+    };
+  }
+
+  rpc AssignIncident(AssignIncidentRequest) returns (AssignIncidentResponse) {
+    option (audit_log_description).description = "assign an incident";
+    option (google.api.http) = {
+      get: "/v1/incidents/incident:assign"
       body: "*"
     };
   }
@@ -165,39 +167,32 @@ message DeleteIncidentRequest {
   google.protobuf.StringValue id = 1;
 }
 
-message CreateIncidentActionRequest {
-  IncidentAction incident_action = 1;
-}
 
-message CreateIncidentActionResponse {
-  Incident incident = 1;
-}
+//message AtomicBatchExecuteIncidentActionRequest {
+//  repeated IncidentActionExecutionRequest requests = 1;
+//}
 
-message AtomicBatchExecuteIncidentActionRequest {
-  repeated IncidentActionExecutionRequest requests = 1;
-}
+//message AtomicBatchExecuteIncidentActionResponse {
+//  repeated IncidentActionExecutionResponse matching_responses = 1;
+//  //  com.coralogix.api.ResponseStatus status = 2;
+//}
 
-message AtomicBatchExecuteIncidentActionResponse {
-  repeated IncidentActionExecutionResponse matching_responses = 1;
-  //  com.coralogix.api.ResponseStatus status = 2;
-}
-
-message IncidentActionExecutionRequest {
-  oneof request {
-    CreateIncidentActionRequest create = 1;
-  }
-}
-message CreateAlertIncidentsActionRequest {
-  AlertIncidentAction alert_incident_action = 1;
-}
-message CreateAlertIncidentsActionResponse {
-  repeated Incident incidents = 1;
-}
-message IncidentActionExecutionResponse {
-  oneof response {
-    CreateIncidentActionResponse create = 1;
-  }
-}
+//message IncidentActionExecutionRequest {
+//  oneof request {
+//    CreateIncidentActionRequest create = 1;
+//  }
+//}
+//message CreateAlertIncidentsActionRequest {
+//  AlertIncidentAction alert_incident_action = 1;
+//}
+//message CreateAlertIncidentsActionResponse {
+//  repeated Incident incidents = 1;
+//}
+//message IncidentActionExecutionResponse {
+//  oneof response {
+//    CreateIncidentActionResponse create = 1;
+//  }
+//}
 
 message ListIncidentAlertsRequest {
   IncidentQuery query = 1;
@@ -240,4 +235,22 @@ message ReplaceIncidentResponse {
 message GetIncidentEventsRequest {
   google.protobuf.Timestamp from = 2;
   google.protobuf.Timestamp to = 3;
+}
+
+message AssignAlertIncidentsRequest {
+  google.protobuf.StringValue alert_id = 1;
+  Assignment assignment = 2;
+}
+
+message AssignAlertIncidentsResponse {
+  repeated Incident incidents = 1;
+}
+
+message AssignIncidentRequest {
+  google.protobuf.StringValue alert_id = 1;
+  Assignment assignment = 2;
+}
+
+message AssignIncidentResponse {
+  Incident incident = 1;
 }
