@@ -20,42 +20,10 @@ enum IncidentActionType {
   INCIDENT_ACTION_TYPE_UPSERT_STATE = 4;
 }
 
-message CloseIncident {
-}
-
-message AcknowledgeIncident {
-}
-
-message AssignIncident {
-  google.protobuf.StringValue incident_id = 3;
-  Assignment assignment = 1;
-}
 
 message IncidentAction {
   IncidentActionType action_type = 1;
   oneof action {
-    CloseIncident close = 101;
-    AcknowledgeIncident acknowledge = 102;
-    AssignIncident assign = 103;
     UpsertIncidentState upsert_state = 104;
-  }
-}
-
-message CloseAllIncidents {
-}
-
-message AcknowledgeAllIncidents {
-}
-
-message AssignAllIncidents {
-  Assignment assignment = 1;
-}
-message AlertIncidentAction {
-  google.protobuf.StringValue alert_id = 1;
-  AlertIncidentActionType alert_incident_action_type = 2;
-  oneof action {
-    CloseAllIncidents close = 101;
-    AcknowledgeAllIncidents acknowledge = 102;
-    AssignAllIncidents assign = 103;
   }
 }
