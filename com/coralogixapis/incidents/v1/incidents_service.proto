@@ -303,7 +303,6 @@ message AcknowledgeIncidentResponse {
 }
 message CloseAlertIncidentsRequest {
   google.protobuf.StringValue alert_id = 1;
-  UserDetails assigned_to = 2;
 }
 
 message CloseAlertIncidentsResponse {
