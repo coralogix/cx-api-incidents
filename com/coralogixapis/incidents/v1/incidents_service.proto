@@ -231,8 +231,21 @@ message ListIncidentAlertsRequest {
   google.protobuf.StringValue page_token = 3;
 }
 
+message AlertAggIncidentsDetails {
+   AlertDef alert = 1;
+   AggIncidentsDetails agg_incidents_detail =2;
+
+}
+
+message AggIncidentsDetails {
+  google.protobuf.Timestamp last_state_update_time = 1;
+  google.protobuf.UInt32Value num_of_notification_groups = 2;
+  optional bool is_resolved = 3;
+  google.protobuf.UInt32Value num_of_triggered_incidents = 4;
+}
+
 message ListIncidentAlertsResponse {
-  repeated AlertDef alerts = 1;
+  repeated AlertAggIncidentsDetails alerts_agg_incidents_details = 1;
   google.protobuf.UInt32Value total_size = 2;
   google.protobuf.StringValue next_page_token = 3;
 }
