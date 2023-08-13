@@ -238,10 +238,12 @@ message AlertAggIncidentsDetails {
 }
 
 message AggIncidentsDetails {
-  google.protobuf.Timestamp last_state_update_time = 1;
+  google.protobuf.Timestamp last_incident_state_update_time = 1;
   google.protobuf.UInt32Value num_of_notification_groups = 2;
-  optional bool is_resolved = 3;
+  google.protobuf.BoolValue are_all_resolved = 3;
   google.protobuf.UInt32Value num_of_triggered_incidents = 4;
+  repeated Assignment all_assignments = 5;
+  google.protobuf.BoolValue are_all_acknowledged = 6;
 }
 
 message ListIncidentAlertsResponse {
