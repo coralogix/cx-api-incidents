@@ -70,10 +70,10 @@ service IncidentsService {
     };
   }
 
-  rpc GetTriggeredAlertsTimeline(GetTriggeredAlertsTimelineRequest) returns (GetTriggeredAlertsTimelineResponse) {
-    option (audit_log_description).description = "get triggered alerts timeline";
+  rpc GetTriggeredIncidentsTimeline(GetTriggeredIncidentsTimelineRequest) returns (GetTriggeredIncidentsTimelineResponse) {
+    option (audit_log_description).description = "get triggered incidents timeline";
     option (google.api.http) = {
-      get: "/v1/incidents/triggered-alerts-timeline"
+      get: "/v1/incidents/triggered-incidents-timeline"
       body: "*"
     };
   }
@@ -166,17 +166,17 @@ message ListTimelinesResponse {
   TimelinesGroupByFields group_by = 2;
 }
 
-message GetTriggeredAlertsTimelineRequest {
+message GetTriggeredIncidentsTimelineRequest {
   IncidentQuery query = 1;
   google.protobuf.UInt32Value granularity_seconds = 2;
 }
 
-message GetTriggeredAlertsTimelineResponse {
-  repeated TriggeredAlertsPerTimestamp events = 1;
+message GetTriggeredIncidentsTimelineResponse {
+  repeated TriggeredIncidentsPerTimestamp events = 1;
 }
 
-message TriggeredAlertsPerTimestamp {
-  google.protobuf.UInt32Value number_of_alerts = 1;
+message TriggeredIncidentsPerTimestamp {
+  google.protobuf.UInt32Value number_of_incidents = 1;
   google.protobuf.Timestamp timestamp = 2;
 }
 
