@@ -12,6 +12,9 @@ message AlertDef {
     google.protobuf.UInt32Value alert_type = 4;
     google.protobuf.UInt32Value severity = 5;
     google.protobuf.StringValue id = 7;
+    google.protobuf.UInt32Value condition_operator = 6;
+    google.protobuf.BoolValue has_conditions = 8;
+
 }
 message SourceSingleAlertSnapshot {
     AlertDef alert_def = 1;
