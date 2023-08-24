@@ -2,12 +2,13 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
+import "com/coralogixapis/incidents/v1/assignee.proto";
 import "com/coralogixapis/incidents/v1/incident.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
 import "com/coralogixapis/incidents/v1/incident_filters.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
 import "com/coralogixapis/incidents/v1/incident_timeline_event.proto";
 import "com/coralogixapis/incidents/v1/source_single_alert_snapshot.proto";
-import "com/coralogixapis/incidents/v1/assignee.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
@@ -40,11 +41,10 @@ service IncidentsService {
     };
   }
 
-//  rpc AtomicBatchExecuteIncidentAction(AtomicBatchExecuteIncidentActionRequest) returns (AtomicBatchExecuteIncidentActionResponse) {
-//    option (audit_log_description).description = "Atomic Batch execute incident action";
-//    option (google.api.http) = {get: "/v1/incidents/incident-action:atomicBatchExecute"};
-//  }
-
+  //  rpc AtomicBatchExecuteIncidentAction(AtomicBatchExecuteIncidentActionRequest) returns (AtomicBatchExecuteIncidentActionResponse) {
+  //    option (audit_log_description).description = "Atomic Batch execute incident action";
+  //    option (google.api.http) = {get: "/v1/incidents/incident-action:atomicBatchExecute"};
+  //  }
 
   rpc ListIncidentAlerts(ListIncidentAlertsRequest) returns (ListIncidentAlertsResponse) {
     option (audit_log_description).description = "list incident alerts";
@@ -124,7 +124,13 @@ service IncidentsService {
     };
   }
 
-
+  rpc GetIncidentEvent(GetIncidentEventsRequest) returns (GetIncidentEventsResponse) {
+    option (audit_log_description).description = "get all incident events of the incident";
+    option (google.api.http) = {
+      get: "/v1/incidents/events"
+      body: "*"
+    };
+  }
 }
 
 enum TimelinesGroupByFields {
@@ -198,7 +204,6 @@ message DeleteIncidentRequest {
   google.protobuf.StringValue id = 1;
 }
 
-
 //message AtomicBatchExecuteIncidentActionRequest {
 //  repeated IncidentActionExecutionRequest requests = 1;
 //}
@@ -232,9 +237,8 @@ message ListIncidentAlertsRequest {
 }
 
 message AlertAggIncidentsDetails {
-   AlertDef alert = 1;
-   AggIncidentsDetails agg_incidents_detail =2;
-
+  AlertDef alert = 1;
+  AggIncidentsDetails agg_incidents_detail = 2;
 }
 
 message AggIncidentsDetails {
@@ -248,7 +252,8 @@ message AggIncidentsDetails {
 
 message ListIncidentAlertsResponse {
   repeated AlertAggIncidentsDetails alerts_agg_incidents_details = 1;
-  google.protobuf.UInt32Value total_size = 2;
+  google
+.protobuf.UInt32Value total_size = 2;
   google.protobuf.StringValue next_page_token = 3;
 }
 
@@ -279,10 +284,11 @@ message ReplaceIncidentResponse {
 }
 
 message GetIncidentEventsRequest {
-  google.protobuf.Timestamp from = 2;
-  google.protobuf.Timestamp to = 3;
+  google.protobuf.StringValue incident_id = 1;
 }
-
+message GetIncidentEventsResponse {
+  repeated IncidentEvent incident_events = 1;
+}
 message AssignAlertIncidentsRequest {
   google.protobuf.StringValue alert_id = 1;
   UserDetails assigned_to = 2;
