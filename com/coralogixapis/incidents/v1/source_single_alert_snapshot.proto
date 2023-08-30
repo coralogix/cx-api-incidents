@@ -3,7 +3,6 @@ syntax = "proto3";
 package com.coralogixapis.incidents.v1;
 
 import "google/protobuf/wrappers.proto";
-import "google/protobuf/timestamp.proto";
 
 message AlertDef {
     google.protobuf.StringValue name = 1;
@@ -19,6 +18,9 @@ message AlertDef {
 message SourceSingleAlertSnapshot {
     AlertDef alert_def = 1;
     NotificationGroup notification_group = 2;
+    AlertTypeConcluded alert_type_concluded = 3;
+
+
 }
 message NotificationGroup {
     google.protobuf.StringValue id = 1;
@@ -29,4 +31,16 @@ message NotificationGroup {
 
 message NotificationGroupIntegration {
     google.protobuf.UInt32Value integration_id = 1;
+}
+
+ enum AlertTypeConcluded {
+     ALERT_TYPE_CONCLUDED_UNKNOWN_OR_UNSPECIFIED =0;
+     ALERT_TYPE_CONCLUDED_STANDARD =1;
+      ALERT_TYPE_CONCLUDED_FLOW=5;
+     ALERT_TYPE_CONCLUDED_METRIC = 8;
+     ALERT_TYPE_CONCLUDED_NEW_VALUE = 9;
+     ALERT_TYPE_CONCLUDED_RATIO = 10;
+     ALERT_TYPE_CONCLUDED_TIME_RELATIVE = 12;
+     ALERT_TYPE_CONCLUDED_TRACING = 14;
+     ALERT_TYPE_CONCLUDED_UNIQUE_COUNT = 16;
 }
