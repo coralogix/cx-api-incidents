@@ -124,7 +124,7 @@ service IncidentsService {
     };
   }
 
-  rpc GetIncidentEvent(GetIncidentEventsRequest) returns (GetIncidentEventsResponse) {
+  rpc GetIncidentEvent(GetIncidentEventRequest) returns (GetIncidentEventResponse) {
     option (audit_log_description).description = "get all incident events of the incident";
     option (google.api.http) = {
       get: "/v1/incidents/events"
@@ -283,10 +283,10 @@ message ReplaceIncidentResponse {
   Incident incident = 1;
 }
 
-message GetIncidentEventsRequest {
+message GetIncidentEventRequest {
   google.protobuf.StringValue incident_id = 1;
 }
-message GetIncidentEventsResponse {
+message GetIncidentEventResponse {
   repeated IncidentEvent incident_events = 1;
 }
 message AssignAlertIncidentsRequest {

@@ -19,9 +19,8 @@ message SourceSingleAlertSnapshot {
     AlertDef alert_def = 1;
     NotificationGroup notification_group = 2;
     AlertTypeConcluded alert_type_concluded = 3;
-
-
 }
+
 message NotificationGroup {
     google.protobuf.StringValue id = 1;
     repeated NotificationGroupIntegration integrations = 2;
