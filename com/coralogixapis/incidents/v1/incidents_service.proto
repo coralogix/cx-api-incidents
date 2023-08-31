@@ -248,6 +248,7 @@ message AggIncidentsDetails {
   google.protobuf.UInt32Value num_of_triggered_incidents = 4;
   repeated Assignment all_assignments = 5;
   google.protobuf.BoolValue are_all_acknowledged = 6;
+  AlertTypeConcluded alert_type_concluded = 7;
 }
 
 message ListIncidentAlertsResponse {
