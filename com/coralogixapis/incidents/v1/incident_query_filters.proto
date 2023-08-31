@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/incidents/v1/source_single_alert_snapshot.proto";
 
 message IncidentQueryFilters {
   enum IncidentStatus {
@@ -17,4 +18,5 @@ message IncidentQueryFilters {
   repeated google.protobuf.UInt32Value alert_type = 6;
   google.protobuf.StringValue alert_id = 3;
   google.protobuf.StringValue notification_group_id = 4;
+  AlertTypeConcluded alert_type_concluded = 7;
 }
