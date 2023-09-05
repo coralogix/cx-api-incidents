@@ -18,6 +18,8 @@ message UpsertIncidentState {
     SourceSingleAlert single_alert = 100;
   };
   map<string, string> labels = 6;
+  map<string, string> contextual_labels = 9;
+  map<string, string> display_labels = 10;
   UpsertIncidentStatePayload payload = 7;
   ScopeDetails scope_details = 8;
 }
