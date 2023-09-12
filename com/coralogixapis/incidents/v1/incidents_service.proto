@@ -64,7 +64,7 @@ service IncidentsService {
       get: "/v1/incidents/alerts"
       body: "*"
     };
-    option deprecated = true;
+    /*option deprecated = true;*/
   }
 
   rpc ListNotificationGroups(ListNotificationGroupsRequest) returns (ListNotificationGroupsResponse) {
@@ -73,7 +73,7 @@ service IncidentsService {
       get: "/v1/incidents/notification-groups"
       body: "*"
     };
-    option deprecated = true;
+    /*option deprecated = true;*/
   }
 
   rpc ListFilters(ListFiltersRequest) returns (ListFiltersResponse) {
@@ -106,7 +106,7 @@ service IncidentsService {
       get: "/v1/incidents/alert-incidents:assign"
       body: "*"
     };
-    option deprecated = true;
+    /*option deprecated = true;*/
   }
 
   rpc AcknowledgeIncident(AcknowledgeIncidentRequest) returns (AcknowledgeIncidentResponse) {
@@ -122,7 +122,7 @@ service IncidentsService {
       get: "/v1/incidents/alert-incidents:acknowledge"
       body: "*"
     };
-    option deprecated = true;
+    /*option deprecated = true;*/
   }
 
   rpc CloseIncident(CloseIncidentRequest) returns (CloseIncidentResponse) {
@@ -138,7 +138,7 @@ service IncidentsService {
       get: "/v1/incidents/alert-incidents:close"
       body: "*"
     };
-    option deprecated = true;
+    /*option deprecated = true;*/
   }
 
   rpc GetIncidentEvent(GetIncidentEventRequest) returns (GetIncidentEventResponse) {

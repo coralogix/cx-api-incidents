@@ -17,7 +17,7 @@ enum OrderByFields {
 }
 
 message OrderBy {
-  OrderByFields field_name = 1 [deprecated = true];
+  OrderByFields field_name = 1 ;/*[deprecated = true];*/
   oneof Fields {
     IncidentFields incident_field = 10;
     google.protobuf.StringValue contextual_label = 11;
