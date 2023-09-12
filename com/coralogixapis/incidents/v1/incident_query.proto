@@ -5,17 +5,7 @@ package com.coralogixapis.incidents.v1;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filters.proto";
-
-enum IncidentFields{
-  INCIDENTS_FIELDS_UNSPECIFIED = 0;
-  INCIDENTS_FIELDS_ID = 1;
-  INCIDENTS_FIELDS_SEVERITY = 2;
-  INCIDENTS_FIELDS_NAME = 3;
-  INCIDENTS_FIELDS_CREATED_TIME = 4;
-  INCIDENTS_FIELDS_CLOSED_TIME = 5;
-  INCIDENTS_FIELDS_STATE = 6;
-  INCIDENTS_FIELDS_STATUS = 7;
-}
+import "com/coralogixapis/incidents/v1/incident.proto";
 
 enum OrderByFields {
   ORDER_BY_FIELDS_UNSPECIFIED = 0;
@@ -51,6 +41,6 @@ message GroupBy {
 message IncidentQuery {
   google.protobuf.Timestamp start_time = 1;
   google.protobuf.Timestamp end_time = 2;
-  repeated IncidentQueryFilters filters = 3;
+  IncidentQueryFilters filters = 3;
   repeated OrderBy order_bys = 4;
 }

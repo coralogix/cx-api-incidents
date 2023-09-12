@@ -32,8 +32,8 @@ message Incident {
   google.protobuf.Timestamp closed_at = 12;
 }
 
-message OneOfIncidentField {
-  oneof incidentField {
+message IncidentFieldOneOf {
+  oneof field {
     google.protobuf.StringValue id = 1;
     IncidentSeverity severity = 2;
     google.protobuf.StringValue name = 3;
@@ -49,7 +49,7 @@ message ContextualLabels {
 }
 message GroupByValues {
   oneof values {
-    OneOfIncidentField incident_field = 1;
+    IncidentFieldOneOf incident_field = 1;
     ContextualLabels contextual_labels = 2;
   }
 }
@@ -61,4 +61,15 @@ message AggregativeIncident {
   repeated Assignment list_assignments = 5;
   google.protobuf.Timestamp first_created_at = 6;
   google.protobuf.Timestamp last_closed_at = 7;
+}
+
+enum IncidentFields{
+  INCIDENTS_FIELDS_UNSPECIFIED = 0;
+  INCIDENTS_FIELDS_ID = 1;
+  INCIDENTS_FIELDS_SEVERITY = 2;
+  INCIDENTS_FIELDS_NAME = 3;
+  INCIDENTS_FIELDS_CREATED_TIME = 4;
+  INCIDENTS_FIELDS_CLOSED_TIME = 5;
+  INCIDENTS_FIELDS_STATE = 6;
+  INCIDENTS_FIELDS_STATUS = 7;
 }
