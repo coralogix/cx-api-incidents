@@ -1,10 +1,13 @@
 syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
-import "google/protobuf/wrappers.proto";
+
 import "com/coralogixapis/incidents/v1/source_single_alert_snapshot.proto";
+import "google/protobuf/wrappers.proto";
+
 
 message IncidentQueryFilters {
+
   enum IncidentStatus {
     INCIDENT_STATUS_UNSPECIFIED = 0;
     INCIDENT_STATUS_OPEN = 1;
@@ -15,8 +18,8 @@ message IncidentQueryFilters {
   repeated google.protobuf.StringValue assignee = 1;
   repeated IncidentStatus status = 2;
   repeated google.protobuf.UInt32Value severity = 5;
-  repeated google.protobuf.UInt32Value alert_type = 6;
-  google.protobuf.StringValue alert_id = 3;
-  google.protobuf.StringValue notification_group_id = 4;
-  AlertTypeConcluded alert_type_concluded = 7;
+  repeated google.protobuf.UInt32Value alert_type = 6 [deprecated = true];
+  google.protobuf.StringValue alert_id = 3 [deprecated = true];
+  google.protobuf.StringValue notification_group_id = 4 [deprecated = true];
+  AlertTypeConcluded alert_type_concluded = 7 [deprecated = true];
 }

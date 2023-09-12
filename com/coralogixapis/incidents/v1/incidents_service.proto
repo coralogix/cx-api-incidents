@@ -13,6 +13,9 @@ import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/incidents/v1/incident_state.proto";
+import "com/coralogixapis/incidents/v1/incident_severity.proto";
+import "com/coralogixapis/incidents/v1/incident_status.proto";
 
 message AuditLogDescription {
   optional string description = 1;
@@ -41,6 +44,15 @@ service IncidentsService {
     };
   }
 
+  rpc ListAggregativeIncidents(ListAggregativeIncidentsRequest) returns (ListAggregativeIncidentsResponse) {
+    option (audit_log_description).description = "get aggregative incidents list";
+    option (google.api.http) = {
+      get: "/v1/incidents"
+      body: "*"
+    };
+  }
+
+
   //  rpc AtomicBatchExecuteIncidentAction(AtomicBatchExecuteIncidentActionRequest) returns (AtomicBatchExecuteIncidentActionResponse) {
   //    option (audit_log_description).description = "Atomic Batch execute incident action";
   //    option (google.api.http) = {get: "/v1/incidents/incident-action:atomicBatchExecute"};
@@ -52,6 +64,7 @@ service IncidentsService {
       get: "/v1/incidents/alerts"
       body: "*"
     };
+    option deprecated = true;
   }
 
   rpc ListNotificationGroups(ListNotificationGroupsRequest) returns (ListNotificationGroupsResponse) {
@@ -60,6 +73,7 @@ service IncidentsService {
       get: "/v1/incidents/notification-groups"
       body: "*"
     };
+    option deprecated = true;
   }
 
   rpc ListFilters(ListFiltersRequest) returns (ListFiltersResponse) {
@@ -92,6 +106,7 @@ service IncidentsService {
       get: "/v1/incidents/alert-incidents:assign"
       body: "*"
     };
+    option deprecated = true;
   }
 
   rpc AcknowledgeIncident(AcknowledgeIncidentRequest) returns (AcknowledgeIncidentResponse) {
@@ -107,6 +122,7 @@ service IncidentsService {
       get: "/v1/incidents/alert-incidents:acknowledge"
       body: "*"
     };
+    option deprecated = true;
   }
 
   rpc CloseIncident(CloseIncidentRequest) returns (CloseIncidentResponse) {
@@ -122,6 +138,7 @@ service IncidentsService {
       get: "/v1/incidents/alert-incidents:close"
       body: "*"
     };
+    option deprecated = true;
   }
 
   rpc GetIncidentEvent(GetIncidentEventRequest) returns (GetIncidentEventResponse) {
@@ -192,7 +209,7 @@ message TimelineEventList {
 
 message BatchGetIncidentRequest {
   repeated google.protobuf.StringValue ids = 1;
-  IncidentQuery query = 2;
+  repeated OrderBy order_bys = 2;
 }
 
 message BatchGetIncidentResponse {
@@ -204,31 +221,18 @@ message DeleteIncidentRequest {
   google.protobuf.StringValue id = 1;
 }
 
-//message AtomicBatchExecuteIncidentActionRequest {
-//  repeated IncidentActionExecutionRequest requests = 1;
-//}
+message ListAggregativeIncidentsRequest{
+  IncidentQuery query = 1;
+  repeated GroupBy group_bys =2;
+  google.protobuf.UInt32Value page_size = 3;
+  google.protobuf.StringValue page_token = 4;
 
-//message AtomicBatchExecuteIncidentActionResponse {
-//  repeated IncidentActionExecutionResponse matching_responses = 1;
-//  //  com.coralogix.api.ResponseStatus status = 2;
-//}
-
-//message IncidentActionExecutionRequest {
-//  oneof request {
-//    CreateIncidentActionRequest create = 1;
-//  }
-//}
-//message CreateAlertIncidentsActionRequest {
-//  AlertIncidentAction alert_incident_action = 1;
-//}
-//message CreateAlertIncidentsActionResponse {
-//  repeated Incident incidents = 1;
-//}
-//message IncidentActionExecutionResponse {
-//  oneof response {
-//    CreateIncidentActionResponse create = 1;
-//  }
-//}
+}
+message ListAggregativeIncidentsResponse {
+  repeated AggregativeIncident agg_incidents = 1;
+  google.protobuf.UInt32Value total_size = 2;
+  google.protobuf.StringValue next_page_token = 3;
+}
 
 message ListIncidentAlertsRequest {
   IncidentQuery query = 1;
@@ -253,8 +257,7 @@ message AggIncidentsDetails {
 
 message ListIncidentAlertsResponse {
   repeated AlertAggIncidentsDetails alerts_agg_incidents_details = 1;
-  google
-.protobuf.UInt32Value total_size = 2;
+  google.protobuf.UInt32Value total_size = 2;
   google.protobuf.StringValue next_page_token = 3;
 }
 
