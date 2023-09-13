@@ -5,6 +5,7 @@ package com.coralogixapis.incidents.v1;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filters.proto";
+import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
 import "com/coralogixapis/incidents/v1/incident.proto";
 
 enum OrderByFields {
@@ -32,10 +33,11 @@ enum OrderByDirection {
 }
 
 message GroupBy {
-  oneof Fields {
+  oneof field {
     IncidentFields incident_field = 10;
     google.protobuf.StringValue contextual_label = 11;
   }
+  OrderByDirection order_by_direction = 1;
 }
 
 message IncidentQuery {

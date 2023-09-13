@@ -55,12 +55,32 @@ message GroupByValues {
 }
 message AggregativeIncident {
   repeated GroupByValues group_bys_value = 1;
-  IncidentState agg_state = 2;
-  IncidentStatus agg_status = 3;
-  IncidentSeverity agg_severity = 4;
-  repeated Assignment list_assignments = 5;
+  repeated IncidentStateCount agg_state_count = 2;
+  repeated IncidentStatusCount agg_status_count = 3;
+  repeated IncidentSeverityCount agg_severity_count = 4;
+  repeated IncidentAssignmentCount agg_assignments_count = 5;
   google.protobuf.Timestamp first_created_at = 6;
   google.protobuf.Timestamp last_closed_at = 7;
+  google.protobuf.UInt32Value all_values_count = 8;
+  repeated google.protobuf.StringValue list_incidents_id = 9;
+}
+
+message IncidentAssignmentCount {
+  UserDetails assigned_to = 1;
+  google.protobuf.UInt32Value count = 2;
+}
+message IncidentSeverityCount {
+  IncidentSeverity severity = 1;
+  google.protobuf.UInt32Value count = 2;
+}
+message IncidentStatusCount {
+  IncidentStatus status = 1;
+  google.protobuf.UInt32Value count = 2;
+}
+
+message IncidentStateCount {
+  IncidentState state = 1;
+  google.protobuf.UInt32Value count = 2;
 }
 
 enum IncidentFields{

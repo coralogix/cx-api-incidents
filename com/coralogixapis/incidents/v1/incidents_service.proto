@@ -16,6 +16,7 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
+import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
 
 message AuditLogDescription {
   optional string description = 1;
@@ -51,7 +52,6 @@ service IncidentsService {
       body: "*"
     };
   }
-
 
   //  rpc AtomicBatchExecuteIncidentAction(AtomicBatchExecuteIncidentActionRequest) returns (AtomicBatchExecuteIncidentActionResponse) {
   //    option (audit_log_description).description = "Atomic Batch execute incident action";
@@ -169,12 +169,16 @@ message ListIncidentsResponse {
   repeated Incident incidents = 1;
   google.protobuf.UInt32Value total_size = 2;
   google.protobuf.StringValue next_page_token = 3;
+  PaginationResponse pagination =4;
 }
 
 message ListIncidentsRequest {
   IncidentQuery query = 1;
   google.protobuf.UInt32Value page_size = 2;
   google.protobuf.StringValue page_token = 3;
+  IncidentQueryFilter filters = 4;
+  PaginationRequest pagination =5;
+
 }
 
 message ListTimelinesRequest {
@@ -220,18 +224,23 @@ message BatchGetIncidentResponse {
 message DeleteIncidentRequest {
   google.protobuf.StringValue id = 1;
 }
+message PaginationRequest{
+  google.protobuf.UInt32Value page_size = 1;
+  google.protobuf.StringValue page_token = 2;
+}
+message PaginationResponse{
+  google.protobuf.UInt32Value total_size = 1;
+  google.protobuf.StringValue next_page_token = 2;
+}
 
 message ListAggregativeIncidentsRequest{
-  IncidentQuery query = 1;
+  IncidentQueryFilter filters =1;
   repeated GroupBy group_bys =2;
-  google.protobuf.UInt32Value page_size = 3;
-  google.protobuf.StringValue page_token = 4;
-
+  PaginationRequest pagination = 3;
 }
 message ListAggregativeIncidentsResponse {
   repeated AggregativeIncident agg_incidents = 1;
-  google.protobuf.UInt32Value total_size = 2;
-  google.protobuf.StringValue next_page_token = 3;
+  PaginationResponse pagination =2;
 }
 
 message ListIncidentAlertsRequest {
