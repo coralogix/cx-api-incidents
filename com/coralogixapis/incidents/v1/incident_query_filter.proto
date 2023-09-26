@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/timestamp.proto";
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 message IncidentQueryFilter {
   repeated google.protobuf.StringValue assignee = 1;
@@ -16,6 +16,6 @@ message IncidentQueryFilter {
   google.protobuf.Timestamp end_time = 6;
 }
 
-message ContextualLabelValues{
+message ContextualLabelValues {
   repeated google.protobuf.StringValue contextual_label_values = 1;
 }

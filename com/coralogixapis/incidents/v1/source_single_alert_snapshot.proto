@@ -5,41 +5,40 @@ package com.coralogixapis.incidents.v1;
 import "google/protobuf/wrappers.proto";
 
 message AlertDef {
-    google.protobuf.StringValue name = 1;
-    google.protobuf.StringValue description = 2;
-    repeated google.protobuf.StringValue group_by = 3;
-    google.protobuf.UInt32Value alert_type = 4;
-    google.protobuf.UInt32Value severity = 5;
-    google.protobuf.StringValue id = 7;
-    google.protobuf.UInt32Value condition_operator = 6;
-    google.protobuf.BoolValue has_conditions = 8;
-
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue description = 2;
+  repeated google.protobuf.StringValue group_by = 3;
+  google.protobuf.UInt32Value alert_type = 4;
+  google.protobuf.UInt32Value severity = 5;
+  google.protobuf.StringValue id = 7;
+  google.protobuf.UInt32Value condition_operator = 6;
+  google.protobuf.BoolValue has_conditions = 8;
 }
 message SourceSingleAlertSnapshot {
-    AlertDef alert_def = 1;
-    NotificationGroup notification_group = 2;
-    AlertTypeConcluded alert_type_concluded = 3;
+  AlertDef alert_def = 1;
+  NotificationGroup notification_group = 2;
+  AlertTypeConcluded alert_type_concluded = 3;
 }
 
 message NotificationGroup {
-    google.protobuf.StringValue id = 1;
-    repeated NotificationGroupIntegration integrations = 2;
-    repeated google.protobuf.StringValue group_by = 3;
-    google.protobuf.UInt32Value num_of_incidents = 4;
+  google.protobuf.StringValue id = 1;
+  repeated NotificationGroupIntegration integrations = 2;
+  repeated google.protobuf.StringValue group_by = 3;
+  google.protobuf.UInt32Value num_of_incidents = 4;
 }
 
 message NotificationGroupIntegration {
-    google.protobuf.UInt32Value integration_id = 1;
+  google.protobuf.UInt32Value integration_id = 1;
 }
 
- enum AlertTypeConcluded {
-     ALERT_TYPE_CONCLUDED_UNKNOWN_OR_UNSPECIFIED =0;
-     ALERT_TYPE_CONCLUDED_STANDARD =1;
-      ALERT_TYPE_CONCLUDED_FLOW=5;
-     ALERT_TYPE_CONCLUDED_METRIC = 8;
-     ALERT_TYPE_CONCLUDED_NEW_VALUE = 9;
-     ALERT_TYPE_CONCLUDED_RATIO = 10;
-     ALERT_TYPE_CONCLUDED_TIME_RELATIVE = 12;
-     ALERT_TYPE_CONCLUDED_TRACING = 14;
-     ALERT_TYPE_CONCLUDED_UNIQUE_COUNT = 16;
+enum AlertTypeConcluded {
+  ALERT_TYPE_CONCLUDED_UNKNOWN_OR_UNSPECIFIED = 0;
+  ALERT_TYPE_CONCLUDED_STANDARD = 1;
+  ALERT_TYPE_CONCLUDED_FLOW = 5;
+  ALERT_TYPE_CONCLUDED_METRIC = 8;
+  ALERT_TYPE_CONCLUDED_NEW_VALUE = 9;
+  ALERT_TYPE_CONCLUDED_RATIO = 10;
+  ALERT_TYPE_CONCLUDED_TIME_RELATIVE = 12;
+  ALERT_TYPE_CONCLUDED_TRACING = 14;
+  ALERT_TYPE_CONCLUDED_UNIQUE_COUNT = 16;
 }

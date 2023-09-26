@@ -18,7 +18,6 @@ enum IncidentActionType {
   INCIDENT_ACTION_TYPE_UPSERT_STATE = 4;
 }
 
-
 message IncidentAction {
   IncidentActionType action_type = 1;
   oneof action {

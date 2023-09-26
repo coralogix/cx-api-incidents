@@ -7,16 +7,16 @@ import "com/coralogixapis/incidents/v1/incident.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
 import "com/coralogixapis/incidents/v1/incident_filters.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
+import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
+import "com/coralogixapis/incidents/v1/incident_severity.proto";
+import "com/coralogixapis/incidents/v1/incident_state.proto";
+import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/incident_timeline_event.proto";
 import "com/coralogixapis/incidents/v1/source_single_alert_snapshot.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "com/coralogixapis/incidents/v1/incident_state.proto";
-import "com/coralogixapis/incidents/v1/incident_severity.proto";
-import "com/coralogixapis/incidents/v1/incident_status.proto";
-import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
 
 message AuditLogDescription {
   optional string description = 1;
@@ -169,7 +169,7 @@ message ListIncidentsResponse {
   repeated Incident incidents = 1;
   google.protobuf.UInt32Value total_size = 2;
   google.protobuf.StringValue next_page_token = 3;
-  PaginationResponse pagination =4;
+  PaginationResponse pagination = 4;
 }
 
 message ListIncidentsRequest {
@@ -177,8 +177,7 @@ message ListIncidentsRequest {
   google.protobuf.UInt32Value page_size = 2;
   google.protobuf.StringValue page_token = 3;
   IncidentQueryFilter filters = 4;
-  PaginationRequest pagination =5;
-
+  PaginationRequest pagination = 5;
 }
 
 message ListTimelinesRequest {
@@ -224,23 +223,23 @@ message BatchGetIncidentResponse {
 message DeleteIncidentRequest {
   google.protobuf.StringValue id = 1;
 }
-message PaginationRequest{
+message PaginationRequest {
   google.protobuf.UInt32Value page_size = 1;
   google.protobuf.StringValue page_token = 2;
 }
-message PaginationResponse{
+message PaginationResponse {
   google.protobuf.UInt32Value total_size = 1;
   google.protobuf.StringValue next_page_token = 2;
 }
 
-message ListAggregativeIncidentsRequest{
-  IncidentQueryFilter filters =1;
-  repeated GroupBy group_bys =2;
+message ListAggregativeIncidentsRequest {
+  IncidentQueryFilter filters = 1;
+  repeated GroupBy group_bys = 2;
   PaginationRequest pagination = 3;
 }
 message ListAggregativeIncidentsResponse {
   repeated AggregativeIncident agg_incidents = 1;
-  PaginationResponse pagination =2;
+  PaginationResponse pagination = 2;
 }
 
 message ListIncidentAlertsRequest {

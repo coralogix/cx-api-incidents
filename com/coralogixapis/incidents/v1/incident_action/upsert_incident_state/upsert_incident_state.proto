@@ -2,27 +2,24 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
-import "google/protobuf/wrappers.proto";
-import "com/coralogixapis/incidents/v1/source_single_alert.proto";
-import "com/coralogixapis/incidents/v1/source_type.proto";
 import "com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto";
 import "com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto";
 import "com/coralogixapis/incidents/v1/scoping_details.proto";
+import "com/coralogixapis/incidents/v1/source_single_alert.proto";
+import "com/coralogixapis/incidents/v1/source_type.proto";
+import "google/protobuf/wrappers.proto";
 
 message UpsertIncidentState {
   google.protobuf.StringValue correlation_key = 1;
   google.protobuf.Int32Value company_id = 2;
   UpsertIncidentStateType state_type = 3;
-  SourceType source_type = 5 ;/*[deprecated = true];*/
+  SourceType source_type = 5; /*[deprecated = true];*/
   oneof source {
-    SourceSingleAlert single_alert = 100   ;/*[deprecated = true];*/
-  };
-  map<string, string> labels = 6   ;/*[deprecated = true];*/
+    SourceSingleAlert single_alert = 100; /*[deprecated = true];*/
+  }
+  map<string, string> labels = 6; /*[deprecated = true];*/
   map<string, string> contextual_labels = 9;
   map<string, string> display_labels = 10;
   UpsertIncidentStatePayload payload = 7;
   ScopeDetails scope_details = 8;
 }
-
-
-
