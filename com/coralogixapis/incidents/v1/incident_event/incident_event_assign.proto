@@ -5,5 +5,5 @@ package com.coralogixapis.incidents.v1;
 import "com/coralogixapis/incidents/v1/assignee.proto";
 
 message IncidentEventAssign {
-    Assignment assignment = 1;
+  Assignment assignment = 1;
 }
