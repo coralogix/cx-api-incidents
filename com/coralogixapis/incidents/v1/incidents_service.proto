@@ -84,6 +84,14 @@ service IncidentsService {
     };
   }
 
+  rpc GetFiltersValues(GetFiltersValuesRequest) returns (GetFiltersValuesResponse) {
+      option (audit_log_description).description = "get filters values";
+      option (google.api.http) = {
+      get: "/v1/incidents/get-filters-values"
+      body: "*"
+    };
+  }
+
   rpc GetTriggeredIncidentsTimeline(GetTriggeredIncidentsTimelineRequest) returns (GetTriggeredIncidentsTimelineResponse) {
     option (audit_log_description).description = "get triggered incidents timeline";
     option (google.api.http) = {
@@ -176,7 +184,7 @@ message ListIncidentsRequest {
   IncidentQuery query = 1;
   google.protobuf.UInt32Value page_size = 2;
   google.protobuf.StringValue page_token = 3;
-  IncidentQueryFilter filters = 4;
+  IncidentQueryFilter filter = 4;
   PaginationRequest pagination = 5;
 }
 
@@ -233,7 +241,7 @@ message PaginationResponse {
 }
 
 message ListAggregativeIncidentsRequest {
-  IncidentQueryFilter filters = 1;
+  IncidentQueryFilter filter = 1;
   repeated GroupBy group_bys = 2;
   PaginationRequest pagination = 3;
 }
@@ -281,6 +289,12 @@ message ListFiltersResponse {
   repeated Filter filters = 1;
 }
 
+message GetFiltersValuesRequest {
+  IncidentQueryFilter filter = 1;
+}
+message GetFiltersValuesResponse {
+  IncidentQueryFilter filter = 1;
+}
 message ListNotificationGroupsResponse {
   repeated NotificationGroup notification_groups = 1;
 }
