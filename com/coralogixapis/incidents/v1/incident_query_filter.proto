@@ -4,16 +4,18 @@ package com.coralogixapis.incidents.v1;
 
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
+import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 message IncidentQueryFilter {
   repeated google.protobuf.StringValue assignee = 1;
   repeated IncidentStatus status = 2;
-  repeated IncidentSeverity severity = 3;
-  map<string, ContextualLabelValues> contextual_labels = 4;
-  google.protobuf.Timestamp start_time = 5;
-  google.protobuf.Timestamp end_time = 6;
+  repeated IncidentState state = 3;
+  repeated IncidentSeverity severity = 4;
+  map<string, ContextualLabelValues> contextual_labels = 5;
+  google.protobuf.Timestamp start_time = 6;
+  google.protobuf.Timestamp end_time = 7;
 }
 
 message ContextualLabelValues {
