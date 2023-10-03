@@ -318,7 +318,6 @@ message GetIncidentEventResponse {
 message AssignAlertIncidentsRequest {
   google.protobuf.StringValue alert_id = 1;
   UserDetails assigned_to = 2;
-  google.protobuf.BoolValue unassign = 3;
 }
 
 message AssignAlertIncidentsResponse {
@@ -328,6 +327,7 @@ message AssignAlertIncidentsResponse {
 message AssignIncidentRequest {
   google.protobuf.StringValue incident_id = 1;
   UserDetails assigned_to = 2;
+  google.protobuf.BoolValue unassign = 3;
 }
 
 message AssignIncidentResponse {
