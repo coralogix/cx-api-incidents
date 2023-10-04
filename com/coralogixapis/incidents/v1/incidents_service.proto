@@ -325,9 +325,10 @@ message AssignAlertIncidentsResponse {
 }
 
 message AssignIncidentRequest {
-  google.protobuf.StringValue incident_id = 1;
+  google.protobuf.StringValue incident_id = 1 [deprecated = true];
   UserDetails assigned_to = 2;
   optional google.protobuf.BoolValue unassign = 3;
+  repeated google.protobuf.StringValue list_incidents_id = 4;
 }
 
 message AssignIncidentResponse {
