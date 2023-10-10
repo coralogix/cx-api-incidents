@@ -30,6 +30,7 @@ message Incident {
   repeated IncidentEvent events = 10;
   google.protobuf.Timestamp created_at = 11;
   google.protobuf.Timestamp closed_at = 12;
+  google.protobuf.Timestamp last_state_update_time = 15;
 }
 
 message IncidentFieldOneOf {
@@ -41,6 +42,7 @@ message IncidentFieldOneOf {
     google.protobuf.Timestamp closed_at = 5;
     IncidentState state = 6;
     IncidentStatus status = 7;
+    google.protobuf.Timestamp last_state_update_time = 8;
   }
 }
 message ContextualLabels {
@@ -63,6 +65,7 @@ message AggregativeIncident {
   google.protobuf.Timestamp last_closed_at = 7;
   google.protobuf.UInt32Value all_values_count = 8;
   repeated google.protobuf.StringValue list_incidents_id = 9;
+  google.protobuf.Timestamp last_state_update_time = 10;
 }
 
 message IncidentAssignmentCount {
@@ -92,4 +95,5 @@ enum IncidentFields {
   INCIDENTS_FIELDS_CLOSED_TIME = 5;
   INCIDENTS_FIELDS_STATE = 6;
   INCIDENTS_FIELDS_STATUS = 7;
+  INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME = 8;
 }
