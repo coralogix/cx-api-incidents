@@ -13,6 +13,13 @@ message IncidentQueryFilters {
     INCIDENT_STATUS_CLOSED = 3;
   }
 
+  enum IncidentState{
+    INCIDENT_STATE_UNSPECIFIED = 0;
+    INCIDENT_STATE_TRIGGERED = 1;
+    INCIDENT_STATE_RESOLVED = 2;
+  }
+
+
   repeated google.protobuf.StringValue assignee = 1;
   repeated IncidentStatus status = 2;
   repeated google.protobuf.UInt32Value severity = 5;
@@ -20,4 +27,5 @@ message IncidentQueryFilters {
   google.protobuf.StringValue alert_id = 3; /*[deprecated = true];*/
   google.protobuf.StringValue notification_group_id = 4; /*[deprecated = true];*/
   AlertTypeConcluded alert_type_concluded = 7; /*[deprecated = true];*/
+  repeated IncidentState state = 8;
 }
