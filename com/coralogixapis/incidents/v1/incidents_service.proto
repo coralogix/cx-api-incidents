@@ -156,6 +156,14 @@ service IncidentsService {
       body: "*"
     };
   }
+
+  rpc GetIncidentByCorrelationKey(GetIncidentByCorrelationKeyRequest) returns (GetIncidentByCorrelationKeyResponse) {
+  option (audit_log_description).description = " Get Incident by correlation key and specific point in time";
+      option (google.api.http) = {
+      get: "/v1/incidents/incident-by-correlation-key"
+      body: "*"
+      };
+  }
 }
 
 enum TimelinesGroupByFields {
@@ -363,5 +371,14 @@ message CloseIncidentRequest {
 }
 
 message CloseIncidentResponse {
+  Incident incident = 1;
+}
+
+message GetIncidentByCorrelationKeyRequest {
+  google.protobuf.StringValue correlation_key = 1;
+  google.protobuf.Timestamp incident_point_in_time = 2;
+}
+
+message GetIncidentByCorrelationKeyResponse {
   Incident incident = 1;
 }
