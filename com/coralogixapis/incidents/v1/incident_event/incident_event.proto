@@ -11,6 +11,7 @@ import "com/coralogixapis/incidents/v1/incident_event/incident_event_originator_
 import "com/coralogixapis/incidents/v1/incident_event/incident_event_snooze_indicator.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event_type.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_unassign.proto";
 import "google/protobuf/wrappers.proto";
 
 message IncidentEvent {
@@ -19,6 +20,7 @@ message IncidentEvent {
   oneof incident_event_payload {
     IncidentEventSnoozeIndicator snooze_indicator = 200;
     IncidentEventAssign assignment = 201;
+    IncidentEventUnassign unassign = 205;
     IncidentEventUpsertState upsert_state = 202;
     IncidentEventAcknowledge acknowledge = 203;
     IncidentEventClose close = 204;
