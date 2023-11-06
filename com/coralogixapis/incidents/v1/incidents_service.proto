@@ -220,6 +220,7 @@ message GetIncidentEventResponse {
 
 message AssignIncidentRequest {
   repeated google.protobuf.StringValue incident_ids = 5;
+  UserDetails assigned_to = 2;
 }
 
 message UnassignIncidentRequest {
