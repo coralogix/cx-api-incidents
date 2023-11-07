@@ -12,6 +12,7 @@ import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/incident_timeline_event.proto";
+import "com/coralogixapis/incidents/v1/incident_query_filters_values.proto";
 import "com/coralogixapis/incidents/v1/source_single_alert_snapshot.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
@@ -207,7 +208,7 @@ message GetFiltersValuesRequest {
   IncidentQueryFilter filter = 1;
 }
 message GetFiltersValuesResponse {
-  IncidentQueryFilter filter = 1;
+  IncidentQueryFiltersValues filters_values = 1;
 }
 
 message GetIncidentEventRequest {
