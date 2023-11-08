@@ -37,6 +37,6 @@ message ContextualLabelValuesWithCount {
   repeated ContextualLabelValueWithCount values_with_count = 1;
 }
 message ContextualLabelValueWithCount {
-  google.protobuf.StringValue contextual_label_values = 1;
+  google.protobuf.StringValue contextual_label_value = 1;
   google.protobuf.Int32Value count = 2;
 }
