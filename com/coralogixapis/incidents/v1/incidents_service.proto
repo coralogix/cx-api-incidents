@@ -256,7 +256,7 @@ message ResolveIncidentRequest {
 }
 
 message ResolveIncidentResponse {
-  repeated Incident incident = 1;
+  repeated Incident incidents = 1;
 }
 
 message GetIncidentByCorrelationKeyRequest {
