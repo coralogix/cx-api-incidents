@@ -118,7 +118,7 @@ service IncidentsService {
   rpc GetIncidentByCorrelationKey(GetIncidentByCorrelationKeyRequest) returns (GetIncidentByCorrelationKeyResponse) {
   option (audit_log_description).description = " Get Incident by correlation key and specific point in time";
       option (google.api.http) = {
-      get: "/v1/incidents/incident-by-correlation-key"
+      post: "/v1/incidents/incident-by-correlation-key"
       body: "*"
       };
   }
