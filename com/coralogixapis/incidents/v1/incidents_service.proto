@@ -49,7 +49,7 @@ service IncidentsService {
   rpc ListAggregativeIncidents(ListAggregativeIncidentsRequest) returns (ListAggregativeIncidentsResponse) {
     option (audit_log_description).description = "get aggregative incidents list";
     option (google.api.http) = {
-      post: "/v1/incidents"
+      post: "/v1/incidents/aggregative-incidents"
       body: "*"
     };
   }
@@ -58,14 +58,6 @@ service IncidentsService {
       option (audit_log_description).description = "get filters values";
       option (google.api.http) = {
       post: "/v1/incidents/get-filters-values"
-      body: "*"
-    };
-  }
-
-  rpc GetTriggeredIncidentsTimeline(GetTriggeredIncidentsTimelineRequest) returns (GetTriggeredIncidentsTimelineResponse) {
-    option (audit_log_description).description = "get triggered incidents timeline";
-    option (google.api.http) = {
-      post: "/v1/incidents/triggered-incidents-timeline"
       body: "*"
     };
   }
@@ -143,16 +135,6 @@ message ListIncidentsRequest {
   repeated OrderBy order_bys = 6;
 }
 
-message GetTriggeredIncidentsTimelineRequest {
-  IncidentQuery query = 1 [deprecated = true];
-  google.protobuf.UInt32Value granularity_seconds = 2;
-  IncidentQueryFilter filter = 3;
-}
-
-message GetTriggeredIncidentsTimelineResponse {
-  repeated TriggeredIncidentsPerTimestamp events = 1;
-}
-
 message TriggeredIncidentsPerTimestamp {
   google.protobuf.UInt32Value number_of_incidents = 1;
   google.protobuf.Timestamp timestamp = 2;
@@ -191,16 +173,6 @@ message ListAggregativeIncidentsRequest {
 message ListAggregativeIncidentsResponse {
   repeated AggregativeIncident agg_incidents = 1;
   PaginationResponse pagination = 2;
-}
-
-message AggIncidentsDetails {
-  google.protobuf.Timestamp last_incident_state_update_time = 1;
-  google.protobuf.UInt32Value num_of_notification_groups = 2;
-  google.protobuf.BoolValue are_all_resolved = 3;
-  google.protobuf.UInt32Value num_of_triggered_incidents = 4;
-  repeated Assignment all_assignments = 5;
-  google.protobuf.BoolValue are_all_acknowledged = 6;
-  AlertTypeConcluded alert_type_concluded = 7;
 }
 
 
