@@ -7,6 +7,7 @@ import "com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/ups
 import "com/coralogixapis/incidents/v1/scoping_details.proto";
 import "com/coralogixapis/incidents/v1/source_single_alert.proto";
 import "com/coralogixapis/incidents/v1/source_type.proto";
+import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "google/protobuf/wrappers.proto";
 
 message UpsertIncidentState {
@@ -14,6 +15,7 @@ message UpsertIncidentState {
   google.protobuf.Int32Value company_id = 2;
   UpsertIncidentStateType state_type = 3;
   SourceType source_type = 5; /*[deprecated = true];*/
+  IncidentSeverity severity = 4;
   oneof source {
     SourceSingleAlert single_alert = 100; /*[deprecated = true];*/
   }

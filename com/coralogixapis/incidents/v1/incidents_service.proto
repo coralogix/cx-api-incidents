@@ -12,6 +12,7 @@ import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/incident_timeline_event.proto";
+import "com/coralogixapis/incidents/v1/incident_query_filters_values.proto";
 import "com/coralogixapis/incidents/v1/source_single_alert_snapshot.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
@@ -34,13 +35,13 @@ service IncidentsService {
 
   rpc BatchGetIncident(BatchGetIncidentRequest) returns (BatchGetIncidentResponse) {
     option (audit_log_description).description = "batch get incidents";
-    option (google.api.http) = {get: "/v1/incidents/incidents:batchGet"};
+    option (google.api.http) = {post: "/v1/incidents/incidents:batchGet"};
   }
 
   rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse) {
     option (audit_log_description).description = "get incidents list";
     option (google.api.http) = {
-      get: "/v1/incidents"
+      post: "/v1/incidents"
       body: "*"
     };
   }
@@ -48,38 +49,7 @@ service IncidentsService {
   rpc ListAggregativeIncidents(ListAggregativeIncidentsRequest) returns (ListAggregativeIncidentsResponse) {
     option (audit_log_description).description = "get aggregative incidents list";
     option (google.api.http) = {
-      get: "/v1/incidents"
-      body: "*"
-    };
-  }
-
-  //  rpc AtomicBatchExecuteIncidentAction(AtomicBatchExecuteIncidentActionRequest) returns (AtomicBatchExecuteIncidentActionResponse) {
-  //    option (audit_log_description).description = "Atomic Batch execute incident action";
-  //    option (google.api.http) = {get: "/v1/incidents/incident-action:atomicBatchExecute"};
-  //  }
-
-  rpc ListIncidentAlerts(ListIncidentAlertsRequest) returns (ListIncidentAlertsResponse) {
-    option (audit_log_description).description = "list incident alerts";
-    option (google.api.http) = {
-      get: "/v1/incidents/alerts"
-      body: "*"
-    };
-    /*option deprecated = true;*/
-  }
-
-  rpc ListNotificationGroups(ListNotificationGroupsRequest) returns (ListNotificationGroupsResponse) {
-    option (audit_log_description).description = "list notification groups";
-    option (google.api.http) = {
-      get: "/v1/incidents/notification-groups"
-      body: "*"
-    };
-    /*option deprecated = true;*/
-  }
-
-  rpc ListFilters(ListFiltersRequest) returns (ListFiltersResponse) {
-    option (audit_log_description).description = "ListFilters";
-    option (google.api.http) = {
-      get: "/v1/incidents/list-filters"
+      post: "/v1/incidents"
       body: "*"
     };
   }
@@ -87,7 +57,7 @@ service IncidentsService {
   rpc GetFiltersValues(GetFiltersValuesRequest) returns (GetFiltersValuesResponse) {
       option (audit_log_description).description = "get filters values";
       option (google.api.http) = {
-      get: "/v1/incidents/get-filters-values"
+      post: "/v1/incidents/get-filters-values"
       body: "*"
     };
   }
@@ -95,7 +65,7 @@ service IncidentsService {
   rpc GetTriggeredIncidentsTimeline(GetTriggeredIncidentsTimelineRequest) returns (GetTriggeredIncidentsTimelineResponse) {
     option (audit_log_description).description = "get triggered incidents timeline";
     option (google.api.http) = {
-      get: "/v1/incidents/triggered-incidents-timeline"
+      post: "/v1/incidents/triggered-incidents-timeline"
       body: "*"
     };
   }
@@ -103,56 +73,44 @@ service IncidentsService {
   rpc AssignIncident(AssignIncidentRequest) returns (AssignIncidentResponse) {
     option (audit_log_description).description = "assign an incident";
     option (google.api.http) = {
-      get: "/v1/incidents/incident:assign"
+      post: "/v1/incidents/incident:assign"
       body: "*"
     };
   }
 
-  rpc AssignAlertIncidents(AssignAlertIncidentsRequest) returns (AssignAlertIncidentsResponse) {
-    option (audit_log_description).description = "assign all incidents of the alert";
+  rpc UnassignIncident(UnassignIncidentRequest) returns (UnassignIncidentResponse) {
+    option (audit_log_description).description = "unassign an incident";
     option (google.api.http) = {
-      get: "/v1/incidents/alert-incidents:assign"
+      post: "/v1/incidents/incident:unassign"
       body: "*"
     };
-    /*option deprecated = true;*/
   }
-
   rpc AcknowledgeIncident(AcknowledgeIncidentRequest) returns (AcknowledgeIncidentResponse) {
     option (audit_log_description).description = "Acknowledge an incident";
     option (google.api.http) = {
-      get: "/v1/incidents/incident:acknowledge"
+      post: "/v1/incidents/incident:acknowledge"
       body: "*"
     };
   }
-  rpc AcknowledgeAlertIncidents(AcknowledgeAlertIncidentsRequest) returns (AcknowledgeAlertIncidentsResponse) {
-    option (audit_log_description).description = "Acknowledge all incidents of the alert";
-    option (google.api.http) = {
-      get: "/v1/incidents/alert-incidents:acknowledge"
-      body: "*"
-    };
-    /*option deprecated = true;*/
-  }
-
   rpc CloseIncident(CloseIncidentRequest) returns (CloseIncidentResponse) {
     option (audit_log_description).description = "close an incident";
     option (google.api.http) = {
-      get: "/v1/incidents/incident:close"
+      post: "/v1/incidents/incident:close"
       body: "*"
     };
   }
-  rpc CloseAlertIncidents(CloseAlertIncidentsRequest) returns (CloseAlertIncidentsResponse) {
-    option (audit_log_description).description = "close all incidents of the alert";
-    option (google.api.http) = {
-      get: "/v1/incidents/alert-incidents:close"
-      body: "*"
-    };
-    /*option deprecated = true;*/
-  }
-
   rpc GetIncidentEvent(GetIncidentEventRequest) returns (GetIncidentEventResponse) {
     option (audit_log_description).description = "get all incident events of the incident";
     option (google.api.http) = {
-      get: "/v1/incidents/events"
+      post: "/v1/incidents/events"
+      body: "*"
+    };
+  }
+
+  rpc ResolveIncident(ResolveIncidentRequest) returns (ResolveIncidentResponse) {
+    option (audit_log_description).description = "Resolve an incident";
+    option (google.api.http) = {
+      post: "/v1/incidents/incident:resolve"
       body: "*"
     };
   }
@@ -160,17 +118,10 @@ service IncidentsService {
   rpc GetIncidentByCorrelationKey(GetIncidentByCorrelationKeyRequest) returns (GetIncidentByCorrelationKeyResponse) {
   option (audit_log_description).description = " Get Incident by correlation key and specific point in time";
       option (google.api.http) = {
-      get: "/v1/incidents/incident-by-correlation-key"
+      post: "/v1/incidents/incident-by-correlation-key"
       body: "*"
       };
   }
-}
-
-enum TimelinesGroupByFields {
-  TIMELINES_GROUP_BY_FIELDS_UNSPECIFIED = 0;
-  TIMELINES_GROUP_BY_FIELDS_NONE = 1;
-  TIMELINES_GROUP_BY_FIELDS_ALERT = 2;
-  TIMELINES_GROUP_BY_FIELDS_NOTIFICATION_GROUP = 3;
 }
 
 message GetIncidentRequest {
@@ -183,34 +134,19 @@ message GetIncidentResponse {
 
 message ListIncidentsResponse {
   repeated Incident incidents = 1;
-  google.protobuf.UInt32Value total_size = 2;
-  google.protobuf.StringValue next_page_token = 3;
   PaginationResponse pagination = 4;
 }
 
 message ListIncidentsRequest {
-  IncidentQuery query = 1;
-  google.protobuf.UInt32Value page_size = 2;
-  google.protobuf.StringValue page_token = 3;
   IncidentQueryFilter filter = 4;
   PaginationRequest pagination = 5;
-}
-
-message ListTimelinesRequest {
-  IncidentQuery query = 1;
-  google.protobuf.UInt32Value granularity_seconds = 2;
-  repeated google.protobuf.StringValue incident_ids = 3;
-  TimelinesGroupByFields group_by = 4;
-}
-
-message ListTimelinesResponse {
-  map<string, TimelineEventList> events = 1;
-  TimelinesGroupByFields group_by = 2;
+  repeated OrderBy order_bys = 6;
 }
 
 message GetTriggeredIncidentsTimelineRequest {
-  IncidentQuery query = 1;
+  IncidentQuery query = 1 [deprecated = true];
   google.protobuf.UInt32Value granularity_seconds = 2;
+  IncidentQueryFilter filter = 3;
 }
 
 message GetTriggeredIncidentsTimelineResponse {
@@ -228,7 +164,6 @@ message TimelineEventList {
 
 message BatchGetIncidentRequest {
   repeated google.protobuf.StringValue ids = 1;
-  repeated OrderBy order_bys = 2;
 }
 
 message BatchGetIncidentResponse {
@@ -258,17 +193,6 @@ message ListAggregativeIncidentsResponse {
   PaginationResponse pagination = 2;
 }
 
-message ListIncidentAlertsRequest {
-  IncidentQuery query = 1;
-  google.protobuf.UInt32Value page_size = 2;
-  google.protobuf.StringValue page_token = 3;
-}
-
-message AlertAggIncidentsDetails {
-  AlertDef alert = 1;
-  AggIncidentsDetails agg_incidents_detail = 2;
-}
-
 message AggIncidentsDetails {
   google.protobuf.Timestamp last_incident_state_update_time = 1;
   google.protobuf.UInt32Value num_of_notification_groups = 2;
@@ -279,99 +203,60 @@ message AggIncidentsDetails {
   AlertTypeConcluded alert_type_concluded = 7;
 }
 
-message ListIncidentAlertsResponse {
-  repeated AlertAggIncidentsDetails alerts_agg_incidents_details = 1;
-  google.protobuf.UInt32Value total_size = 2;
-  google.protobuf.StringValue next_page_token = 3;
-}
-
-message ListNotificationGroupsRequest {
-  IncidentQuery query = 1;
-}
-
-message ListFiltersRequest {
-  IncidentQuery query = 1;
-}
-
-message ListFiltersResponse {
-  repeated Filter filters = 1;
-}
 
 message GetFiltersValuesRequest {
   IncidentQueryFilter filter = 1;
 }
 message GetFiltersValuesResponse {
-  IncidentQueryFilter filter = 1;
-}
-message ListNotificationGroupsResponse {
-  repeated NotificationGroup notification_groups = 1;
-}
-
-message DeleteIncidentResponse {}
-
-message ReplaceIncidentRequest {
-  Incident incident = 1;
-}
-
-message ReplaceIncidentResponse {
-  Incident incident = 1;
+  IncidentQueryFiltersValues filters_values = 1;
 }
 
 message GetIncidentEventRequest {
   google.protobuf.StringValue incident_id = 1;
 }
+
 message GetIncidentEventResponse {
   repeated IncidentEvent incident_events = 1;
 }
-message AssignAlertIncidentsRequest {
-  google.protobuf.StringValue alert_id = 1;
-  UserDetails assigned_to = 2;
-}
-
-message AssignAlertIncidentsResponse {
-  repeated Incident incidents = 1;
-}
 
 message AssignIncidentRequest {
-  optional google.protobuf.StringValue incident_id = 1 [deprecated = true];
+  repeated google.protobuf.StringValue incident_ids = 5;
   UserDetails assigned_to = 2;
-  optional google.protobuf.BoolValue unassign = 3;
-  repeated google.protobuf.StringValue list_incidents_id = 4;
+}
+
+message UnassignIncidentRequest {
+  repeated google.protobuf.StringValue incident_ids = 1;
+}
+message UnassignIncidentResponse {
+  repeated Incident incidents = 1;
 }
 
 message AssignIncidentResponse {
-  Incident incident = 1;
-}
-
-message AcknowledgeAlertIncidentsRequest {
-  google.protobuf.StringValue alert_id = 1;
-}
-
-message AcknowledgeAlertIncidentsResponse {
-  repeated Incident incidents = 1;
+  repeated Incident incidents = 2;
 }
 
 message AcknowledgeIncidentRequest {
-  google.protobuf.StringValue incident_id = 1;
+  repeated google.protobuf.StringValue incident_ids = 2;
 }
 
 message AcknowledgeIncidentResponse {
-  Incident incident = 1;
-}
-message CloseAlertIncidentsRequest {
-  google.protobuf.StringValue alert_id = 1;
-}
-
-message CloseAlertIncidentsResponse {
-  repeated Incident incidents = 1;
+  repeated Incident incidents = 2;
 }
 
 message CloseIncidentRequest {
-  google.protobuf.StringValue incident_id = 1;
+  repeated google.protobuf.StringValue incident_ids = 2;
 }
 
 message CloseIncidentResponse {
-  Incident incident = 1;
+  repeated Incident incidents = 2;
+}
+
+message ResolveIncidentRequest {
+  repeated google.protobuf.StringValue incident_ids = 1;
+}
+
+message ResolveIncidentResponse {
+  repeated Incident incidents = 1;
 }
 
 message GetIncidentByCorrelationKeyRequest {

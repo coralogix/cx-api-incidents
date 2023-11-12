@@ -20,11 +20,6 @@ message Incident {
   repeated Assignment assignments = 5;
   google.protobuf.StringValue description = 6;
   IncidentSeverity severity = 7;
-  SourceType source_type = 8; /*[deprecated = true];*/
-  oneof source {
-    SourceSingleAlert alert = 100; /*[deprecated = true];*/
-  }
-  map<string, string> labels = 9; /*[deprecated = true];*/
   map<string, string> contextual_labels = 13;
   map<string, string> display_labels = 14;
   repeated IncidentEvent events = 10;
