@@ -50,7 +50,7 @@ message GroupByValues {
     ContextualLabels contextual_labels = 2;
   }
 }
-message AggregativeIncident {
+message IncidentAggregation {
   repeated GroupByValues group_bys_value = 1;
   repeated IncidentStateCount agg_state_count = 2;
   repeated IncidentStatusCount agg_status_count = 3;
