@@ -18,6 +18,8 @@ message IncidentQueryFilter {
   google.protobuf.Timestamp start_time = 6;
   google.protobuf.Timestamp end_time = 7;
   IncidentSearchQuery search_query = 8;
+  repeated google.protobuf.StringValue application_name = 9;
+  repeated google.protobuf.StringValue subsystem_name = 10;
 }
 
 message ContextualLabelValues {
