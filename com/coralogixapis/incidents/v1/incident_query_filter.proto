@@ -20,6 +20,7 @@ message IncidentQueryFilter {
   IncidentSearchQuery search_query = 8;
   repeated google.protobuf.StringValue application_name = 9;
   repeated google.protobuf.StringValue subsystem_name = 10;
+  google.protobuf.BoolValue is_muted = 11;
 }
 
 message ContextualLabelValues {

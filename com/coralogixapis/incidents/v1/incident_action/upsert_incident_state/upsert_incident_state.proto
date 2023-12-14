@@ -25,4 +25,6 @@ message UpsertIncidentState {
   UpsertIncidentStatePayload payload = 7;
   ScopeDetails scope_details = 8;
   google.protobuf.BoolValue close_on_resolve_event = 11;
+  google.protobuf.BoolValue is_muted = 12;
+
 }
