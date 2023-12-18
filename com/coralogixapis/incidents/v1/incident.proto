@@ -27,6 +27,7 @@ message Incident {
   google.protobuf.Timestamp closed_at = 12;
   google.protobuf.Timestamp last_state_update_time = 15;
   google.protobuf.StringValue last_state_update_key = 16;
+  google.protobuf.BoolValue is_muted = 17;
 }
 
 message IncidentFieldOneOf {
