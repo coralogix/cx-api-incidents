@@ -14,12 +14,7 @@ message UpsertIncidentState {
   google.protobuf.StringValue correlation_key = 1;
   google.protobuf.Int32Value company_id = 2;
   UpsertIncidentStateType state_type = 3;
-  SourceType source_type = 5; /*[deprecated = true];*/
   IncidentSeverity severity = 4;
-  oneof source {
-    SourceSingleAlert single_alert = 100; /*[deprecated = true];*/
-  }
-  map<string, string> labels = 6; /*[deprecated = true];*/
   map<string, string> contextual_labels = 9;
   map<string, string> display_labels = 10;
   UpsertIncidentStatePayload payload = 7;
