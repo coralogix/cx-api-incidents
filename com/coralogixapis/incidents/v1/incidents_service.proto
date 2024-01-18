@@ -7,12 +7,7 @@ import "com/coralogixapis/incidents/v1/incident.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
-import "com/coralogixapis/incidents/v1/incident_severity.proto";
-import "com/coralogixapis/incidents/v1/incident_state.proto";
-import "com/coralogixapis/incidents/v1/incident_status.proto";
-import "com/coralogixapis/incidents/v1/incident_timeline_event.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filters_values.proto";
-import "com/coralogixapis/incidents/v1/source_single_alert_snapshot.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
@@ -44,7 +39,6 @@ service IncidentsService {
       body: "*"
     };
   }
-
   rpc ListIncidentAggregations(ListIncidentAggregationsRequest) returns (ListIncidentAggregationsResponse) {
     option (audit_log_description).description = "List incident aggregations";
     option (google.api.http) = {
@@ -52,7 +46,10 @@ service IncidentsService {
       body: "*"
     };
   }
-
+/*
+ This shouldn't be exposed in the docs, it has no external usecase
+ Rpc to get the values and count of the filters of the all the incidents (under the filter specified)
+ */
   rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {
       option (audit_log_description).description = "Get filter values";
       option (google.api.http) = {
@@ -106,6 +103,9 @@ service IncidentsService {
     };
   }
 
+  /*
+    This shouldn't be exposed in the docs, it has no external usecase
+   */
   rpc GetIncidentUsingCorrelationKey(GetIncidentUsingCorrelationKeyRequest) returns (GetIncidentUsingCorrelationKeyResponse) {
   option (audit_log_description).description = "Get incident by correlation key and specific point in time";
       option (google.api.http) = {

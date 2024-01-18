@@ -5,7 +5,6 @@ package com.coralogixapis.incidents.v1;
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 message AssigneeWithCount {

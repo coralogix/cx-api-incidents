@@ -7,27 +7,28 @@ import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
-import "com/coralogixapis/incidents/v1/source_single_alert.proto";
-import "com/coralogixapis/incidents/v1/source_type.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
+/**
+ * Represents an Incident.
+ */
 message Incident {
-  google.protobuf.StringValue id = 1;
-  google.protobuf.StringValue name = 2;
-  IncidentState state = 3;
-  IncidentStatus status = 4;
-  repeated Assignment assignments = 5;
-  google.protobuf.StringValue description = 6;
-  IncidentSeverity severity = 7;
-  map<string, string> contextual_labels = 13;
-  map<string, string> display_labels = 14;
-  repeated IncidentEvent events = 10;
+  google.protobuf.StringValue id = 1; // The Incident's id
+  google.protobuf.StringValue name = 2; // The Incident's name
+  IncidentState state = 3; // The Incident's current state, the internal state of the incident, usually is derived from the operational events of the incident
+  IncidentStatus status = 4; // The Incident's current status, the status of the incident can be derived from state of the incident and/or administrative user operation (i.e acknowledging the incident)
+  repeated Assignment assignments = 5; // The Incident's current assignments
+  google.protobuf.StringValue description = 6; // The Incident's current description
+  IncidentSeverity severity = 7; // The Incident's current severity
+  map<string, string> contextual_labels = 13; // The Incident's current contextual labels, contextual labels are dynamic labels that gives contextual information about the incident ( for example: alert_name label can appear in an incident created by an event originated from the alerting system )
+  map<string, string> display_labels = 14; // The Incident's current display labels, display labels are dynamic labels that gives more of an extension to the name of the incident, for identification and naming purposes
+  repeated IncidentEvent events = 10;  // The Incident's current events
   google.protobuf.Timestamp created_at = 11;
   google.protobuf.Timestamp closed_at = 12;
   google.protobuf.Timestamp last_state_update_time = 15;
-  google.protobuf.StringValue last_state_update_key = 16;
-  google.protobuf.BoolValue is_muted = 17;
+  google.protobuf.StringValue last_state_update_key = 16; // The Incident's last event payload key that caused the incident to change state
+  google.protobuf.BoolValue is_muted = 17; // Is the incident muted/suppressed
 }
 
 message IncidentFieldOneOf {
@@ -55,17 +56,18 @@ message GroupByValues {
     ContextualLabels contextual_labels = 2;
   }
 }
+// Represents and Incident Aggregation (group by)
 message IncidentAggregation {
-  repeated GroupByValues group_bys_value = 1;
-  repeated IncidentStateCount agg_state_count = 2;
-  repeated IncidentStatusCount agg_status_count = 3;
-  repeated IncidentSeverityCount agg_severity_count = 4;
-  repeated IncidentAssignmentCount agg_assignments_count = 5;
-  google.protobuf.Timestamp first_created_at = 6;
-  google.protobuf.Timestamp last_closed_at = 7;
-  google.protobuf.UInt32Value all_values_count = 8;
-  repeated google.protobuf.StringValue list_incidents_id = 9;
-  google.protobuf.Timestamp last_state_update_time = 10;
+  repeated GroupByValues group_bys_value = 1; // The Aggregation's group by fields and values
+  repeated IncidentStateCount agg_state_count = 2; // The Aggregation's count of states
+  repeated IncidentStatusCount agg_status_count = 3; // The Aggregation's count of statuses
+  repeated IncidentSeverityCount agg_severity_count = 4; // The Aggregation's count of severities
+  repeated IncidentAssignmentCount agg_assignments_count = 5; // The Aggregation's count of assignments
+  google.protobuf.Timestamp first_created_at = 6; // The Aggregation's first incident created time
+  google.protobuf.Timestamp last_closed_at = 7; // The Aggregation's last incident closed time
+  google.protobuf.UInt32Value all_values_count = 8; // The Aggregation's count of incidents
+  repeated google.protobuf.StringValue list_incidents_id = 9; // The Aggregation's list of incident's id
+  google.protobuf.Timestamp last_state_update_time = 10; // The Aggregation's last state update time
 }
 
 message IncidentAssignmentCount {
