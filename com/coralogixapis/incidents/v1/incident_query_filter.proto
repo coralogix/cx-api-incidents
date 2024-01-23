@@ -8,6 +8,7 @@ import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/incidents/v1/meta_label.proto";
 
 message IncidentQueryFilter {
   repeated google.protobuf.StringValue assignee = 1;
@@ -23,6 +24,7 @@ message IncidentQueryFilter {
   google.protobuf.BoolValue is_muted = 11;
   TimeRange created_at_range = 12; // filters all incidents created at the given time range
   TimeRange incident_duration_range = 13; // filters all incidents open (alive) at the given time range
+  repeated MetaLabel meta_labels = 14; // filters all incidents with the given meta labels
 }
 message TimeRange {
   google.protobuf.Timestamp start_time = 1;

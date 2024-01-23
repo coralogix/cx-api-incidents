@@ -7,6 +7,7 @@ import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
+import "com/coralogixapis/incidents/v1/meta_label.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -29,7 +30,9 @@ message Incident {
   google.protobuf.Timestamp last_state_update_time = 15;
   google.protobuf.StringValue last_state_update_key = 16; // The Incident's last event payload key that caused the incident to change state
   google.protobuf.BoolValue is_muted = 17; // Is the incident muted/suppressed
+  repeated MetaLabel meta_labels = 18; // The Incident's current meta labels
 }
+
 
 message IncidentFieldOneOf {
   oneof field {
@@ -68,8 +71,13 @@ message IncidentAggregation {
   google.protobuf.UInt32Value all_values_count = 8; // The Aggregation's count of incidents
   repeated google.protobuf.StringValue list_incidents_id = 9; // The Aggregation's list of incident's id
   google.protobuf.Timestamp last_state_update_time = 10; // The Aggregation's last state update time
+  repeated IncidentMetaLabelsCount agg_meta_labels_count = 11; // The Aggregation's of meta labels
 }
 
+message IncidentMetaLabelsCount {
+  MetaLabel meta_label = 1;
+  google.protobuf.UInt32Value count = 2;
+}
 message IncidentAssignmentCount {
   UserDetails assigned_to = 1;
   google.protobuf.UInt32Value count = 2;

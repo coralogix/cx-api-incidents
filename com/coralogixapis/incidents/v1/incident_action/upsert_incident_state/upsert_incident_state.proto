@@ -6,6 +6,7 @@ import "com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/ups
 import "com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto";
 import "com/coralogixapis/incidents/v1/scoping_details.proto";
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
+import "com/coralogixapis/incidents/v1/meta_label.proto";
 import "google/protobuf/wrappers.proto";
 
 message UpsertIncidentState {
@@ -19,5 +20,5 @@ message UpsertIncidentState {
   ScopeDetails scope_details = 8;
   google.protobuf.BoolValue close_on_resolve_event = 11;
   google.protobuf.BoolValue is_muted = 12;
-
+  repeated MetaLabel meta_labels = 13;
 }
