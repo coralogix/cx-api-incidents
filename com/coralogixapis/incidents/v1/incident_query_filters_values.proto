@@ -5,6 +5,7 @@ package com.coralogixapis.incidents.v1;
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
+import "com/coralogixapis/incidents/v1/meta_label.proto";
 import "google/protobuf/wrappers.proto";
 
 message AssigneeWithCount {
@@ -23,12 +24,17 @@ message IncidentSeverityWithCount {
   IncidentSeverity severity = 1;
   google.protobuf.Int32Value count = 2;
 }
+message IncidentMetaLabelsWithCount {
+  MetaLabel meta_label = 1;
+  google.protobuf.Int32Value count = 2;
+}
 message IncidentQueryFiltersValues {
   repeated AssigneeWithCount assignee_with_count = 1;
   repeated IncidentStatusWithCount status_with_count = 2;
   repeated IncidentStateWithCount state_with_count = 3;
   repeated IncidentSeverityWithCount severity_with_count = 4;
   map<string, ContextualLabelValuesWithCount> contextual_labels = 5;
+  repeated IncidentMetaLabelsWithCount meta_labels_with_count = 6;
 }
 
 message ContextualLabelValuesWithCount {
