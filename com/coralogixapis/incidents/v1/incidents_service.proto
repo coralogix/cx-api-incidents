@@ -12,6 +12,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "com/coralogix/openapi/v1/annotations.proto";
 
 message AuditLogDescription {
   optional string description = 1;
@@ -22,14 +23,41 @@ extend google.protobuf.MethodOptions {
 }
 
 service IncidentsService {
+  option (com.coralogix.openapi.v1.service) = {
+    description: "API for managing incidents. Incidents are a collection of events that are related to a specific issue or problem. Incidents are used to track and manage the lifecycle of an issue or problem."
+    resource_name: "Incident"
+  };
   rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {
     option (audit_log_description).description = "Get incident";
-    option (google.api.http) = {get: "/v1/incidents/{id}"};
+    option (google.api.http) = {
+      get: "/v1/incidents/{id}"
+      
+      additional_bindings {
+        get: "/v1/incidents/{id}"
+        response_body: "incident"
+      }
+    };
+    option (com.coralogix.openapi.v1.method) = {
+      http_rule_index: 1
+      resource: true
+      description: "Get incident by id"
+    };
+
   }
 
   rpc BatchGetIncident(BatchGetIncidentRequest) returns (BatchGetIncidentResponse) {
     option (audit_log_description).description = "Batch get incidents";
-    option (google.api.http) = {post: "/v1/incidents:batchGet"};
+    option (google.api.http) = {
+      post: "/v1/incidents:batchGet"
+      additional_bindings {
+        post: "/v1/incidents/batch/get"
+        body: "*"
+      }
+    };
+    option (com.coralogix.openapi.v1.method) = {
+      http_rule_index: 1
+      description: "Batch get incidents by ids"
+    };
   }
 
   rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse) {
@@ -37,6 +65,15 @@ service IncidentsService {
     option (google.api.http) = {
       post: "/v1/incidents"
       body: "*"
+
+      additional_bindings {
+        post: "/v1/incidents/query/run"
+        body: "*"
+      }
+    };
+    option (com.coralogix.openapi.v1.method) = {
+      http_rule_index: 1
+      description: "Query incidents"
     };
   }
   rpc ListIncidentAggregations(ListIncidentAggregationsRequest) returns (ListIncidentAggregationsResponse) {
@@ -44,6 +81,15 @@ service IncidentsService {
     option (google.api.http) = {
       post: "/v1/incidents:listIncidentAggregations"
       body: "*"
+
+      additional_bindings {
+        post: "/v1/incidents/aggregations/query/run"
+        body: "*"
+      }
+    };
+    option (com.coralogix.openapi.v1.method) = {
+      http_rule_index: 1
+      description: "Query incident aggregations"
     };
   }
 /*
