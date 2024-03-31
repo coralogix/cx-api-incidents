@@ -47,7 +47,6 @@ message IncidentFieldOneOf {
     google.protobuf.Timestamp last_state_update_time = 8;
     google.protobuf.StringValue application_name = 9;
     google.protobuf.StringValue subsystem_name = 10;
-    google.protobuf.Duration duration = 11;
   }
 }
 message ContextualLabels {
@@ -109,5 +108,6 @@ enum IncidentFields {
   INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME = 8;
   INCIDENTS_FIELDS_APPLICATION_NAME = 9;
   INCIDENTS_FIELDS_SUBSYSTEM_NAME = 10;
+  INCIDENTS_FIELDS_DURATION = 11;
 
 }
