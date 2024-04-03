@@ -47,6 +47,7 @@ message IncidentFieldOneOf {
     google.protobuf.Timestamp last_state_update_time = 8;
     google.protobuf.StringValue application_name = 9;
     google.protobuf.StringValue subsystem_name = 10;
+    google.protobuf.Duration duration = 11;
   }
 }
 message ContextualLabels {
