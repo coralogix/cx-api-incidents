@@ -10,7 +10,7 @@ import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/meta_label.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-
+import "google/protobuf/duration.proto";
 /**
  * Represents an Incident.
  */
@@ -31,6 +31,7 @@ message Incident {
   google.protobuf.StringValue last_state_update_key = 16; // The Incident's last event payload key that caused the incident to change state
   google.protobuf.BoolValue is_muted = 17; // Is the incident muted/suppressed
   repeated MetaLabel meta_labels = 18; // The Incident's current meta labels
+  google.protobuf.Duration duration = 19; // The Incident duration between created at and close time
 }
 
 
@@ -46,7 +47,7 @@ message IncidentFieldOneOf {
     google.protobuf.Timestamp last_state_update_time = 8;
     google.protobuf.StringValue application_name = 9;
     google.protobuf.StringValue subsystem_name = 10;
-
+    google.protobuf.Duration duration = 11;
   }
 }
 message ContextualLabels {
@@ -108,5 +109,6 @@ enum IncidentFields {
   INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME = 8;
   INCIDENTS_FIELDS_APPLICATION_NAME = 9;
   INCIDENTS_FIELDS_SUBSYSTEM_NAME = 10;
+  INCIDENTS_FIELDS_DURATION = 11;
 
 }
