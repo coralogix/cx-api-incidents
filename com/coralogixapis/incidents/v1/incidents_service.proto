@@ -380,7 +380,13 @@ message AssignIncidentsResponse {
 // Request to acknowledge incidents.
 message AcknowledgeIncidentsRequest {
   // The IDs of the incidents to acknowledge.
-  repeated google.protobuf.StringValue incident_ids = 2;
+  repeated google.protobuf.StringValue incident_ids = 2 [(com.coralogix.openapi.v1.field) = { 
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
 }
 
 // Response to acknowledge incidents.
