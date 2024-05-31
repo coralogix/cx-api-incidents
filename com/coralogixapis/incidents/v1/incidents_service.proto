@@ -308,7 +308,7 @@ message PaginationRequest {
 message PaginationResponse {
   // The total size.
   google.protobuf.UInt32Value total_size = 1 [ (com.coralogix.openapi.v1.field) = {
-    minimum : 0,
+    min_length: 0,
     example : "100"
   }];
   google.protobuf.StringValue next_page_token = 2 [ (com.coralogix.openapi.v1.field) = {
