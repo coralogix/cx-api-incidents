@@ -53,6 +53,7 @@ message Incident {
   // The Incident's current contextual labels, contextual labels are dynamic labels that gives contextual information about the incident (for example: alert_name label can appear in an incident created by an event originated from the alerting system)
   map<string, string> contextual_labels = 13 [(com.coralogix.openapi.v1.field) = { 
     max_length : 255,
+    min_length : 0,
     example : "{\"alert_name\": \"Too many unique count alerts\"}"
   }];
 
@@ -155,6 +156,7 @@ message ContextualLabels {
   google.protobuf.StringValue field_value = 2 [(com.coralogix.openapi.v1.field) = { 
     required : true,
     max_length : 255,
+    min_length : 0,
     example : "\"Too many unique count alerts\""
   }];
 }
