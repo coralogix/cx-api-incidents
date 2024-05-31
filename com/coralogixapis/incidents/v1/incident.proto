@@ -135,6 +135,7 @@ message IncidentFieldOneOf {
       max_length : 255,
       example : "\"demo\""
     }];
+    // The Incident's subsystem name
     google.protobuf.StringValue subsystem_name = 10 [(com.coralogix.openapi.v1.field) = { 
       max_length : 255,
       example : "\"demo-logs\""

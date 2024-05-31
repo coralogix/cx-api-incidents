@@ -240,6 +240,7 @@ message GetIncidentResponse {
   Incident incident = 1;
 }
 
+// The response of resolved incidents.
 message ListIncidentsResponse {
   // The incidents.
   repeated Incident incidents = 1;
@@ -257,6 +258,7 @@ message ListIncidentsRequest {
   repeated OrderBy order_bys = 6;
 }
 
+// The request to get incidents in batch.
 message BatchGetIncidentRequest {
   // The ID of the incident.
   repeated google.protobuf.StringValue ids = 1 [(com.coralogix.openapi.v1.field) = { 
@@ -302,6 +304,7 @@ message PaginationRequest {
     max_length: 1000,
     example : "100"
   }];
+  // The page token.
   google.protobuf.StringValue page_token = 2 [ (com.coralogix.openapi.v1.field) = {
     format : "uuid",
     min_length : 36,
@@ -317,6 +320,7 @@ message PaginationResponse {
     min_length: 0,
     example : "100"
   }];
+  // The next page token.
   google.protobuf.StringValue next_page_token = 2 [ (com.coralogix.openapi.v1.field) = {
     format : "uuid",
     min_length : 36,
