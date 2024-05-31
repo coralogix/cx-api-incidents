@@ -69,5 +69,6 @@ message ContextualLabelValues {
   // The contextual label values.
   repeated google.protobuf.StringValue contextual_label_values = 1 [(com.coralogix.openapi.v1.field) = { 
     example : "\"alert_name\"",
+    min_length : 0,
   }];
 }
