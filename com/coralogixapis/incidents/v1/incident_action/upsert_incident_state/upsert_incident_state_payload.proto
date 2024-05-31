@@ -2,8 +2,11 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
+import "com/coralogix/openapi/v1/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
+// The incident state to upsert.
 message UpsertIncidentStatePayload {
-  google.protobuf.StringValue cx_event_key = 1;
+  // The cx event key.
+  google.protobuf.StringValue cx_event_key = 1 [(com.coralogix.openapi.v1.field) = {required: true, example: "\"severity\""}];
 }

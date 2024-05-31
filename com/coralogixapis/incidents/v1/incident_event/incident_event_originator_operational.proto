@@ -2,10 +2,14 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
+import "com/coralogix/openapi/v1/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
 // Originator of the incident event.
 message IncidentEventOriginatorOperational {
   // The system name of the originator.
-  google.protobuf.StringValue system_name = 1;
+  google.protobuf.StringValue system_name = 1 [(com.coralogix.openapi.v1.field) = { 
+    required : true,
+    example : "\"demo\"",
+  }];
 }
