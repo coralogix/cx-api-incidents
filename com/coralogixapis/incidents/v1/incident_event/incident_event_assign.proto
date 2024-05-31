@@ -4,6 +4,8 @@ package com.coralogixapis.incidents.v1;
 
 import "com/coralogixapis/incidents/v1/assignee.proto";
 
+// The assignment of an incident event.
 message IncidentEventAssign {
+  // The assignment.
   Assignment assignment = 1;
 }

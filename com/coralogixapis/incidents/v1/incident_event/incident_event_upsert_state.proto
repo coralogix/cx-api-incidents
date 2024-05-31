@@ -5,8 +5,13 @@ package com.coralogixapis.incidents.v1;
 import "com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto";
 import "com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto";
 import "google/protobuf/wrappers.proto";
+
+// The event that indicates that the state of an incident should be upserted.
 message IncidentEventUpsertState {
+  // The type of the state to upsert.
   UpsertIncidentStateType state_type = 1;
+  // The payload of the state to upsert.
   UpsertIncidentStatePayload payload = 2;
+  // Whether the incident should be muted.
   google.protobuf.BoolValue is_muted = 3;
 }

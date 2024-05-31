@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
+// The status of an incident.
 enum IncidentStatus {
   INCIDENT_STATUS_UNSPECIFIED = 0;
   INCIDENT_STATUS_TRIGGERED = 1;

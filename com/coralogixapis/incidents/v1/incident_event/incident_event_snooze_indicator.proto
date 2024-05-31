@@ -5,8 +5,12 @@ package com.coralogixapis.incidents.v1;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
+// The indicator that an incident has been snoozed.
 message IncidentEventSnoozeIndicator {
+  // The time the snooze started.
   google.protobuf.Timestamp start_time = 1;
+  // The duration of the snooze in minutes.
   google.protobuf.Int32Value duration_minutes = 2;
+  // The user who snoozed the incident.
   google.protobuf.StringValue user_id = 3;
 }

@@ -8,94 +8,263 @@ import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/meta_label.proto";
+import "com/coralogix/openapi/v1/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-/**
- * Represents an Incident.
- */
+// The Incident resource represents an incident that is created by the system or by the user.
 message Incident {
-  google.protobuf.StringValue id = 1; // The Incident's id
-  google.protobuf.StringValue name = 2; // The Incident's name
-  IncidentState state = 3; // The Incident's current state, the internal state of the incident, usually is derived from the operational events of the incident
-  IncidentStatus status = 4; // The Incident's current status, the status of the incident can be derived from state of the incident and/or administrative user operation (i.e acknowledging the incident)
-  repeated Assignment assignments = 5; // The Incident's current assignments
-  google.protobuf.StringValue description = 6; // The Incident's current description
-  IncidentSeverity severity = 7; // The Incident's current severity
-  map<string, string> contextual_labels = 13; // The Incident's current contextual labels, contextual labels are dynamic labels that gives contextual information about the incident ( for example: alert_name label can appear in an incident created by an event originated from the alerting system )
-  map<string, string> display_labels = 14; // The Incident's current display labels, display labels are dynamic labels that gives more of an extension to the name of the incident, for identification and naming purposes
-  repeated IncidentEvent events = 10;  // The Incident's current events
-  google.protobuf.Timestamp created_at = 11;
-  google.protobuf.Timestamp closed_at = 12;
-  google.protobuf.Timestamp last_state_update_time = 15;
-  google.protobuf.StringValue last_state_update_key = 16; // The Incident's last event payload key that caused the incident to change state
-  google.protobuf.BoolValue is_muted = 17; // Is the incident muted/suppressed
-  repeated MetaLabel meta_labels = 18; // The Incident's current meta labels
+  // The Incident's id
+  google.protobuf.StringValue id = 1 [(com.coralogix.openapi.v1.field) = { 
+    required : true,
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
+  
+  // The Incident's name
+  google.protobuf.StringValue name = 2 [(com.coralogix.openapi.v1.field) = { 
+    min_length : 1,
+    max_length : 255,
+    example : "\"Too many unique count alerts\""
+  }];
+  
+  // The Incident's current state, the internal state of the incident, usually is derived from the operational events of the incident
+  IncidentState state = 3;
+
+  // The Incident's current status, the status of the incident can be derived from state of the incident and/or administrative user operation (i.e acknowledging the incident)
+  IncidentStatus status = 4;
+
+  // The Incident's current assignments
+  repeated Assignment assignments = 5;
+
+  // The Incident's current description
+  google.protobuf.StringValue description = 6 [(com.coralogix.openapi.v1.field) = { 
+    min_length : 1,
+    max_length : 1024,
+    example : "\"The alert is triggered by the number of unique count of the events\""
+  }];
+
+  // The Incident's current severity
+  IncidentSeverity severity = 7;
+
+  // The Incident's current contextual labels, contextual labels are dynamic labels that gives contextual information about the incident (for example: alert_name label can appear in an incident created by an event originated from the alerting system)
+  map<string, string> contextual_labels = 13 [(com.coralogix.openapi.v1.field) = { 
+    max_length : 255,
+    example : "{\"alert_name\": \"Too many unique count alerts\"}"
+  }];
+
+  // The Incident's current display labels, display labels are dynamic labels that gives more of an extension to the name of the incident, for identification and naming purposes
+  map<string, string> display_labels = 14 [(com.coralogix.openapi.v1.field) = { 
+    max_length : 255,
+    example : "{\"level\": \"warning\"}"
+  }];
+
+  // The Incident's current events
+  repeated IncidentEvent events = 10;
+
+  // The Incident's created time
+  google.protobuf.Timestamp created_at = 11 [(com.coralogix.openapi.v1.field) = { 
+    required : true
+    example : "\"2021-01-01T00:00:00Z\""
+  }];
+
+  // The Incident's closed time
+  google.protobuf.Timestamp closed_at = 12 [(com.coralogix.openapi.v1.field) = { 
+    example : "\"2021-01-01T00:00:00Z\""
+  }];
+
+  // The Incident's last event time that caused the incident to change state
+  google.protobuf.Timestamp last_state_update_time = 15 [(com.coralogix.openapi.v1.field) = { 
+    example : "\"2021-01-01T00:00:00Z\""
+  }];
+
+  // The Incident's last event payload key that caused the incident to change state
+  google.protobuf.StringValue last_state_update_key = 16 [(com.coralogix.openapi.v1.field) = { 
+    max_length : 255,
+    example : "\"alert_name\""
+  }];
+
+  // Is the incident muted/suppressed
+  google.protobuf.BoolValue is_muted = 17;
+
+  // The Incident's current meta labels
+  repeated MetaLabel meta_labels = 18;
 }
 
-
+// The incident field that can be used for the group by
 message IncidentFieldOneOf {
   oneof field {
-    google.protobuf.StringValue id = 1;
+    // The Incident's ID
+    google.protobuf.StringValue id = 1 [(com.coralogix.openapi.v1.field) = { 
+      format : "uuid",
+      min_length : 36,
+      max_length : 36,
+      example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+      pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    }];
+    // The Incident's severity
     IncidentSeverity severity = 2;
-    google.protobuf.StringValue name = 3;
-    google.protobuf.Timestamp created_at = 4;
-    google.protobuf.Timestamp closed_at = 5;
+    // The Incident's name
+    google.protobuf.StringValue name = 3 [(com.coralogix.openapi.v1.field) = { 
+      min_length : 1,
+      max_length : 255,
+      example : "\"Too many unique count alerts\""
+    }];
+    // The Incident's created time
+    google.protobuf.Timestamp created_at = 4 [(com.coralogix.openapi.v1.field) = { 
+      required : true,
+      example : "\"2021-01-01T00:00:00Z\""
+    }];
+    // The Incident's closed time
+    google.protobuf.Timestamp closed_at = 5 [(com.coralogix.openapi.v1.field) = { 
+      example : "\"2021-01-01T00:00:00Z\""
+    }];
+    // The Incident's state
     IncidentState state = 6;
+    // The Incident's status
     IncidentStatus status = 7;
-    google.protobuf.Timestamp last_state_update_time = 8;
-    google.protobuf.StringValue application_name = 9;
-    google.protobuf.StringValue subsystem_name = 10;
+    // The Incident's last state update time
+    google.protobuf.Timestamp last_state_update_time = 8 [(com.coralogix.openapi.v1.field) = { 
+      example : "\"2021-01-01T00:00:00Z\""
+    }];
+    // The Incident's application name
+    google.protobuf.StringValue application_name = 9 [(com.coralogix.openapi.v1.field) = { 
+      max_length : 255,
+      example : "\"demo\""
+    }];
+    google.protobuf.StringValue subsystem_name = 10 [(com.coralogix.openapi.v1.field) = { 
+      max_length : 255,
+      example : "\"demo-logs\""
+    }];
 
   }
 }
+// Represents a group by field and value
 message ContextualLabels {
-  google.protobuf.StringValue field_name = 1;
-  google.protobuf.StringValue field_value = 2;
+  // The field name
+  google.protobuf.StringValue field_name = 1 [(com.coralogix.openapi.v1.field) = { 
+    required : true,
+    max_length : 255,
+    example : "\"alert_name\""
+  }];
+  // The field value
+  google.protobuf.StringValue field_value = 2 [(com.coralogix.openapi.v1.field) = { 
+    required : true,
+    max_length : 255,
+    example : "\"Too many unique count alerts\""
+  }];
 }
+// Represents a group by field and value
 message GroupByValues {
   oneof values {
+    // The incident field used for the group by
     IncidentFieldOneOf incident_field = 1;
+    // The contextual labels
     ContextualLabels contextual_labels = 2;
   }
 }
 // Represents and Incident Aggregation (group by)
 message IncidentAggregation {
-  repeated GroupByValues group_bys_value = 1; // The Aggregation's group by fields and values
-  repeated IncidentStateCount agg_state_count = 2; // The Aggregation's count of states
-  repeated IncidentStatusCount agg_status_count = 3; // The Aggregation's count of statuses
-  repeated IncidentSeverityCount agg_severity_count = 4; // The Aggregation's count of severities
-  repeated IncidentAssignmentCount agg_assignments_count = 5; // The Aggregation's count of assignments
-  google.protobuf.Timestamp first_created_at = 6; // The Aggregation's first incident created time
-  google.protobuf.Timestamp last_closed_at = 7; // The Aggregation's last incident closed time
-  google.protobuf.UInt32Value all_values_count = 8; // The Aggregation's count of incidents
-  repeated google.protobuf.StringValue list_incidents_id = 9; // The Aggregation's list of incident's id
-  google.protobuf.Timestamp last_state_update_time = 10; // The Aggregation's last state update time
-  repeated IncidentMetaLabelsCount agg_meta_labels_count = 11; // The Aggregation's of meta labels
+  // The Aggregation's group by fields and values
+  repeated GroupByValues group_bys_value = 1;
+  
+  // The Aggregation's count of states
+  repeated IncidentStateCount agg_state_count = 2;
+  
+  // The Aggregation's count of statuses
+  repeated IncidentStatusCount agg_status_count = 3;
+  
+  // The Aggregation's count of severities
+  repeated IncidentSeverityCount agg_severity_count = 4;
+  
+  // The Aggregation's count of assignments
+  repeated IncidentAssignmentCount agg_assignments_count = 5;
+  
+  // The Aggregation's first incident created time
+  google.protobuf.Timestamp first_created_at = 6;
+  
+  // The Aggregation's last incident closed time
+  google.protobuf.Timestamp last_closed_at = 7;
+  
+  // The Aggregation's count of incidents
+  google.protobuf.UInt32Value all_values_count = 8 [(com.coralogix.openapi.v1.field) = { 
+    example : "10"
+    required : true
+  }];
+  
+  // The Aggregation's list of incident's id
+  repeated google.protobuf.StringValue list_incidents_id = 9 [(com.coralogix.openapi.v1.field) = { 
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
+  
+  // The Aggregation's last state update time
+  google.protobuf.Timestamp last_state_update_time = 10;
+  
+  // The Aggregation's of meta labels
+  repeated IncidentMetaLabelsCount agg_meta_labels_count = 11;
 }
 
+
+// Represents a count of meta labels
 message IncidentMetaLabelsCount {
+  // The meta label
   MetaLabel meta_label = 1;
-  google.protobuf.UInt32Value count = 2;
+  // The count of the meta label
+  google.protobuf.UInt32Value count = 2 [(com.coralogix.openapi.v1.field) = { 
+    example : "10"
+    required : true
+  }];
 }
+// Represents a count of assignments
 message IncidentAssignmentCount {
+  // The user assigned to
   UserDetails assigned_to = 1;
-  google.protobuf.UInt32Value count = 2;
+  // The count of the assignments
+  google.protobuf.UInt32Value count = 2 [(com.coralogix.openapi.v1.field) = { 
+    example : "10"
+    required : true
+  }];
 }
+// Represents a count of severities
 message IncidentSeverityCount {
+  // The severity
   IncidentSeverity severity = 1;
-  google.protobuf.UInt32Value count = 2;
+  // The count of the severity
+  google.protobuf.UInt32Value count = 2 [(com.coralogix.openapi.v1.field) = { 
+    example : "10"
+    required : true
+  }];
 }
+// Represents a count of statuses
 message IncidentStatusCount {
+  // The status
   IncidentStatus status = 1;
-  google.protobuf.UInt32Value count = 2;
+  // The count of the status
+  google.protobuf.UInt32Value count = 2 [(com.coralogix.openapi.v1.field) = { 
+    example : "10"
+    required : true
+  }];
 }
 
+// Represents a count of states
 message IncidentStateCount {
+  // The state
   IncidentState state = 1;
-  google.protobuf.UInt32Value count = 2;
+  // The count of the state
+  google.protobuf.UInt32Value count = 2 [(com.coralogix.openapi.v1.field) = { 
+    example : "10"
+    required : true
+  }];
 }
 
+// The fields of the Incident
 enum IncidentFields {
   INCIDENTS_FIELDS_UNSPECIFIED = 0;
   INCIDENTS_FIELDS_ID = 1;

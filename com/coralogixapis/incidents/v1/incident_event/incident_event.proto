@@ -14,20 +14,34 @@ import "com/coralogixapis/incidents/v1/incident_event/incident_event_upsert_stat
 import "com/coralogixapis/incidents/v1/incident_event/incident_event_unassign.proto";
 import "google/protobuf/wrappers.proto";
 
+// An incident event.
 message IncidentEvent {
+  // The ID of the incident event.
   google.protobuf.StringValue id = 1;
+  // The type of the incident event.
   IncidentEventType incident_event_type = 2;
+  // The payload of the incident event.
   oneof incident_event_payload {
+    // The snooze indicator of the incident event.
     IncidentEventSnoozeIndicator snooze_indicator = 200;
+    // The assignment of the incident event.
     IncidentEventAssign assignment = 201;
+    // The unassignment of the incident event.
     IncidentEventUnassign unassign = 205;
+    // The upsert state of the incident event.
     IncidentEventUpsertState upsert_state = 202;
+    // The acknowledge of the incident event.
     IncidentEventAcknowledge acknowledge = 203;
+    // The close of the incident event.
     IncidentEventClose close = 204;
   }
+  // The originator type of the incident event.
   OriginatorType originator_type = 3;
+  // The originator of the incident event.
   oneof originator {
+    // The administrative originator of the incident event.
     IncidentEventOriginatorAdministrative administrative_event = 100;
+    // The operational originator of the incident event.
     IncidentEventOriginatorOperational operational_event = 101;
   }
 }

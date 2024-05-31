@@ -41,6 +41,7 @@ service IncidentsService {
       http_rule_index: 1
       resource: true
       description: "Get incident by id"
+      response_body_example: "{\"id\":\"b1f34726-1584-42a6-89f8-12a69927af37\",\"state\":\"triggered\",\"status\":\"acknowledged\",\"assignments\":[{\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"},\"assigned_by\":{\"user_id\":\"IBMid-692000B33A\"}}],\"severity\":\"info\",\"events\":[],\"created_at\":\"2024-02-29T11:14:00Z\",\"contextual_labels\":{\"alert_type\":\"Standard\",\"alert_id\":\"1df71373-544c-4807-bad9-7aceb6408fa8\",\"alert_notification_group_grouping_fields\":\"coralogix.metadata.applicationName , coralogix.metadata.subsystemName\",\"alert_name\":\"another group by alert for alert map\",\"alert_notification_group_integrations_ids\":\"\",\"alert_notification_group_id\":\"ce093a04-9753-49bd-b6c4-f813ee89a590\",\"alert_severity\":\"Info\",\"alert_group_by_fields\":\"coralogix.metadata.applicationName , coralogix.metadata.subsystemName\"},\"display_labels\":{\"coralogix.metadata.applicationName\":\"demo\",\"coralogix.metadata.subsystemName\":\"demo-logs\"},\"last_state_update_time\":\"2024-05-31T07:05:11.110Z\",\"last_state_update_key\":\"557ee0f6-9313-4f9d-8488-6b7f6b5010dd\",\"meta_labels\":[]}"
     };
 
   }
@@ -50,13 +51,15 @@ service IncidentsService {
     option (google.api.http) = {
       post: "/v1/incidents:batchGet"
       additional_bindings {
-        post: "/v1/incidents/batch/get"
+        post: "/v1/incidents/actions/batch_get"
         body: "*"
       }
     };
     option (com.coralogix.openapi.v1.method) = {
       http_rule_index: 1
       description: "Batch get incidents by ids"
+      request_body_example: "{\"ids\":[\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"]}"
+      response_body_example: "{\"incidents\":{\"b1f34726-1584-42a6-89f8-12a69927af37\":{\"id\":\"b1f34726-1584-42a6-89f8-12a69927af37\",\"state\":\"triggered\",\"status\":\"acknowledged\",\"assignments\":[{\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"},\"assigned_by\":{\"user_id\":\"IBMid-692000B33A\"}}],\"severity\":\"info\",\"events\":[],\"created_at\":\"2024-02-29T11:14:00Z\",\"contextual_labels\":{\"alert_notification_group_grouping_fields\":\"coralogix.metadata.applicationName , coralogix.metadata.subsystemName\",\"alert_notification_group_integrations_ids\":\"\",\"alert_notification_group_id\":\"ce093a04-9753-49bd-b6c4-f813ee89a590\",\"alert_id\":\"1df71373-544c-4807-bad9-7aceb6408fa8\",\"alert_group_by_fields\":\"coralogix.metadata.applicationName , coralogix.metadata.subsystemName\",\"alert_severity\":\"Info\",\"alert_name\":\"another group by alert for alert map\",\"alert_type\":\"Standard\"},\"display_labels\":{\"coralogix.metadata.applicationName\":\"demo\",\"coralogix.metadata.subsystemName\":\"demo-logs\"},\"last_state_update_time\":\"2024-05-31T07:23:11.173Z\",\"last_state_update_key\":\"004df3b8-ced2-4e1f-a170-2e8f962b2c71\",\"meta_labels\":[]}},\"not_found_ids\":[\"b59eab32-7b91-4f2d-bdad-4ed49840fea2\",\"da869e2c-e123-4880-923d-93b715f2d07d\"]}"
     };
   }
 
@@ -74,6 +77,8 @@ service IncidentsService {
     option (com.coralogix.openapi.v1.method) = {
       http_rule_index: 1
       description: "Query incidents"
+      request_body_example: "{\"filter\":{\"assignee\":[\"IBMid-692000B33A\"],\"status\":[\"acknowledged\"],\"state\":[\"triggered\"],\"severity\":[\"critical\"],\"contextual_labels\":{},\"created_at_range\":{\"start_time\":\"2024-02-11T17:29:31.858Z\",\"end_time\":\"2024-03-13T05:29:31.858Z\"},\"application_name\":[],\"subsystem_name\":[]},\"order_bys\":[{\"incident_field\":\"incidents_fields_last_state_update_time\",\"direction\":\"desc\"}]}"
+      response_body_example: "{\"incidents\":[{\"id\":\"b1f34726-1584-42a6-89f8-12a69927af37\",\"state\":\"triggered\",\"status\":\"acknowledged\",\"assignments\":[{\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"},\"assigned_by\":{\"user_id\":\"IBMid-692000B33A\"}}],\"severity\":\"info\",\"events\":[],\"created_at\":\"2024-02-29T11:14:00Z\",\"contextual_labels\":{\"alert_severity\":\"Info\",\"alert_group_by_fields\":\"coralogix.metadata.applicationName , coralogix.metadata.subsystemName\",\"alert_name\":\"another group by alert for alert map\",\"alert_notification_group_grouping_fields\":\"coralogix.metadata.applicationName , coralogix.metadata.subsystemName\",\"alert_notification_group_id\":\"ce093a04-9753-49bd-b6c4-f813ee89a590\",\"alert_id\":\"1df71373-544c-4807-bad9-7aceb6408fa8\",\"alert_notification_group_integrations_ids\":\"\",\"alert_type\":\"Standard\"},\"display_labels\":{\"coralogix.metadata.subsystemName\":\"demo-logs\",\"coralogix.metadata.applicationName\":\"demo\"},\"last_state_update_time\":\"2024-05-31T07:05:11.110Z\",\"last_state_update_key\":\"557ee0f6-9313-4f9d-8488-6b7f6b5010dd\",\"meta_labels\":[]},{\"id\":\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"state\":\"triggered\",\"status\":\"acknowledged\",\"assignments\":[{\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"},\"assigned_by\":{\"user_id\":\"IBMid-692000B33A\"}}],\"severity\":\"warning\",\"events\":[],\"created_at\":\"2024-02-29T11:12:00Z\",\"contextual_labels\":{\"alert_severity\":\"Warning\",\"alert_notification_group_integrations_ids\":\"\",\"alert_id\":\"3f8d6917-0d0a-4b88-8677-08c1019b6204\",\"alert_notification_group_grouping_fields\":\"\",\"alert_notification_group_id\":\"4636ad84-e845-4824-8756-67c9135593ac\",\"alert_group_by_fields\":\"\",\"alert_name\":\"test123\",\"alert_type\":\"Standard\"},\"display_labels\":{},\"last_state_update_time\":\"2024-05-31T06:57:11.304Z\",\"last_state_update_key\":\"f31ac514-3111-4f1b-8884-3cacdaf7c227\",\"meta_labels\":[]},{\"id\":\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"state\":\"triggered\",\"status\":\"acknowledged\",\"assignments\":[{\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"},\"assigned_by\":{\"user_id\":\"IBMid-692000B33A\"}}],\"severity\":\"info\",\"events\":[],\"created_at\":\"2024-02-29T11:12:00Z\",\"contextual_labels\":{\"alert_notification_group_id\":\"691f5a0d-6bc7-461d-a328-ae13fc6335ed\",\"alert_severity\":\"Info\",\"alert_notification_group_grouping_fields\":\"\",\"alert_type\":\"Standard\",\"alert_group_by_fields\":\"\",\"alert_id\":\"67b03f98-b15d-4b4d-a8ec-b48c9f5dd73f\",\"alert_notification_group_integrations_ids\":\"\",\"alert_name\":\"new standard alert\"},\"display_labels\":{},\"last_state_update_time\":\"2024-05-31T06:57:08.256Z\",\"last_state_update_key\":\"e46d505e-1600-454b-8580-b1e42aabfd49\",\"meta_labels\":[]}],\"pagination\":{\"total_size\":3,\"next_page_token\":\"9a23c70c-0a67-493a-b645-46b61af9030e\"}}"
     };
   }
   rpc ListIncidentAggregations(ListIncidentAggregationsRequest) returns (ListIncidentAggregationsResponse) {
@@ -90,6 +95,8 @@ service IncidentsService {
     option (com.coralogix.openapi.v1.method) = {
       http_rule_index: 1
       description: "Query incident aggregations"
+      request_body_example: "{\"filter\":{\"assignee\":[\"IBMid-692000B33A\"],\"status\":[\"acknowledged\"],\"state\":[\"triggered\"],\"severity\":[\"critical\"],\"contextual_labels\":{},\"created_at_range\":{\"start_time\":\"2024-02-11T17:29:31.858Z\",\"end_time\":\"2024-03-13T05:29:31.858Z\"},\"application_name\":[],\"subsystem_name\":[]},\"order_bys\":[{\"incident_field\":\"incidents_fields_last_state_update_time\",\"direction\":\"desc\"}]}"
+      response_body_example: "{\"incident_aggs\":[{\"group_bys_value\":[],\"agg_state_count\":[{\"state\":\"triggered\",\"count\":3}],\"agg_status_count\":[{\"status\":\"acknowledged\",\"count\":3}],\"agg_severity_count\":[{\"severity\":\"info\",\"count\":2},{\"severity\":\"warning\",\"count\":1}],\"agg_assignments_count\":[{\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"},\"count\":3}],\"first_created_at\":\"2024-02-29T11:12:00Z\",\"all_values_count\":3,\"list_incidents_id\":[\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"],\"last_state_update_time\":\"2024-05-31T07:05:11.110Z\",\"agg_meta_labels_count\":[]}],\"pagination\":{\"total_size\":1,\"next_page_token\":\"b1f34726-1584-42a6-89f8-12a69927af37\"}}"
     };
   }
 /*
@@ -109,6 +116,17 @@ service IncidentsService {
     option (google.api.http) = {
       post: "/v1/incidents:assign"
       body: "*"
+
+      additional_bindings {
+        post: "/v1/incidents/actions/assign"
+        body: "*"
+      }
+    };
+    option (com.coralogix.openapi.v1.method) = {
+      http_rule_index: 1
+      description: "Assign incidents to a user"
+      request_body_example: "{\"incident_ids\": [\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"],\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"}}"
+      response_body_example: "{\"incident_aggs\":[{\"group_bys_value\":[],\"agg_state_count\":[{\"state\":\"triggered\",\"count\":3}],\"agg_status_count\":[{\"status\":\"acknowledged\",\"count\":3}],\"agg_severity_count\":[{\"severity\":\"info\",\"count\":2},{\"severity\":\"warning\",\"count\":1}],\"agg_assignments_count\":[{\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"},\"count\":3}],\"first_created_at\":\"2024-02-29T11:12:00Z\",\"all_values_count\":3,\"list_incidents_id\":[\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"],\"last_state_update_time\":\"2024-05-31T07:05:11.110Z\",\"agg_meta_labels_count\":[]}],\"pagination\":{\"total_size\":1,\"next_page_token\":\"b1f34726-1584-42a6-89f8-12a69927af37\"}}"
     };
   }
 
@@ -117,6 +135,16 @@ service IncidentsService {
     option (google.api.http) = {
       post: "/v1/incidents:unassign"
       body: "*"
+      additional_bindings {
+        post: "/v1/incidents/actions/unassign"
+        body: "*"
+      }
+    };
+    option (com.coralogix.openapi.v1.method) = {
+      http_rule_index: 1
+      description: "Unassign incidents from a user"
+      request_body_example: "{\"incident_ids\": [\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"]}"
+      response_body_example: "{\"incident_aggs\":[{\"group_bys_value\":[],\"agg_state_count\":[{\"state\":\"triggered\",\"count\":3}],\"agg_status_count\":[{\"status\":\"acknowledged\",\"count\":3}],\"agg_severity_count\":[{\"severity\":\"info\",\"count\":2},{\"severity\":\"warning\",\"count\":1}],\"agg_assignments_count\":[{\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"},\"count\":3}],\"first_created_at\":\"2024-02-29T11:12:00Z\",\"all_values_count\":3,\"list_incidents_id\":[\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"],\"last_state_update_time\":\"2024-05-31T07:05:11.110Z\",\"agg_meta_labels_count\":[]}],\"pagination\":{\"total_size\":1,\"next_page_token\":\"b1f34726-1584-42a6-89f8-12a69927af37\"}}"
     };
   }
   rpc AcknowledgeIncidents(AcknowledgeIncidentsRequest) returns (AcknowledgeIncidentsResponse) {
@@ -124,6 +152,17 @@ service IncidentsService {
     option (google.api.http) = {
       post: "/v1/incidents:acknowledge"
       body: "*"
+
+      additional_bindings {
+        post: "/v1/incidents/actions/acknowledge"
+        body: "*"
+      }
+    };
+    option (com.coralogix.openapi.v1.method) = {
+      http_rule_index: 1
+      description: "Acknowledge incidents"
+      request_body_example: "{\"incident_ids\": [\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"]}"
+      response_body_example: "{\"incident_aggs\":[{\"group_bys_value\":[],\"agg_state_count\":[{\"state\":\"triggered\",\"count\":3}],\"agg_status_count\":[{\"status\":\"acknowledged\",\"count\":3}],\"agg_severity_count\":[{\"severity\":\"info\",\"count\":2},{\"severity\":\"warning\",\"count\":1}],\"agg_assignments_count\":[{\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"},\"count\":3}],\"first_created_at\":\"2024-02-29T11:12:00Z\",\"all_values_count\":3,\"list_incidents_id\":[\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"],\"last_state_update_time\":\"2024-05-31T07:05:11.110Z\",\"agg_meta_labels_count\":[]}],\"pagination\":{\"total_size\":1,\"next_page_token\":\"b1f34726-1584-42a6-89f8-12a69927af37\"}}"
     };
   }
   rpc CloseIncidents(CloseIncidentsRequest) returns (CloseIncidentsResponse) {
@@ -131,6 +170,18 @@ service IncidentsService {
     option (google.api.http) = {
       post: "/v1/incidents:close"
       body: "*"
+    
+      additional_bindings {
+        post: "/v1/incidents/actions/close"
+        body: "*"
+      }
+    };
+
+    option (com.coralogix.openapi.v1.method) = {
+      http_rule_index: 1
+      description: "Close incidents"
+      request_body_example: "{\"incident_ids\": [\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"]}"
+      response_body_example: "{\"incident_aggs\":[{\"group_bys_value\":[],\"agg_state_count\":[{\"state\":\"triggered\",\"count\":3}],\"agg_status_count\":[{\"status\":\"acknowledged\",\"count\":3}],\"agg_severity_count\":[{\"severity\":\"info\",\"count\":2},{\"severity\":\"warning\",\"count\":1}],\"agg_assignments_count\":[{\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"},\"count\":3}],\"first_created_at\":\"2024-02-29T11:12:00Z\",\"all_values_count\":3,\"list_incidents_id\":[\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"],\"last_state_update_time\":\"2024-05-31T07:05:11.110Z\",\"agg_meta_labels_count\":[]}],\"pagination\":{\"total_size\":1,\"next_page_token\":\"b1f34726-1584-42a6-89f8-12a69927af37\"}}"
     };
   }
   rpc GetIncidentEvents(GetIncidentEventsRequest) returns (GetIncidentEventsResponse) {
@@ -146,6 +197,17 @@ service IncidentsService {
     option (google.api.http) = {
       post: "/v1/incidents:resolve"
       body: "*"
+      additional_bindings {
+        post: "/v1/incidents/actions/resolve"
+        body: "*"
+      }
+    };
+    
+    option (com.coralogix.openapi.v1.method) = {
+      http_rule_index: 1
+      description: "Resolve incidents"
+      request_body_example: "{\"incident_ids\": [\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"]}"
+      response_body_example: "{\"incident_aggs\":[{\"group_bys_value\":[],\"agg_state_count\":[{\"state\":\"triggered\",\"count\":3}],\"agg_status_count\":[{\"status\":\"acknowledged\",\"count\":3}],\"agg_severity_count\":[{\"severity\":\"info\",\"count\":2},{\"severity\":\"warning\",\"count\":1}],\"agg_assignments_count\":[{\"assigned_to\":{\"user_id\":\"IBMid-692000B33A\"},\"count\":3}],\"first_created_at\":\"2024-02-29T11:12:00Z\",\"all_values_count\":3,\"list_incidents_id\":[\"0e6aee6f-b958-4e84-9507-438e80570f4c\",\"9a23c70c-0a67-493a-b645-46b61af9030e\",\"b1f34726-1584-42a6-89f8-12a69927af37\"],\"last_state_update_time\":\"2024-05-31T07:05:11.110Z\",\"agg_meta_labels_count\":[]}],\"pagination\":{\"total_size\":1,\"next_page_token\":\"b1f34726-1584-42a6-89f8-12a69927af37\"}}"
     };
   }
 
@@ -162,52 +224,116 @@ service IncidentsService {
 }
 
 message GetIncidentRequest {
-  google.protobuf.StringValue id = 1;
+  // The ID of the incident.
+  google.protobuf.StringValue id = 1 [ (com.coralogix.openapi.v1.field) = {
+    required : true,
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  } ];
 }
 
 message GetIncidentResponse {
+  // The incident.
   Incident incident = 1;
 }
 
 message ListIncidentsResponse {
+  // The incidents.
   repeated Incident incidents = 1;
+  // The pagination.
   PaginationResponse pagination = 4;
 }
 
+// Request to list incidents.
 message ListIncidentsRequest {
+  // The filter to apply.
   IncidentQueryFilter filter = 4;
+  // The pagination.
   PaginationRequest pagination = 5;
+  // The order bys.
   repeated OrderBy order_bys = 6;
 }
 
 message BatchGetIncidentRequest {
-  repeated google.protobuf.StringValue ids = 1;
+  // The ID of the incident.
+  repeated google.protobuf.StringValue ids = 1 [(com.coralogix.openapi.v1.field) = { 
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
 }
 
+// Response to batch get incidents.
 message BatchGetIncidentResponse {
+  // The incidents.
   map<string, Incident> incidents = 1;
-  repeated google.protobuf.StringValue not_found_ids = 2;
+  // The IDs of the incidents that were not found.
+  repeated google.protobuf.StringValue not_found_ids = 2 [(com.coralogix.openapi.v1.field) = { 
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
 }
 
+// Request to delete an incident.
 message DeleteIncidentRequest {
+  // The ID of the incident.
   google.protobuf.StringValue id = 1;
 }
+
+// The pagination request.
 message PaginationRequest {
-  google.protobuf.UInt32Value page_size = 1;
-  google.protobuf.StringValue page_token = 2;
+  // The page size.
+  google.protobuf.UInt32Value page_size = 1 [ (com.coralogix.openapi.v1.field) = {
+    min_length: 1,
+    max_length: 1000,
+    example : "100"
+  }];
+  google.protobuf.StringValue page_token = 2 [ (com.coralogix.openapi.v1.field) = {
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
 }
+// The pagination response.
 message PaginationResponse {
-  google.protobuf.UInt32Value total_size = 1;
-  google.protobuf.StringValue next_page_token = 2;
+  // The total size.
+  google.protobuf.UInt32Value total_size = 1 [ (com.coralogix.openapi.v1.field) = {
+    minimum : 0,
+    example : "100"
+  }];
+  google.protobuf.StringValue next_page_token = 2 [ (com.coralogix.openapi.v1.field) = {
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
 }
 
+// Request to list incident aggregations.
 message ListIncidentAggregationsRequest {
+  // The filter to apply.
   IncidentQueryFilter filter = 1;
+  // The group bys.
   repeated GroupBy group_bys = 2;
+  // The pagination.
   PaginationRequest pagination = 3;
 }
+// Response to list incident aggregations.
 message ListIncidentAggregationsResponse {
+  // The incident aggregations.
   repeated IncidentAggregation incident_aggs = 1;
+  // The pagination.
   PaginationResponse pagination = 2;
 }
 
@@ -226,43 +352,64 @@ message GetIncidentEventsResponse {
   repeated IncidentEvent incident_events = 1;
 }
 
+// Request to assign incidents.
 message AssignIncidentsRequest {
+  // The IDs of the incidents to assign.
   repeated google.protobuf.StringValue incident_ids = 5;
+  // The user to assign the incidents to.
   UserDetails assigned_to = 2;
 }
 
+// Request to unassign incidents.
 message UnassignIncidentsRequest {
+  // The IDs of the incidents to unassign.
   repeated google.protobuf.StringValue incident_ids = 1;
 }
+// Response to unassign incidents.
 message UnassignIncidentsResponse {
+  // The incidents.
   repeated Incident incidents = 1;
 }
 
+// Response to assign incidents.
 message AssignIncidentsResponse {
+  // The incidents.
   repeated Incident incidents = 2;
 }
 
+// Request to acknowledge incidents.
 message AcknowledgeIncidentsRequest {
+  // The IDs of the incidents to acknowledge.
   repeated google.protobuf.StringValue incident_ids = 2;
 }
 
+// Response to acknowledge incidents.
 message AcknowledgeIncidentsResponse {
+  // The incidents.
   repeated Incident incidents = 2;
 }
 
+// Request to close incidents.
 message CloseIncidentsRequest {
+  // The IDs of the incidents to close.
   repeated google.protobuf.StringValue incident_ids = 2;
 }
 
+// Response to close incidents.
 message CloseIncidentsResponse {
+  // The incidents.
   repeated Incident incidents = 2;
 }
 
+// Request to resolve incidents.
 message ResolveIncidentsRequest {
+  // The IDs of the incidents to resolve.
   repeated google.protobuf.StringValue incident_ids = 1;
 }
 
+// Response to resolve incidents.
 message ResolveIncidentsResponse {
+  // The incidents.
   repeated Incident incidents = 1;
 }
 

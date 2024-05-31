@@ -1,14 +1,27 @@
 syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
+import "com/coralogix/openapi/v1/annotations.proto";
 
 import "google/protobuf/wrappers.proto";
 
+// The assignment of an incident to a user.
 message Assignment {
+  // The user to whom the incident is assigned.
   UserDetails assigned_to = 1;
+  // The user who assigned the incident.
   UserDetails assigned_by = 2;
 }
 
+// The user details.
 message UserDetails {
-  google.protobuf.StringValue user_id = 1;
+  // The user ID.
+  google.protobuf.StringValue user_id = 1 [(com.coralogix.openapi.v1.field) = { 
+    required : true,
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
 }
