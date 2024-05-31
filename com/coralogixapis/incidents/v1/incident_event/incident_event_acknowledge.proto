@@ -4,6 +4,8 @@ package com.coralogixapis.incidents.v1;
 
 import "com/coralogixapis/incidents/v1/assignee.proto";
 
+// The event of acknowledging an incident.
 message IncidentEventAcknowledge {
+  // The user who acknowledged the incident.
   UserDetails acknowledged_by = 1;
 }

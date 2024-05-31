@@ -3,7 +3,10 @@ syntax = "proto3";
 package com.coralogixapis.incidents.v1;
 
 import "google/protobuf/wrappers.proto";
+import "com/coralogix/openapi/v1/annotations.proto";
 
+// The originator of the incident event.
 message IncidentEventOriginatorAdministrative {
-  google.protobuf.StringValue user_id = 1;
+  // The user ID of the originator.
+  google.protobuf.StringValue user_id = 1 [(com.coralogix.openapi.v1.field) = { example: "\"IBMid-692000B33A\""}];
 }

@@ -285,7 +285,13 @@ message BatchGetIncidentResponse {
 // Request to delete an incident.
 message DeleteIncidentRequest {
   // The ID of the incident.
-  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue id = 1 [(com.coralogix.openapi.v1.field) = { 
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
 }
 
 // The pagination request.
@@ -355,7 +361,13 @@ message GetIncidentEventsResponse {
 // Request to assign incidents.
 message AssignIncidentsRequest {
   // The IDs of the incidents to assign.
-  repeated google.protobuf.StringValue incident_ids = 5;
+  repeated google.protobuf.StringValue incident_ids = 5 [(com.coralogix.openapi.v1.field) = { 
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
   // The user to assign the incidents to.
   UserDetails assigned_to = 2;
 }
@@ -363,7 +375,13 @@ message AssignIncidentsRequest {
 // Request to unassign incidents.
 message UnassignIncidentsRequest {
   // The IDs of the incidents to unassign.
-  repeated google.protobuf.StringValue incident_ids = 1;
+  repeated google.protobuf.StringValue incident_ids = 1 [(com.coralogix.openapi.v1.field) = { 
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
 }
 // Response to unassign incidents.
 message UnassignIncidentsResponse {
@@ -398,7 +416,13 @@ message AcknowledgeIncidentsResponse {
 // Request to close incidents.
 message CloseIncidentsRequest {
   // The IDs of the incidents to close.
-  repeated google.protobuf.StringValue incident_ids = 2;
+  repeated google.protobuf.StringValue incident_ids = 2 [(com.coralogix.openapi.v1.field) = { 
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
 }
 
 // Response to close incidents.
@@ -410,7 +434,13 @@ message CloseIncidentsResponse {
 // Request to resolve incidents.
 message ResolveIncidentsRequest {
   // The IDs of the incidents to resolve.
-  repeated google.protobuf.StringValue incident_ids = 1;
+  repeated google.protobuf.StringValue incident_ids = 1 [(com.coralogix.openapi.v1.field) = { 
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
 }
 
 // Response to resolve incidents.

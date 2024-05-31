@@ -12,12 +12,20 @@ import "com/coralogixapis/incidents/v1/incident_event/incident_event_snooze_indi
 import "com/coralogixapis/incidents/v1/incident_event/incident_event_type.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event_unassign.proto";
+import "com/coralogix/openapi/v1/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
 // An incident event.
 message IncidentEvent {
   // The ID of the incident event.
-  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue id = 1 [(com.coralogix.openapi.v1.field) = { 
+    required : true,
+    format : "uuid",
+    min_length : 36,
+    max_length : 36,
+    example : "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
   // The type of the incident event.
   IncidentEventType incident_event_type = 2;
   // The payload of the incident event.

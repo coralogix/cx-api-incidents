@@ -4,6 +4,8 @@ package com.coralogixapis.incidents.v1;
 
 import "com/coralogixapis/incidents/v1/assignee.proto";
 
+// The event of closing an incident.
 message IncidentEventClose {
+  // The user who closed the incident.
   UserDetails closed_by = 1;
 }

@@ -22,11 +22,17 @@ message IncidentQueryFilter {
     pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
   }];
   // The status filter.
-  repeated IncidentStatus status = 2;
+  repeated IncidentStatus status = 2 [(com.coralogix.openapi.v1.field) = { 
+    example : "\"resolved\""
+  }];
   // The state filter.
-  repeated IncidentState state = 3;
+  repeated IncidentState state = 3 [(com.coralogix.openapi.v1.field) = { 
+    example : "\"open\""
+  }];
   // The severity filter.
-  repeated IncidentSeverity severity = 4;
+  repeated IncidentSeverity severity = 4 [(com.coralogix.openapi.v1.field) = { 
+    example : "\"critical\""
+  }];
   // The contextual labels filter.
   map<string, ContextualLabelValues> contextual_labels = 5;
   // The start time filter.
