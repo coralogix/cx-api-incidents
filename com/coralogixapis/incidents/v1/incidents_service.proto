@@ -24,6 +24,7 @@ extend google.protobuf.MethodOptions {
 
 service IncidentsService {
   option (com.coralogix.openapi.v1.service) = {
+    name: "Incidents"
     description: "API for managing incidents. Incidents are a collection of events that are related to a specific issue or problem. Incidents are used to track and manage the lifecycle of an issue or problem."
     resource_name: "Incident"
   };
