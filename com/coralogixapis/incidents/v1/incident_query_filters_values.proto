@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
+import "com/coralogixapis/incidents/v1/filter_operators.proto";
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
@@ -27,6 +28,7 @@ message IncidentSeverityWithCount {
 message IncidentMetaLabelsWithCount {
   MetaLabel meta_label = 1;
   google.protobuf.Int32Value count = 2;
+  FilterOperator op = 3;
 }
 message IncidentQueryFiltersValues {
   repeated AssigneeWithCount assignee_with_count = 1;
