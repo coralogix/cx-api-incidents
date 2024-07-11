@@ -28,7 +28,6 @@ message IncidentSeverityWithCount {
 message IncidentMetaLabelsWithCount {
   MetaLabel meta_label = 1;
   google.protobuf.Int32Value count = 2;
-  FilterOperator op = 3;
 }
 message IncidentQueryFiltersValues {
   repeated AssigneeWithCount assignee_with_count = 1;
@@ -37,6 +36,7 @@ message IncidentQueryFiltersValues {
   repeated IncidentSeverityWithCount severity_with_count = 4;
   map<string, ContextualLabelValuesWithCount> contextual_labels = 5;
   repeated IncidentMetaLabelsWithCount meta_labels_with_count = 6;
+  FilterOperator meta_labels_op = 7;
 }
 
 message ContextualLabelValuesWithCount {
