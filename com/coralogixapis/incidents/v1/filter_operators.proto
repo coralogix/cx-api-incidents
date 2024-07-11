@@ -1,0 +1,5 @@
+enum FilterOperator {
+    FILTER_OPERATOR_UNSPECIFIED = 0;
+    FILTER_OPERATOR_AND = 1;
+    FILTER_OPERATOR_OR = 2;
+}
