@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
+import "com/coralogixapis/incidents/v1/filter_operators.proto";
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
@@ -25,6 +26,7 @@ message IncidentQueryFilter {
   TimeRange created_at_range = 12; // filters all incidents created at the given time range
   TimeRange incident_duration_range = 13; // filters all incidents open (alive) at the given time range
   repeated MetaLabel meta_labels = 14; // filters all incidents with the given meta labels
+  FilterOperator meta_labels_op = 15; // filter operations for meta labels filter
 }
 message TimeRange {
   google.protobuf.Timestamp start_time = 1;
