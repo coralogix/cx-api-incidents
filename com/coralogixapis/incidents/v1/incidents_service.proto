@@ -241,6 +241,16 @@ message GetIncidentUsingCorrelationKeyResponse {
 message ListIncidentEventsRequest {
   IncidentEventQueryFilter filter = 1;
   PaginationRequest pagination = 2;
+  ListIncidentEventRequestOrderBy order_by = 3;
+}
+
+message ListIncidentEventRequestOrderBy {
+  IncidentEventOrderByFieldType field = 1;
+  OrderByDirection direction = 2;
+}
+
+enum IncidentEventOrderByFieldType {
+    INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED = 0;
 }
 
 message ListIncidentEventsResponse {
