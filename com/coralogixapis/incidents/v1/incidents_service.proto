@@ -8,6 +8,7 @@ import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filters_values.proto";
+import "com/coralogixapis/incidents/v1/incident_event_query_filter.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
@@ -112,6 +113,14 @@ service IncidentsService {
       post: "/v1/incidents:getIncidentUsingCorrelationKey"
       body: "*"
       };
+  }
+
+  rpc ListIncidentEvents(ListIncidentEventsRequest) returns (ListIncidentEventsResponse) {
+    option (audit_log_description).description = "List incident events";
+    option (google.api.http) = {
+      post: "/v1/incidents:listIncidentEvents"
+      body: "*"
+    };
   }
 }
 
@@ -227,4 +236,14 @@ message GetIncidentUsingCorrelationKeyRequest {
 
 message GetIncidentUsingCorrelationKeyResponse {
   Incident incident = 1;
+}
+
+message ListIncidentEventsRequest {
+  IncidentEventQueryFilter filter = 1;
+  PaginationRequest pagination = 2;
+}
+
+message ListIncidentEventsResponse {
+  repeated IncidentEvent incident_events = 1;
+  PaginationResponse pagination = 2;
 }
