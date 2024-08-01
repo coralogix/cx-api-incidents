@@ -256,6 +256,5 @@ enum IncidentEventOrderByFieldType {
 
 message ListIncidentEventsToIncidentsResponse {
   repeated IncidentEventToIncident items = 1;
-  repeated Incident incidents = 2;
-  PaginationResponse pagination = 3;
+  PaginationResponse pagination = 2;
 }
