@@ -9,7 +9,7 @@ import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/meta_label.proto";
 
-message IncidentEventItem {
+message ExtendedIncidentEvent{
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue incident_id = 2;
   IncidentEventType incident_event_type = 3;
