@@ -116,10 +116,10 @@ service IncidentsService {
       };
   }
 
-  rpc ListIncidentEvents(ListIncidentEventsRequest) returns (ListIncidentEventsResponse) {
-    option (audit_log_description).description = "List incident events";
+  rpc ListIncidentEventsToIncidents(ListIncidentEventsToIncidentsRequest) returns (ListIncidentEventsToIncidentsResponse) {
+    option (audit_log_description).description = "List incident events to incidents";
     option (google.api.http) = {
-      post: "/v1/incidents:listIncidentEvents"
+      post: "/v1/incidents:listIncidentEventsToIncidents"
       body: "*"
     };
   }
@@ -239,7 +239,7 @@ message GetIncidentUsingCorrelationKeyResponse {
   Incident incident = 1;
 }
 
-message ListIncidentEventsRequest {
+message ListIncidentEventsToIncidentsRequest {
   IncidentEventQueryFilter filter = 1;
   PaginationRequest pagination = 2;
   ListIncidentEventRequestOrderBy order_by = 3;
@@ -254,7 +254,7 @@ enum IncidentEventOrderByFieldType {
     INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED = 0;
 }
 
-message ListIncidentEventsResponse {
-  repeated ExtendedIncidentEvent incident_events_items = 1;
+message ListIncidentEventsToIncidentsResponse {
+  repeated IncidentEventToIncident items = 1;
   PaginationResponse pagination = 2;
 }
