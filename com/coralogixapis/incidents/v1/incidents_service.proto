@@ -5,11 +5,11 @@ package com.coralogixapis.incidents.v1;
 import "com/coralogixapis/incidents/v1/assignee.proto";
 import "com/coralogixapis/incidents/v1/incident.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
+import "com/coralogixapis/incidents/v1/incident_event_query_filter.proto";
+import "com/coralogixapis/incidents/v1/incident_event_to_incident/incident_event_to_incident.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filters_values.proto";
-import "com/coralogixapis/incidents/v1/incident_event_query_filter.proto";
-import "com/coralogixapis/incidents/v1/incident_event_to_incident/incident_event_to_incident.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
@@ -48,13 +48,13 @@ service IncidentsService {
       body: "*"
     };
   }
-/*
- This shouldn't be exposed in the docs, it has no external usecase
- Rpc to get the values and count of the filters of the all the incidents (under the filter specified)
- */
+  /*
+     This shouldn't be exposed in the docs, it has no external usecase
+     Rpc to get the values and count of the filters of the all the incidents (under the filter specified)
+  */
   rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {
-      option (audit_log_description).description = "Get filter values";
-      option (google.api.http) = {
+    option (audit_log_description).description = "Get filter values";
+    option (google.api.http) = {
       post: "/v1/incidents:getFilterValues"
       body: "*"
     };
@@ -106,20 +106,28 @@ service IncidentsService {
   }
 
   /*
-    This shouldn't be exposed in the docs, it has no external usecase
-   */
+     This shouldn't be exposed in the docs, it has no external usecase
+  */
   rpc GetIncidentUsingCorrelationKey(GetIncidentUsingCorrelationKeyRequest) returns (GetIncidentUsingCorrelationKeyResponse) {
-  option (audit_log_description).description = "Get incident by correlation key and specific point in time";
-      option (google.api.http) = {
+    option (audit_log_description).description = "Get incident by correlation key and specific point in time";
+    option (google.api.http) = {
       post: "/v1/incidents:getIncidentUsingCorrelationKey"
       body: "*"
-      };
+    };
   }
 
   rpc ListIncidentEventsToIncidents(ListIncidentEventsToIncidentsRequest) returns (ListIncidentEventsToIncidentsResponse) {
     option (audit_log_description).description = "List incident events to incidents";
     option (google.api.http) = {
       post: "/v1/incidents:listIncidentEventsToIncidents"
+      body: "*"
+    };
+  }
+
+  rpc ListIncidentEventsToIncidentsTotalCount(ListIncidentEventsToIncidentsTotalCountRequest) returns (ListIncidentEventsToIncidentsTotalCountResponse) {
+    option (audit_log_description).description = "List incident events to incidents total count";
+    option (google.api.http) = {
+      post: "/v1/incidents:listIncidentEventsToIncidentsTotalCount"
       body: "*"
     };
   }
@@ -251,10 +259,19 @@ message ListIncidentEventRequestOrderBy {
 }
 
 enum IncidentEventOrderByFieldType {
-    INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED = 0;
+  INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED = 0;
 }
 
 message ListIncidentEventsToIncidentsResponse {
   repeated IncidentEventToIncident items = 1;
   PaginationResponse pagination = 2;
+}
+
+message ListIncidentEventsToIncidentsTotalCountRequest {
+  IncidentEventQueryFilter filter = 1;
+}
+
+message ListIncidentEventsToIncidentsTotalCountResponse {
+  google.protobuf.UInt64Value count = 1;
+  google.protobuf.BoolValue reached_limit = 2;
 }
