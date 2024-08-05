@@ -131,6 +131,14 @@ service IncidentsService {
       body: "*"
     };
   }
+
+  rpc ListIncidentEventsFilterValues(ListIncidentEventsFilterValuesRequest) returns (ListIncidentEventsFilterValuesResponse) {
+    option (audit_log_description).description = "List incident events filter values";
+    option (google.api.http) = {
+      post: "/v1/incidents:listIncidentEventsFilterValues"
+      body: "*"
+    };
+  }
 }
 
 message GetIncidentRequest {
@@ -274,4 +282,12 @@ message ListIncidentEventsTotalCountRequest {
 message ListIncidentEventsTotalCountResponse {
   google.protobuf.UInt64Value count = 1;
   google.protobuf.BoolValue reached_limit = 2;
+}
+
+message ListIncidentEventsFilterValuesRequest {
+  IncidentEventQueryFilter filter = 1;
+}
+
+message ListIncidentEventsFilterValuesResponse {
+  IncidentQueryFiltersValues filters_values = 1;
 }
