@@ -9,6 +9,7 @@ import "com/coralogixapis/incidents/v1/incident_event_query_filter.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filters_values.proto";
+import "com/coralogixapis/incidents/v1/incident_event_extended/incident_event_extended.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
@@ -262,7 +263,7 @@ enum IncidentEventOrderByFieldType {
 }
 
 message ListIncidentEventsResponse {
-  repeated IncidentEvent items = 1;
+  repeated IncidentEventExtended items = 1;
   PaginationResponse pagination = 2;
 }
 

@@ -30,5 +30,4 @@ message IncidentEvent {
     IncidentEventOriginatorAdministrative administrative_event = 100;
     IncidentEventOriginatorOperational operational_event = 101;
   }
-  map<string, string> incident_event_metadata = 4;
 }
