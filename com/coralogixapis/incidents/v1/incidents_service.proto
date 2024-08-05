@@ -6,7 +6,6 @@ import "com/coralogixapis/incidents/v1/assignee.proto";
 import "com/coralogixapis/incidents/v1/incident.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
 import "com/coralogixapis/incidents/v1/incident_event_query_filter.proto";
-import "com/coralogixapis/incidents/v1/incident_event_to_incident/incident_event_to_incident.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filters_values.proto";
@@ -116,18 +115,18 @@ service IncidentsService {
     };
   }
 
-  rpc ListIncidentEventsToIncidents(ListIncidentEventsToIncidentsRequest) returns (ListIncidentEventsToIncidentsResponse) {
-    option (audit_log_description).description = "List incident events to incidents";
+  rpc ListIncidentEvents(ListIncidentEventsRequest) returns (ListIncidentEventsResponse) {
+    option (audit_log_description).description = "List incident events";
     option (google.api.http) = {
-      post: "/v1/incidents:listIncidentEventsToIncidents"
+      post: "/v1/incidents:listIncidentEvents"
       body: "*"
     };
   }
 
-  rpc ListIncidentEventsToIncidentsTotalCount(ListIncidentEventsToIncidentsTotalCountRequest) returns (ListIncidentEventsToIncidentsTotalCountResponse) {
-    option (audit_log_description).description = "List incident events to incidents total count";
+  rpc ListIncidentEventsTotalCount(ListIncidentEventsTotalCountRequest) returns (ListIncidentEventsTotalCountResponse) {
+    option (audit_log_description).description = "List incident events total count";
     option (google.api.http) = {
-      post: "/v1/incidents:listIncidentEventsToIncidentsTotalCount"
+      post: "/v1/incidents:listIncidentEventsTotalCount"
       body: "*"
     };
   }
@@ -247,7 +246,7 @@ message GetIncidentUsingCorrelationKeyResponse {
   Incident incident = 1;
 }
 
-message ListIncidentEventsToIncidentsRequest {
+message ListIncidentEventsRequest {
   IncidentEventQueryFilter filter = 1;
   PaginationRequest pagination = 2;
   ListIncidentEventRequestOrderBy order_by = 3;
@@ -262,16 +261,16 @@ enum IncidentEventOrderByFieldType {
   INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED = 0;
 }
 
-message ListIncidentEventsToIncidentsResponse {
-  repeated IncidentEventToIncident items = 1;
+message ListIncidentEventsResponse {
+  repeated IncidentEvent items = 1;
   PaginationResponse pagination = 2;
 }
 
-message ListIncidentEventsToIncidentsTotalCountRequest {
+message ListIncidentEventsTotalCountRequest {
   IncidentEventQueryFilter filter = 1;
 }
 
-message ListIncidentEventsToIncidentsTotalCountResponse {
+message ListIncidentEventsTotalCountResponse {
   google.protobuf.UInt64Value count = 1;
   google.protobuf.BoolValue reached_limit = 2;
 }
