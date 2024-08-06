@@ -13,7 +13,6 @@ import "google/protobuf/wrappers.proto";
 message IncidentEventExtended {
   google.protobuf.StringValue cx_event_key = 1;
   IncidentEvent incident_event = 2;
-  map<string, string> incident_event_metadata = 3;
   google.protobuf.Timestamp cx_event_timestamp = 4;
   IncidentEventExtendedMetadata incident_event_extended_metadata = 5;
 }
