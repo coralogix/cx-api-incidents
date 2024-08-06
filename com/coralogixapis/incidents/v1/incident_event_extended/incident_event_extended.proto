@@ -6,6 +6,7 @@ import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
+import "com/coralogixapis/incidents/v1/meta_label.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -26,6 +27,8 @@ message IncidentEventExtendedMetadata {
   google.protobuf.BoolValue is_muted = 6;
   IncidentStatus incident_status = 7;
   repeated google.protobuf.StringValue alert_group_by_fields = 8;
+  repeated MetaLabel alert_labels = 9;
+  map<string, string> incident_permutation = 10;
 }
 
 enum IncidentEventAlertType {
