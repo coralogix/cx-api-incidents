@@ -40,3 +40,4 @@ enum IncidentEventAlertType {
   INCIDENT_EVENT_ALERT_TYPE_TRACING = 6;
   INCIDENT_EVENT_ALERT_TYPE_FLOW = 7;
 }
+
