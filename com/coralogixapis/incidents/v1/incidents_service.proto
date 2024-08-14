@@ -115,7 +115,10 @@ service IncidentsService {
       body: "*"
     };
   }
-
+/*
+ This shouldn't be exposed in the docs, only web-app uses it for alert-explorer feature
+ Rpc to get a list of all incident events
+*/
   rpc ListIncidentEvents(ListIncidentEventsRequest) returns (ListIncidentEventsResponse) {
     option (audit_log_description).description = "List incident events";
     option (google.api.http) = {
@@ -123,7 +126,10 @@ service IncidentsService {
       body: "*"
     };
   }
-
+/*
+   This shouldn't be exposed in the docs, only web-app uses it for alert-explorer feature
+   Rpc to get a count of all incident events
+*/
   rpc ListIncidentEventsTotalCount(ListIncidentEventsTotalCountRequest) returns (ListIncidentEventsTotalCountResponse) {
     option (audit_log_description).description = "List incident events total count";
     option (google.api.http) = {
@@ -131,7 +137,10 @@ service IncidentsService {
       body: "*"
     };
   }
-
+/*
+   This shouldn't be exposed in the docs, only web-app uses it for alert-explorer feature
+   Rpc to get the filter values of incident events
+*/
   rpc ListIncidentEventsFilterValues(ListIncidentEventsFilterValuesRequest) returns (ListIncidentEventsFilterValuesResponse) {
     option (audit_log_description).description = "List incident events filter values";
     option (google.api.http) = {
