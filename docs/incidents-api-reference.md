@@ -668,19 +668,19 @@ An incident event typically refers to a specific occurrence or action related to
 
 Incident Query Filter is used for specifying criteria when querying or filtering incidents within a your system. This definition includes various fields that can be used to filter incidents based on different attributes. 
 
-| Field                  | Type                                                | Label    | Description                                           |
-|------------------------|-----------------------------------------------------|----------|-------------------------------------------------------|
-| assignee               | google.protobuf.StringValue                         | repeated | List of assignee user IDs.                            |
-| status                 | IncidentStatus                                      | repeated | List of incident statuses.                            |
-| state                  | IncidentState                                       | repeated | List of incident states.                              |
-| severity               | IncidentSeverity                                    | repeated | List of incident severities.                          |
-| contextual_labels      | IncidentQueryFilter.ContextualLabelsEntry           | repeated | List of contextual labels and their values.           |
-| search_query           | IncidentSearchQuery                                 |          | Search query for incidents.                           |
-| application_name       | google.protobuf.StringValue                         | repeated | List of application names.                            |
-| subsystem_name         | google.protobuf.StringValue                         | repeated | List of subsystem names.                              |
-| is_muted               | google.protobuf.BoolValue                           |          | Indicates whether incidents are muted.                |
-| created_at_range       | TimeRange                                           |          | Filters all incidents created at the given time range |
-| incident_duration_range| TimeRange                                           |          | Filters all incidents open (alive) at the given time range |
+| Field | Type | Label | Description |
+| --- | --- | --- | --- |
+| assignee | google.protobuf.StringValue | repeated | List of assignee user IDs. |
+| status | IncidentStatus | repeated | List of incident statuses. |
+| state | IncidentState | repeated | List of incident states. |
+| severity | IncidentSeverity | repeated | List of incident severities. |
+| contextual_labels | IncidentQueryFilter.ContextualLabelsEntry | repeated | List of contextual labels and their values. |
+| search_query | IncidentSearchQuery |  | Search query for incidents. |
+| application_name | google.protobuf.StringValue | repeated | List of application names. |
+| subsystem_name | google.protobuf.StringValue | repeated | List of subsystem names. |
+| is_muted | google.protobuf.BoolValue |  | Indicates whether incidents are muted. |
+| created_at_range | TimeRange |  | Filters all incidents created at the given time range |
+| incident_duration_range | TimeRange |  | Filters all incidents open (alive) at the given time range |
 
 
 ### IncidentQueryFilter.TimeRange
