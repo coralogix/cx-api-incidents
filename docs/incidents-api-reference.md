@@ -132,6 +132,12 @@ EOF
             "id": {
                 "value": "cdfaf78b-27ee-401f-8d13-ebd2daa08232"
             },
+            "meta_labels": [
+                {
+                    "key":"some_interesting_label",
+                    "value": "val"
+                }
+            ],
             "name": null,
             "state": "INCIDENT_STATE_TRIGGERED",
             "status": "INCIDENT_STATUS_TRIGGERED",
