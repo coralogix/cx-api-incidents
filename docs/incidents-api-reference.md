@@ -72,67 +72,31 @@ EOF
         {
             "assignments": [
                 {
-                    "assigned_to": {
-                        "user_id": {
-                            "value": "assignee@coralogix.com"
-                        }
+                    "assignedTo": {
+                        "userId": "assignee@coralogix.com"
                     },
-                    "assigned_by": {
-                        "user_id": {
-                            "value": "assignee@coralogix.com"
-                        }
+                    "assignedBy": {
+                        "userId": "assignee@coralogix.com"
                     }
                 }
             ],
             "events": [],
-            "contextual_labels": [
-                {
-                    "key": "alert_id",
-                    "value": "e2e1e00f-552f-4dfc-9d24-ab9d21d4979c"
-                },
-                {
-                    "key": "alert_name",
-                    "value": "inalert"
-                },
-                {
-                    "key": "alert_type",
-                    "value": "Standard"
-                },
-                {
-                    "key": "alert_severity",
-                    "value": "Info"
-                },
-                {
-                    "key": "alert_group_by_fields",
-                    "value": "coralogix.metadata.applicationName , coralogix.metadata.subsystemName"
-                },
-                {
-                    "key": "alert_notification_group_id",
-                    "value": "ab8dee0e-063b-43c2-89a3-bdbb068ff851"
-                },
-                {
-                    "key": "alert_notification_group_grouping_fields",
-                    "value": "coralogix.metadata.applicationName , coralogix.metadata.subsystemName"
-                },
-                {
-                    "key": "alert_notification_group_integrations_ids",
-                    "value": ""
-                }
-            ],
-            "display_labels": [
-                {
-                    "key": "coralogix.metadata.subsystemName",
-                    "value": "coralogix-operator"
-                },
-                {
-                    "key": "coralogix.metadata.applicationName",
-                    "value": "staging"
-                }
-            ],
-            "id": {
-                "value": "cdfaf78b-27ee-401f-8d13-ebd2daa08232"
+            "contextualLabels": {
+                "alert_id": "e2e1e00f-552f-4dfc-9d24-ab9d21d4979c",
+                "alert_name": "inalert",
+                "alert_type": "Standard",
+                "alert_severity": "Info",
+                "alert_group_by_fields": "coralogix.metadata.applicationName , coralogix.metadata.subsystemName",
+                "alert_notification_group_id": "ab8dee0e-063b-43c2-89a3-bdbb068ff851",
+                "alert_notification_group_grouping_fields": "coralogix.metadata.applicationName , coralogix.metadata.subsystemName",
+                "alert_notification_group_integrations_ids": ""
             },
-            "meta_labels": [
+            "displayLabels": {
+                "coralogix.metadata.subsystemName": "coralogix-operator",
+                "coralogix.metadata.applicationName": "staging"
+            },
+            "id": "cdfaf78b-27ee-401f-8d13-ebd2daa08232",
+            "metaLabels": [
                 {
                     "key":"some_interesting_label",
                     "value": "val"
@@ -143,21 +107,11 @@ EOF
             "status": "INCIDENT_STATUS_TRIGGERED",
             "description": null,
             "severity": "INCIDENT_SEVERITY_INFO",
-            "created_at": {
-                "seconds": "1703677320",
-                "nanos": 0
-            },
-            "closed_at": null,
-            "last_state_update_time": {
-                "seconds": "1706088981",
-                "nanos": 286000000
-            },
-            "last_state_update_key": {
-                "value": "8cde7807-dedc-418b-b542-62d78fead629"
-            },
-            "is_muted": {
-                "value": false
-            }
+            "createdAt": "2024-10-09T08:03:17.520Z",
+            "closedAt": null,
+            "lastStateUpdateTime": "2024-10-09T08:18:43.981Z",
+            "lastStateUpdateKey": "8cde7807-dedc-418b-b542-62d78fead629",
+            "isMuted":  false
         }
     ]
 }
@@ -674,19 +628,19 @@ An incident event typically refers to a specific occurrence or action related to
 
 Incident Query Filter is used for specifying criteria when querying or filtering incidents within a your system. This definition includes various fields that can be used to filter incidents based on different attributes. 
 
-| Field | Type | Label | Description |
-| --- |  | --- | --- |
-| assignee | google.protobuf.StringValue | repeated | List of assignee user IDs. |
-| status | IncidentStatus | repeated | List of incident statuses. |
-| state | IncidentState | repeated | List of incident states. |
-| severity | IncidentSeverity | repeated | List of incident severities. |
+| Field | Type                                      | Label | Description |
+| --- |---| --- | --- |
+| assignee | google.protobuf.StringValue               | repeated | List of assignee user IDs. |
+| status | IncidentStatus                            | repeated | List of incident statuses. |
+| state | IncidentState                             | repeated | List of incident states. |
+| severity | IncidentSeverity                          | repeated | List of incident severities. |
 | contextual_labels | IncidentQueryFilter.ContextualLabelsEntry | repeated | List of contextual labels and their values. |
-| search_query | IncidentSearchQuery |  | Search query for incidents. |
-| application_name | google.protobuf.StringValue | repeated | List of application names. |
-| subsystem_name | google.protobuf.StringValue | repeated | List of subsystem names. |
-| is_muted | google.protobuf.BoolValue |  | Indicates whether incidents are muted. |
-| created_at_range | TimeRange |  | Filters all incidents created at the given time range |
-| incident_duration_range | TimeRange |  | Filters all incidents open (alive) at the given time range |
+| search_query | IncidentSearchQuery                       |  | Search query for incidents. |
+| application_name | google.protobuf.StringValue               | repeated | List of application names. |
+| subsystem_name | google.protobuf.StringValue               | repeated | List of subsystem names. |
+| is_muted | google.protobuf.BoolValue                 |  | Indicates whether incidents are muted. |
+| created_at_range | TimeRange                                 |  | Filters all incidents created at the given time range |
+| incident_duration_range | TimeRange                                 |  | Filters all incidents open (alive) at the given time range |
 
 
 ### IncidentQueryFilter.TimeRange
