@@ -1,12 +1,18 @@
-version: v1
-deps:
-  - buf.build/googleapis/googleapis
+version: v2
+modules:
+  - path: src/
+  - path: deps/
 lint:
   use:
     - DEFAULT
   except:
     - PACKAGE_DIRECTORY_MATCH
     - PACKAGE_SAME_DIRECTORY
+    - ENUM_VALUE_PREFIX
+  ignore:
+    - deps
 breaking:
   use:
     - WIRE
+  ignore:
+    - deps
