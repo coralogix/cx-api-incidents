@@ -1,0 +1,6 @@
+name = 'cx-api-actions'
+proto_out_dir = 'deps'
+
+[cx-api-common]
+url = 'github.com/coralogix/cx-api-common'
+branch = 'master'
