@@ -61,7 +61,7 @@ message IncidentFieldOneOf {
 message ContextualLabels {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "ContextualLabels"
+      title: "Contextual labels"
       description: "Contextual labels for an incident"
       required: ["field_name", "field_value"]
     }
@@ -79,7 +79,7 @@ message GroupByValues {
 message IncidentAggregation {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IncidentAggregation"
+      title: "Incident aggregation"
       description: "An incident aggregation"
       required: ["group_bys_value", "agg_state_count", "agg_status_count", "agg_severity_count", "agg_assignments_count", "first_created_at", "last_closed_at", "all_values_count", "list_incidents_id", "last_state_update_time", "agg_meta_labels_count"]
     }
@@ -100,7 +100,7 @@ message IncidentAggregation {
 message IncidentMetaLabelsCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IncidentMetaLabelsCount"
+      title: "Incident meta labels count"
       description: "An incident meta labels count"
       required: ["meta_label", "count"]
     }
