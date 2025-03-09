@@ -18,8 +18,7 @@ enum OrderByFields {
 message OrderBy {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Order by"
-      description: "An order by for an incident"
+      title: "Incident order by"
       required: ["field", "direction"]
     }
   };
@@ -39,8 +38,7 @@ enum OrderByDirection {
 message GroupBy {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Group by"
-      description: "A group by for an incident"
+      title: "Incident group by"
       required: ["field", "order_by_direction"]
     }
   };
@@ -55,7 +53,6 @@ message IncidentSearchQuery {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident search query"
-      description: "An incident search query"
       required: ["query", "field"]
     }
   };

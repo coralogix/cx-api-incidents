@@ -11,7 +11,6 @@ message IncidentTimelineEvent {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident timeline event"
-      description: "An incident timeline event"
       required: ["name", "start_time", "end_time", "state"]
     }
   };

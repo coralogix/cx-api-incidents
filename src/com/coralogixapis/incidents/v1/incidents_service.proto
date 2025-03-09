@@ -22,7 +22,11 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 service IncidentsService {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
     name: "Incidents service"
-    description: "Handle all operations related to incident management within Coralogix."
+    description: "Handle all operations related to incident management within Coralogix. Identify, manage, and resolve incidents efficiently through automated workflows and team collaboration."
+    external_docs: {
+      description: "Find out more about incident management in our documentation"
+      url: "https://coralogix.com/docs/user-guides/alerting/incidents/"
+    }
   };
 
   rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {
@@ -187,7 +191,7 @@ service IncidentsService {
   rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get filter values";
     option (google.api.http) = {
-      post: "/v1/incidents:getFilterValues"
+      post: "/v1/incidents:get-filter-values"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -476,7 +480,7 @@ service IncidentsService {
   rpc ListIncidentEvents(ListIncidentEventsRequest) returns (ListIncidentEventsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "List incident events";
     option (google.api.http) = {
-      post: "/v1/incidents:listIncidentEvents"
+      post: "/v1/incidents:list-incident-events"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -517,7 +521,7 @@ service IncidentsService {
   rpc ListIncidentEventsTotalCount(ListIncidentEventsTotalCountRequest) returns (ListIncidentEventsTotalCountResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "List incident events total count";
     option (google.api.http) = {
-      post: "/v1/incidents:listIncidentEventsTotalCount"
+      post: "/v1/incidents:list-incident-events-total-count"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -558,7 +562,7 @@ service IncidentsService {
   rpc ListIncidentEventsFilterValues(ListIncidentEventsFilterValuesRequest) returns (ListIncidentEventsFilterValuesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "List incident events filter values";
     option (google.api.http) = {
-      post: "/v1/incidents:listIncidentEventsFilterValues"
+      post: "/v1/incidents:list-incident-events-filter-values"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -601,7 +605,6 @@ message GetIncidentRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get incident request"
-      description: "A request to get an incident by its id"
       required: ["id"]
     }
   };
@@ -644,7 +647,7 @@ message ListIncidentsRequest {
 message BatchGetIncidentRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Batch get incident request"
+      title: "Batch get incidents request"
       description: "Request to get multiple incidents by their IDs"
       required: ["ids"]
     }
@@ -655,7 +658,7 @@ message BatchGetIncidentRequest {
 message BatchGetIncidentResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Batch get incident response"
+      title: "Batch get incidents response"
       description: "Response containing the requested incidents and any IDs that weren't found"
     }
   };
@@ -892,7 +895,7 @@ message GetIncidentUsingCorrelationKeyRequest {
 message GetIncidentUsingCorrelationKeyResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Get incident using correlation key response"
+      title: "Get incident by correlation response"
       description: "Response containing the incident matching the correlation key and timestamp"
     }
   };
@@ -914,8 +917,7 @@ message ListIncidentEventsRequest {
 message ListIncidentEventRequestOrderBy {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "List incident event request order by"
-      description: "Ordering configuration for incident events list"
+      title: "List incident events order by request"
     }
   };
   IncidentEventOrderByFieldType field = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
@@ -936,7 +938,7 @@ message ListIncidentEventsResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "List incident events response"
-      description: "A response containing list of incident events and pagination information"
+      description: "A response containing a list of incident events and pagination information"
     }
   };
   repeated IncidentEventExtended items = 1;
