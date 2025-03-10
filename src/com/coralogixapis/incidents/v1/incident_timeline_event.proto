@@ -10,8 +10,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message IncidentTimelineEvent {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IncidentTimelineEvent"
-      description: "An incident timeline event"
+      title: "Incident timeline event"
       required: ["name", "start_time", "end_time", "state"]
     }
   };
