@@ -106,19 +106,43 @@ message IncidentMetaLabelsCount {
   google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
 }
 message IncidentAssignmentCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Incident assignment count"
+      required: ["assigned_to", "count"]
+    }
+  };
   UserDetails assigned_to = 1;
   google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
 }
 message IncidentSeverityCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Incident severity count"
+      required: ["severity", "count"]
+    }
+  };
   IncidentSeverity severity = 1;
   google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
 }
 message IncidentStatusCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Incident status count"
+      required: ["status", "count"]
+    }
+  };
   IncidentStatus status = 1;
   google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
 }
 
 message IncidentStateCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Incident state count"
+      required: ["state", "count"]
+    }
+  };
   IncidentState state = 1;
   google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
 }

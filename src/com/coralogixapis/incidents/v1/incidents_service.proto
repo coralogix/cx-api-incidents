@@ -2,22 +2,20 @@ syntax = "proto3";
 
 package com.coralogixapis.incidents.v1;
 
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogixapis/incidents/v1/assignee.proto";
 import "com/coralogixapis/incidents/v1/incident.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
+import "com/coralogixapis/incidents/v1/incident_event_extended/incident_event_extended.proto";
 import "com/coralogixapis/incidents/v1/incident_event_query_filter.proto";
 import "com/coralogixapis/incidents/v1/incident_query.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
 import "com/coralogixapis/incidents/v1/incident_query_filters_values.proto";
-import "com/coralogixapis/incidents/v1/incident_event_extended/incident_event_extended.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "com/coralogix/common/v1/audit_log.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
-
-
 
 service IncidentsService {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
@@ -31,28 +29,20 @@ service IncidentsService {
 
   rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get incident";
-    option (google.api.http) = {
-      get: "/v1/incidents/{id}"
-    };
+    option (google.api.http) = {get: "/v1/incidents/{id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Get incident by ID"
       description: "Retrieve detailed information about a single incident by its unique identifier."
@@ -60,9 +50,7 @@ service IncidentsService {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:read"
-            }
+            values: {string_value: "incidents:read"}
           }
         }
       }
@@ -75,22 +63,16 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Get multiple incidents by IDs"
       description: "Retrieve multiple incidents by their IDs in a single request."
@@ -98,9 +80,7 @@ service IncidentsService {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:read"
-            }
+            values: {string_value: "incidents:read"}
           }
         }
       }
@@ -116,22 +96,16 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "List incidents with filters"
       description: "Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time."
@@ -139,9 +113,7 @@ service IncidentsService {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:read"
-            }
+            values: {string_value: "incidents:read"}
           }
         }
       }
@@ -156,22 +128,16 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Get incident aggregations"
       description: "Retrieve aggregated incident data with support for grouping and filtering."
@@ -179,9 +145,7 @@ service IncidentsService {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:read"
-            }
+            values: {string_value: "incidents:read"}
           }
         }
       }
@@ -197,31 +161,23 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Get available filter values"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:read"
-            }
+            values: {string_value: "incidents:read"}
           }
         }
       }
@@ -237,22 +193,16 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Assign incidents to a user"
       description: "Assign one or more incidents to a specific user."
@@ -260,9 +210,7 @@ service IncidentsService {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:assign"
-            }
+            values: {string_value: "incidents:assign"}
           }
         }
       }
@@ -278,22 +226,16 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Remove incident user assignments"
       description: "Remove user assignments from one or more incidents."
@@ -301,9 +243,7 @@ service IncidentsService {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:assign"
-            }
+            values: {string_value: "incidents:assign"}
           }
         }
       }
@@ -318,22 +258,16 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Acknowledge incidents"
       description: "Mark one or more incidents as acknowledged."
@@ -341,9 +275,7 @@ service IncidentsService {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:acknowledge"
-            }
+            values: {string_value: "incidents:acknowledge"}
           }
         }
       }
@@ -358,31 +290,23 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Close incidents"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:close"
-            }
+            values: {string_value: "incidents:close"}
           }
         }
       }
@@ -390,28 +314,20 @@ service IncidentsService {
   }
   rpc GetIncidentEvents(GetIncidentEventsRequest) returns (GetIncidentEventsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get all incident events of the incident";
-    option (google.api.http) = {
-      get: "/v1/incidents/{incident_id}/events"
-    };
+    option (google.api.http) = {get: "/v1/incidents/{incident_id}/events"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Get incident events"
       description: "Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions."
@@ -419,9 +335,7 @@ service IncidentsService {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:read"
-            }
+            values: {string_value: "incidents:read"}
           }
         }
       }
@@ -437,22 +351,16 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Resolve incidents"
       description: "Mark one or more incidents as resolved."
@@ -460,9 +368,7 @@ service IncidentsService {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:close"
-            }
+            values: {string_value: "incidents:close"}
           }
         }
       }
@@ -474,7 +380,6 @@ service IncidentsService {
   */
   rpc GetIncidentUsingCorrelationKey(GetIncidentUsingCorrelationKeyRequest) returns (GetIncidentUsingCorrelationKeyResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get incident by correlation key and specific point in time";
-
   }
 
   rpc ListIncidentEvents(ListIncidentEventsRequest) returns (ListIncidentEventsResponse) {
@@ -486,22 +391,16 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "List incident events with filters"
       description: "List incident events with support for filtering, pagination, and ordering."
@@ -509,9 +408,7 @@ service IncidentsService {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:read"
-            }
+            values: {string_value: "incidents:read"}
           }
         }
       }
@@ -527,22 +424,16 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Get total count of incident events"
       description: "Retrieve the total count of incident events matching a filter."
@@ -550,9 +441,7 @@ service IncidentsService {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:read"
-            }
+            values: {string_value: "incidents:read"}
           }
         }
       }
@@ -568,38 +457,29 @@ service IncidentsService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Incidents service"]
       operation_id: "Get available incident event filter values"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "incidents:read"
-            }
+            values: {string_value: "incidents:read"}
           }
         }
       }
     };
   }
 }
-
 
 message GetIncidentRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -608,7 +488,7 @@ message GetIncidentRequest {
       required: ["id"]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"incident_id\"" }];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"incident_id\""}];
 }
 
 message GetIncidentResponse {
@@ -616,6 +496,7 @@ message GetIncidentResponse {
     json_schema: {
       title: "Get incident response"
       description: "Response containing the requested incident"
+      required: ["incident"]
     }
   };
   Incident incident = 1;
@@ -626,6 +507,10 @@ message ListIncidentsResponse {
     json_schema: {
       title: "List incidents response"
       description: "Response containing a list of incidents and pagination information"
+      required: [
+        "incidents",
+        "pagination"
+      ]
     }
   };
   repeated Incident incidents = 1;
@@ -639,9 +524,9 @@ message ListIncidentsRequest {
       description: "Request to list incidents with filtering, pagination and ordering options"
     }
   };
-  IncidentQueryFilter filter = 4;
-  PaginationRequest pagination = 5;
-  repeated OrderBy order_bys = 6;
+  IncidentQueryFilter filter = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter for incidents"}];
+  PaginationRequest pagination = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Pagination parameters"}];
+  repeated OrderBy order_bys = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Order by fields"}];
 }
 
 message BatchGetIncidentRequest {
@@ -681,20 +566,34 @@ message PaginationRequest {
     json_schema: {
       title: "Pagination request"
       description: "Pagination parameters for list requests"
+      required: ["page_size"]
     }
   };
-  google.protobuf.UInt32Value page_size = 1;
-  google.protobuf.StringValue page_token = 2;
+  google.protobuf.UInt32Value page_size = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Number of items to return per page"
+    example: "10"
+  }];
+  google.protobuf.StringValue page_token = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Token for the next page of results"
+    example: "\"next_page_token\""
+  }];
 }
 message PaginationResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Pagination response"
       description: "Pagination information for list responses"
+      required: ["total_size"]
     }
   };
-  google.protobuf.UInt32Value total_size = 1;
-  google.protobuf.StringValue next_page_token = 2;
+  google.protobuf.UInt32Value total_size = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Total number of items available"
+    example: "100"
+  }];
+  google.protobuf.StringValue next_page_token = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Token for the next page of results"
+    example: "\"next_page_token\""
+  }];
 }
 
 message ListIncidentAggregationsRequest {
@@ -704,19 +603,23 @@ message ListIncidentAggregationsRequest {
       description: "Request to get aggregated incident data with filtering and grouping options"
     }
   };
-  IncidentQueryFilter filter = 1;
-  repeated GroupBy group_bys = 2;
-  PaginationRequest pagination = 3;
+  IncidentQueryFilter filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter for incidents"}];
+  repeated GroupBy group_bys = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Group by fields for aggregation"}];
+  PaginationRequest pagination = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Pagination parameters"}];
 }
 message ListIncidentAggregationsResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "List incident aggregations response"
       description: "Response containing aggregated incident data and pagination information"
+      required: [
+        "incident_aggs",
+        "pagination"
+      ]
     }
   };
-  repeated IncidentAggregation incident_aggs = 1;
-  PaginationResponse pagination = 2;
+  repeated IncidentAggregation incident_aggs = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of incident aggregations"}];
+  PaginationResponse pagination = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Pagination information for the response"}];
 }
 
 message GetFilterValuesRequest {
@@ -726,13 +629,14 @@ message GetFilterValuesRequest {
       description: "Request to get available filter values for incidents"
     }
   };
-  IncidentQueryFilter filter = 1;
+  IncidentQueryFilter filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter for incidents"}];
 }
 message GetFilterValuesResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get filter values response"
       description: "Response containing available filter values for incidents"
+      required: ["filters_values"]
     }
   };
   IncidentQueryFiltersValues filters_values = 1;
@@ -746,7 +650,10 @@ message GetIncidentEventsRequest {
       required: ["incident_id"]
     }
   };
-  google.protobuf.StringValue incident_id = 1;
+  google.protobuf.StringValue incident_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "ID of the incident to retrieve events for"
+    example: "\"incident_id\""
+  }];
 }
 
 message GetIncidentEventsResponse {
@@ -756,7 +663,10 @@ message GetIncidentEventsResponse {
       description: "Response containing all events associated with the requested incident"
     }
   };
-  repeated IncidentEvent incident_events = 1;
+  repeated IncidentEvent incident_events = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "List of incident events"
+    example: "[{\"event_id\": \"event_id_1\"}, {\"event_id\": \"event_id_2\"}]"
+  }];
 }
 
 message AssignIncidentsRequest {
@@ -764,11 +674,20 @@ message AssignIncidentsRequest {
     json_schema: {
       title: "Assign incidents request"
       description: "Request to assign one or more incidents to a user"
-      required: ["incident_ids", "assigned_to"]
+      required: [
+        "incident_ids",
+        "assigned_to"
+      ]
     }
   };
-  repeated google.protobuf.StringValue incident_ids = 5;
-  UserDetails assigned_to = 2;
+  repeated google.protobuf.StringValue incident_ids = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "List of incident IDs to assign"
+    example: "[\"incident_id_1\", \"incident_id_2\"]"
+  }];
+  UserDetails assigned_to = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "User to assign the incidents to"
+    example: "{\"user_id\": \"user_id_123\"}"
+  }];
 }
 
 message UnassignIncidentsRequest {
@@ -779,7 +698,10 @@ message UnassignIncidentsRequest {
       required: ["incident_ids"]
     }
   };
-  repeated google.protobuf.StringValue incident_ids = 1;
+  repeated google.protobuf.StringValue incident_ids = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "List of incident IDs to unassign"
+    example: "[\"incident_id_1\", \"incident_id_2\"]"
+  }];
 }
 
 message UnassignIncidentsResponse {
@@ -787,9 +709,10 @@ message UnassignIncidentsResponse {
     json_schema: {
       title: "Unassign incidents response"
       description: "Response containing the updated incidents after unassignment"
+      required: ["incidents"]
     }
   };
-  repeated Incident incidents = 1;
+  repeated Incident incidents = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of incidents after unassignment"}];
 }
 
 message AssignIncidentsResponse {
@@ -797,9 +720,10 @@ message AssignIncidentsResponse {
     json_schema: {
       title: "Assign incidents response"
       description: "Response containing the updated incidents after assignment"
+      required: ["incidents"]
     }
   };
-  repeated Incident incidents = 2;
+  repeated Incident incidents = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of incidents after assignment"}];
 }
 
 message AcknowledgeIncidentsRequest {
@@ -821,9 +745,10 @@ message AcknowledgeIncidentsResponse {
     json_schema: {
       title: "Acknowledge incidents response"
       description: "Response containing the updated incidents after acknowledgment"
+      required: ["incidents"]
     }
   };
-  repeated Incident incidents = 2;
+  repeated Incident incidents = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of incidents after acknowledgment"}];
 }
 
 message CloseIncidentsRequest {
@@ -845,9 +770,10 @@ message CloseIncidentsResponse {
     json_schema: {
       title: "Close incidents response"
       description: "Response containing the updated incidents after closing"
+      required: ["incidents"]
     }
   };
-  repeated Incident incidents = 2;
+  repeated Incident incidents = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of incidents after closing"}];
 }
 
 message ResolveIncidentsRequest {
@@ -869,9 +795,10 @@ message ResolveIncidentsResponse {
     json_schema: {
       title: "Resolve incidents response"
       description: "Response containing the updated incidents after resolution"
+      required: ["incidents"]
     }
   };
-  repeated Incident incidents = 1;
+  repeated Incident incidents = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of incidents after resolution"}];
 }
 
 message GetIncidentUsingCorrelationKeyRequest {
@@ -879,7 +806,10 @@ message GetIncidentUsingCorrelationKeyRequest {
     json_schema: {
       title: "Get incident using correlation key request"
       description: "Request to get an incident using a correlation key and timestamp"
-      required: ["correlation_key", "incident_point_in_time"]
+      required: [
+        "correlation_key",
+        "incident_point_in_time"
+      ]
     }
   };
   google.protobuf.StringValue correlation_key = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
@@ -909,16 +839,14 @@ message ListIncidentEventsRequest {
       description: "Request to list incident events with filtering, pagination and ordering options"
     }
   };
-  IncidentEventQueryFilter filter = 1;
-  PaginationRequest pagination = 2;
-  ListIncidentEventRequestOrderBy order_by = 3;
+  IncidentEventQueryFilter filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter for incident events"}];
+  PaginationRequest pagination = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Pagination parameters"}];
+  ListIncidentEventRequestOrderBy order_by = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Order by fields for incident events"}];
 }
 
 message ListIncidentEventRequestOrderBy {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "List incident events order by request"
-    }
+    json_schema: {title: "List incident events order by request"}
   };
   IncidentEventOrderByFieldType field = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "Field to order by"
@@ -926,7 +854,7 @@ message ListIncidentEventRequestOrderBy {
   }];
   OrderByDirection direction = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "Sort direction (ascending or descending)"
-    example: "\"ASC\""
+    example: "\"ORDER_BY_DIRECTION_ASC\""
   }];
 }
 
@@ -941,8 +869,8 @@ message ListIncidentEventsResponse {
       description: "A response containing a list of incident events and pagination information"
     }
   };
-  repeated IncidentEventExtended items = 1;
-  PaginationResponse pagination = 2;
+  repeated IncidentEventExtended items = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of incident events"}];
+  PaginationResponse pagination = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Pagination information for the response"}];
 }
 
 message ListIncidentEventsTotalCountRequest {
@@ -952,7 +880,7 @@ message ListIncidentEventsTotalCountRequest {
       description: "A request to get the total count of incident events matching a filter"
     }
   };
-  IncidentEventQueryFilter filter = 1;
+  IncidentEventQueryFilter filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter for incident events"}];
 }
 
 message ListIncidentEventsTotalCountResponse {
@@ -979,7 +907,7 @@ message ListIncidentEventsFilterValuesRequest {
       description: "A request to get available filter values for incident events"
     }
   };
-  IncidentEventQueryFilter filter = 1;
+  IncidentEventQueryFilter filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter for incident events"}];
 }
 
 message ListIncidentEventsFilterValuesResponse {
@@ -989,5 +917,5 @@ message ListIncidentEventsFilterValuesResponse {
       description: "A response containing available filter values for incident events"
     }
   };
-  IncidentQueryFiltersValues filters_values = 1;
+  IncidentQueryFiltersValues filters_values = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Available filter values for incident events"}];
 }
