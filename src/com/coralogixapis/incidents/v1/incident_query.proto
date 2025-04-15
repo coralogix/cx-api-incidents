@@ -43,8 +43,7 @@ message GroupBy {
     json_schema: {
       title: "Incident group by"
       required: [
-        "field",
-        "order_by_direction"
+        "field"
       ]
     }
   };

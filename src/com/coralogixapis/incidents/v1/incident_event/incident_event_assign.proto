@@ -10,7 +10,6 @@ message IncidentEventAssign {
     json_schema: {
       title: "Incident event assign"
       description: "Details of the incident event assignment"
-      required: ["assignment"]
     }
   };
   Assignment assignment = 1;

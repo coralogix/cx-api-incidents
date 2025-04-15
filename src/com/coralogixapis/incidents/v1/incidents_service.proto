@@ -499,7 +499,7 @@ message GetIncidentResponse {
       required: ["incident"]
     }
   };
-  Incident incident = 1;
+  Incident incident = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The requested incident"}];
 }
 
 message ListIncidentsResponse {
@@ -545,10 +545,17 @@ message BatchGetIncidentResponse {
     json_schema: {
       title: "Batch get incidents response"
       description: "Response containing the requested incidents and any IDs that weren't found"
+      required: [
+        "incidents",
+        "not_found_ids"
+      ]
     }
   };
-  map<string, Incident> incidents = 1;
-  repeated google.protobuf.StringValue not_found_ids = 2;
+  map<string, Incident> incidents = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Map of incident IDs to their corresponding incidents"}];
+  repeated google.protobuf.StringValue not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "List of IDs that were not found"
+    example: "[\"not_found_id_1\", \"not_found_id_2\"]"
+  }];
 }
 
 message DeleteIncidentRequest {
@@ -663,10 +670,7 @@ message GetIncidentEventsResponse {
       description: "Response containing all events associated with the requested incident"
     }
   };
-  repeated IncidentEvent incident_events = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "List of incident events"
-    example: "[{\"event_id\": \"event_id_1\"}, {\"event_id\": \"event_id_2\"}]"
-  }];
+  repeated IncidentEvent incident_events = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of incident events"}];
 }
 
 message AssignIncidentsRequest {
@@ -867,6 +871,7 @@ message ListIncidentEventsResponse {
     json_schema: {
       title: "List incident events response"
       description: "A response containing a list of incident events and pagination information"
+      required: ["items"]
     }
   };
   repeated IncidentEventExtended items = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of incident events"}];

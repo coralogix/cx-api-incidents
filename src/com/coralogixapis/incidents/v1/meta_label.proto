@@ -9,7 +9,6 @@ message MetaLabel {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident meta label"
-      required: ["key", "value"]
     }
   };
   google.protobuf.StringValue key = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"key\"" }];
