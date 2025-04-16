@@ -49,7 +49,7 @@ message GroupBy {
   };
   oneof field {
     IncidentFields incident_field = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "The field to group by."
+      description: "The field to group by"
       example: "\"INCIDENTS_FIELDS_ID\""
     }];
     google.protobuf.StringValue contextual_label = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The contextual label to group by."}];
@@ -71,12 +71,12 @@ message IncidentSearchQuery {
     }
   };
   google.protobuf.StringValue query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "The search query."
+    description: "The search query"
     example: "\"error\""
   }];
   oneof field {
     IncidentFields incident_field = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "The field to search in."
+      description: "The field to search in"
       example: "\"INCIDENTS_FIELDS_STATUS\""
     }];
     google.protobuf.StringValue contextual_label = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The contextual label to search in."}];

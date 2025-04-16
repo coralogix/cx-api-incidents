@@ -14,7 +14,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message IncidentEventExtended {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Incident event extended"
+      title: "Extended incident event"
       required: [
         "cx_event_key",
         "incident_event",
