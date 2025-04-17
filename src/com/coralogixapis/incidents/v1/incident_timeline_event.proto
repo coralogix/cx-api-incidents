@@ -11,11 +11,16 @@ message IncidentTimelineEvent {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident timeline event"
-      required: ["name", "start_time", "end_time", "state"]
+      required: [
+        "name",
+        "start_time",
+        "end_time",
+        "state"
+      ]
     }
   };
-  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"incident_timeline_event_name\"" }];
-  google.protobuf.Timestamp start_time = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-01-01T00:00:00Z\"" }];
-  google.protobuf.Timestamp end_time = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-01-01T00:00:00Z\"" }];
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"incident_timeline_event_name\""}];
+  google.protobuf.Timestamp start_time = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-01-01T00:00:00Z\""}];
+  google.protobuf.Timestamp end_time = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-01-01T00:00:00Z\""}];
   IncidentState state = 4;
 }
