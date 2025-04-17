@@ -9,7 +9,7 @@ message Assignment {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Assignment"
-      description: "Details of the user who assigned the incident"
+      description: "Details of the user who assigned the incident and the user to whom it was assigned"
       required: [
         "assigned_to",
         "assigned_by"
@@ -24,12 +24,10 @@ message UserDetails {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "User details"
-      description: "Details of the user who assigned the incident"
       required: ["user_id"]
     }
   };
   google.protobuf.StringValue user_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "The ID of the user who assigned the incident."
     example: "\"user_id\""
   }];
 }
