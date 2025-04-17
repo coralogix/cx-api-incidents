@@ -44,7 +44,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Get incident by ID"
+      summary: "Get incident by ID"
       description: "Retrieve detailed information about a single incident by its unique identifier."
       extensions: {
         key: "x-coralogixPermissions"
@@ -74,7 +74,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Get multiple incidents by IDs"
+      summary: "Get multiple incidents by IDs"
       description: "Retrieve multiple incidents by their IDs in a single request."
       extensions: {
         key: "x-coralogixPermissions"
@@ -107,7 +107,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "List incidents with filters"
+      summary: "List incidents with filters"
       description: "Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time."
       extensions: {
         key: "x-coralogixPermissions"
@@ -139,7 +139,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Get incident aggregations"
+      summary: "Get incident aggregations"
       description: "Retrieve aggregated incident data with support for grouping and filtering."
       extensions: {
         key: "x-coralogixPermissions"
@@ -172,7 +172,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Get available filter values"
+      summary: "Get available filter values"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -204,7 +204,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Assign incidents to a user"
+      summary: "Assign incidents to a user"
       description: "Assign one or more incidents to a specific user."
       extensions: {
         key: "x-coralogixPermissions"
@@ -237,7 +237,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Remove incident user assignments"
+      summary: "Remove incident user assignments"
       description: "Remove user assignments from one or more incidents."
       extensions: {
         key: "x-coralogixPermissions"
@@ -269,7 +269,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Acknowledge incidents"
+      summary: "Acknowledge incidents"
       description: "Mark one or more incidents as acknowledged."
       extensions: {
         key: "x-coralogixPermissions"
@@ -301,7 +301,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Close incidents"
+      summary: "Close incidents"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -329,7 +329,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Get incident events"
+      summary: "Get incident events"
       description: "Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions."
       extensions: {
         key: "x-coralogixPermissions"
@@ -362,7 +362,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Resolve incidents"
+      summary: "Resolve incidents"
       description: "Mark one or more incidents as resolved."
       extensions: {
         key: "x-coralogixPermissions"
@@ -402,7 +402,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "List incident events with filters"
+      summary: "List incident events with filters"
       description: "List incident events with support for filtering, pagination, and ordering."
       extensions: {
         key: "x-coralogixPermissions"
@@ -435,7 +435,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Get total count of incident events"
+      summary: "Get total count of incident events"
       description: "Retrieve the total count of incident events matching a filter."
       extensions: {
         key: "x-coralogixPermissions"
@@ -468,7 +468,7 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      operation_id: "Get available incident event filter values"
+      summary: "Get available incident event filter values"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
