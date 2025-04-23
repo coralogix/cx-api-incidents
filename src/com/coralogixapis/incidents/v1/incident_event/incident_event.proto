@@ -31,12 +31,12 @@ message IncidentEvent {
   google.protobuf.StringValue id = 1 [
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "The ID of the incident event"
-      example: "incident_event_id"
+      example: "\"incident_event_id\""
     }
   ];
   IncidentEventType incident_event_type = 2 [
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      example: "INCIDENT_EVENT_TYPE_ACKNOWLEDGE"
+      example: "\"INCIDENT_EVENT_TYPE_ACKNOWLEDGE\""
     }
   ];
   oneof incident_event_payload {
@@ -49,7 +49,7 @@ message IncidentEvent {
   }
   OriginatorType originator_type = 3 [
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      example: "ORIGINATOR_TYPE_OPERATIONAL"
+      example: "\"ORIGINATOR_TYPE_OPERATIONAL\""
     }
   ];
   oneof originator {
