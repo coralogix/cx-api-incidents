@@ -34,7 +34,7 @@ enum IncidentState {
 
 enum IncidentResponderStatus {
   STATUS_UNSPECIFIED = 0;
-  PENDING = 1;
+  OPEN = 1;
   ACKNOWLEDGED = 2;
   INVESTIGATING = 3;
   CLOSED = 4;
