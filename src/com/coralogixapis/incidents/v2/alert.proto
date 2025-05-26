@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v2;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+message AlertDef {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue title = 2;
+  AlertType alert_type = 3;
+  AlertSeverity alert_severity = 4;
+  AlertMetaLabel meta_labels = 5;
+  AlertState alert_state = 6;
+  google.protobuf.Timestamp first_triggered_at = 8;
+  google.protobuf.Timestamp resolved_at = 11;
+}
+
+enum AlertPriority {
+  ALERT_PRIORITY_UNSPECIFIED = 0;
+  ALERT_PRIORITY_P5 = 1;
+  ALERT_PRIORITY_P4 = 2;
+  ALERT_PRIORITY_P3 = 3;
+  ALERT_PRIORITY_P2 = 4;
+  ALERT_PRIORITY_P1 = 5;
+}
+
+message AlertSeverity {
+  google.protobuf.Int32Value severity = 1;
+  AlertPriority priority = 2;
+}
+
+message AlertMetaLabel {
+  google.protobuf.StringValue key = 1;
+  google.protobuf.StringValue value = 2;
+}
+
+enum AlertType {
+  ALERT_TYPE_UNSPECIFIED = 0;
+  STANDARD = 1;
+  METRIC = 2;
+  NEW_VALUE = 3;
+  RATIO = 4;
+  TIME_RELATIVE = 5;
+  UNIQUE_COUNT = 6;
+  TRACING = 7;
+  FLOW = 8;
+}
+
+enum AlertState {
+  ALERT_STATE_UNSPECIFIED = 0;
+  ALERT_STATE_TRIGGERRED = 1;
+  ALERT_STATE_RESOLVED = 2;
+}

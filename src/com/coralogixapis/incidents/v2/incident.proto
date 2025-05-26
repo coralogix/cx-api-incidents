@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v2;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/incidents/v2/alert.proto";
+
+message Incident {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue title = 2;
+  google.protobuf.StringValue description = 3;
+  UserDetails assignee = 4;
+  IncidentState state = 5;
+  IncidentResponderStatus responder_status = 6;
+  IncidentPriority priority = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+  google.protobuf.Timestamp first_acknowledged_at = 10;
+  google.protobuf.Timestamp resolved_at = 11;
+  google.protobuf.Timestamp closed_at = 12;
+  IncidentSource created_by = 13;
+  repeated Alert alerts = 14;
+  repeated google.protobuf.StringValue tags = 15;
+}
+
+enum IncidentState {
+  STATE_UNSPECIFIED = 0;
+  CREATED = 1;
+  TRIGGERRED = 2;
+  RESOLVED = 3;
+  MANUALLY_RESOLVED = 4;
+}
+
+enum IncidentResponderStatus {
+  STATUS_UNSPECIFIED = 0;
+  PENDING = 1;
+  ACKNOWLEDGED = 2;
+  INVESTIGATING = 3;
+  CLOSED = 4;
+}
+
+enum IncidentPriority {
+  PRIORITY_UNSPECIFIED = 0;
+  P5 = 1;
+  P4 = 2;
+  P3 = 3;
+  P2 = 4;
+  P1 = 5;
+}
+
+message UserDetails {
+  google.protobuf.StringValue user_id = 1;
+}
+
+message AlertSource {
+  google.protobuf.StringValue id = 1;
+}
+
+message IncidentSource {
+  oneof source {
+    AlertSource alert = 1;
+    UserDetails user = 2;
+  }
+}
