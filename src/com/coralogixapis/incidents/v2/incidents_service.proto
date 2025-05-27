@@ -6,7 +6,6 @@ service IncidentsService {
 // TBD add along when the new endpoints are being implemented
 //  rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {}
 //  rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse) {}
-//  rpc ListIncidentAggregations(ListIncidentAggregationsRequest) returns (ListIncidentAggregationsResponse) {}
 //  rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {}
 //  rpc AssignIncident(AssignIncidentRequest) returns (AssignIncidentResponse) {}
 //  rpc UnassignIncident(UnassignIncidentRequest) returns (UnassignIncidentResponse) {}
@@ -14,7 +13,4 @@ service IncidentsService {
 //  rpc CloseIncident(CloseIncidentRequest) returns (CloseIncidentResponse) {}
 // For the manual resolve
 //  rpc ResolveIncident(ResolveIncidentRequest) returns (ResolveIncidentResponse) {}
-//
-//  rpc ListIncidentEvents(ListIncidentEventsRequest) returns (ListIncidentEventsResponse) {}
-//  rpc ListIncidentEventsFilterValues(ListIncidentEventsFilterValuesRequest) returns (ListIncidentEventsFilterValuesResponse) {}
 }
