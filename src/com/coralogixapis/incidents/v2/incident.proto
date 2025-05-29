@@ -8,32 +8,33 @@ import "com/coralogixapis/incidents/v2/alert.proto";
 
 message Incident {
   google.protobuf.StringValue id = 1;
-  google.protobuf.StringValue title = 2;
-  google.protobuf.StringValue description = 3;
-  UserDetails assignee = 4;
-  IncidentState state = 5;
-  IncidentResponderStatus responder_status = 6;
-  IncidentPriority priority = 7;
-  google.protobuf.Timestamp created_at = 8;
-  google.protobuf.Timestamp updated_at = 9;
-  google.protobuf.Timestamp first_acknowledged_at = 10;
-  google.protobuf.Timestamp resolved_at = 11;
-  google.protobuf.Timestamp closed_at = 12;
-  IncidentSource created_by = 13;
-  repeated Alert alerts = 14;
-  repeated google.protobuf.StringValue tags = 15;
+  google.protobuf.StringValue dedup_key = 2;
+  google.protobuf.StringValue title = 3;
+  google.protobuf.StringValue description = 4;
+  UserDetails assignee = 5;
+  IncidentState state = 6;
+  IncidentStatus status = 7;
+  IncidentPriority priority = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+  google.protobuf.Timestamp first_acknowledged_at = 11;
+  google.protobuf.Timestamp resolved_at = 12;
+  google.protobuf.Timestamp closed_at = 13;
+  IncidentSource created_by = 14;
+  repeated Alert alerts = 15;
+  repeated google.protobuf.StringValue tags = 16;
 }
 
 enum IncidentState {
-  STATE_UNSPECIFIED = 0;
+  INCIDENT_STATE_UNSPECIFIED = 0;
   CREATED = 1;
   TRIGGERRED = 2;
   RESOLVED = 3;
   MANUALLY_RESOLVED = 4;
 }
 
-enum IncidentResponderStatus {
-  STATUS_UNSPECIFIED = 0;
+enum IncidentStatus {
+  INCIDENT_STATUS_UNSPECIFIED = 0;
   OPEN = 1;
   ACKNOWLEDGED = 2;
   INVESTIGATING = 3;
@@ -41,25 +42,24 @@ enum IncidentResponderStatus {
 }
 
 enum IncidentPriority {
-  PRIORITY_UNSPECIFIED = 0;
-  P5 = 1;
-  P4 = 2;
+  INCIDENT_PRIORITY_UNSPECIFIED = 0;
+  P1 = 1;
+  P2 = 2;
   P3 = 3;
-  P2 = 4;
-  P1 = 5;
+  P4 = 4;
+  P5 = 5;
 }
 
 message UserDetails {
   google.protobuf.StringValue user_id = 1;
 }
 
-message AlertSource {
-  google.protobuf.StringValue id = 1;
-}
-
 message IncidentSource {
+  message Alert {
+    google.protobuf.StringValue id = 1;
+  }
   oneof source {
-    AlertSource alert = 1;
+    Alert alert = 1;
     UserDetails user = 2;
   }
 }

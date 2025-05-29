@@ -12,8 +12,8 @@ message AlertDef {
   AlertSeverity alert_severity = 4;
   AlertMetaLabel meta_labels = 5;
   AlertState alert_state = 6;
-  google.protobuf.Timestamp first_triggered_at = 8;
-  google.protobuf.Timestamp resolved_at = 11;
+  google.protobuf.Timestamp first_triggered_at = 7;
+  google.protobuf.Timestamp resolved_at = 8;
 }
 
 enum AlertPriority {
@@ -45,6 +45,7 @@ enum AlertType {
   UNIQUE_COUNT = 6;
   TRACING = 7;
   FLOW = 8;
+  SLO = 9;
 }
 
 enum AlertState {
