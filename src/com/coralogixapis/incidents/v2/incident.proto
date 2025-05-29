@@ -15,14 +15,15 @@ message Incident {
   IncidentState state = 6;
   IncidentStatus status = 7;
   IncidentPriority priority = 8;
-  google.protobuf.Timestamp created_at = 9;
-  google.protobuf.Timestamp updated_at = 10;
-  google.protobuf.Timestamp first_acknowledged_at = 11;
-  google.protobuf.Timestamp resolved_at = 12;
-  google.protobuf.Timestamp closed_at = 13;
-  IncidentSource created_by = 14;
-  repeated Alert alerts = 15;
-  repeated google.protobuf.StringValue tags = 16;
+  IncidentUrgency urgency = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+  google.protobuf.Timestamp first_acknowledged_at = 12;
+  google.protobuf.Timestamp resolved_at = 13;
+  google.protobuf.Timestamp closed_at = 14;
+  IncidentSource created_by = 15;
+  repeated Alert alerts = 16;
+  repeated google.protobuf.StringValue tags = 17;
 }
 
 enum IncidentState {
@@ -48,6 +49,14 @@ enum IncidentPriority {
   P3 = 3;
   P4 = 4;
   P5 = 5;
+}
+
+enum IncidentUrgency {
+  INCIDENT_URGENCY_UNSPECIFIED = 0;
+  LOW = 1;
+  MEDIUM = 2;
+  HIGH = 3;
+  CRITICAL = 4;
 }
 
 message UserDetails {
