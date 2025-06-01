@@ -22,7 +22,7 @@ message Incident {
   google.protobuf.Timestamp resolved_at = 13;
   google.protobuf.Timestamp closed_at = 14;
   IncidentSource created_by = 15;
-  repeated Alert alerts = 16;
+  repeated AlertDef alerts = 16;
   repeated google.protobuf.StringValue tags = 17;
 }
 
