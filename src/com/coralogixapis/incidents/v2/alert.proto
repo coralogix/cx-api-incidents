@@ -13,7 +13,7 @@ message AlertDef {
   AlertMetaLabel meta_labels = 5;
   AlertState alert_state = 6;
   google.protobuf.Timestamp first_triggered_at = 7;
-  google.protobuf.Timestamp resolved_at = 8;
+  optional google.protobuf.Timestamp resolved_at = 8;
 }
 
 enum AlertPriority {

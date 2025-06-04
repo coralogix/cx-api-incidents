@@ -8,22 +8,21 @@ import "com/coralogixapis/incidents/v2/alert.proto";
 
 message Incident {
   google.protobuf.StringValue id = 1;
-  google.protobuf.StringValue dedup_key = 2;
-  google.protobuf.StringValue title = 3;
-  google.protobuf.StringValue description = 4;
-  UserDetails assignee = 5;
-  IncidentState state = 6;
-  IncidentStatus status = 7;
-  IncidentPriority priority = 8;
-  IncidentUrgency urgency = 9;
-  google.protobuf.Timestamp created_at = 10;
-  google.protobuf.Timestamp updated_at = 11;
-  google.protobuf.Timestamp first_acknowledged_at = 12;
-  google.protobuf.Timestamp resolved_at = 13;
-  google.protobuf.Timestamp closed_at = 14;
-  IncidentSource created_by = 15;
-  repeated AlertDef alerts = 16;
-  repeated google.protobuf.StringValue tags = 17;
+  google.protobuf.StringValue title = 2;
+  google.protobuf.StringValue description = 3;
+  UserDetails assignee = 4;
+  IncidentState state = 5;
+  IncidentStatus status = 6;
+  IncidentPriority priority = 7;
+  IncidentUrgency urgency = 8;
+  google.protobuf.Timestamp created_at = 9;
+  optional google.protobuf.Timestamp updated_at = 10;
+  optional google.protobuf.Timestamp first_acknowledged_at = 11;
+  optional google.protobuf.Timestamp resolved_at = 12;
+  optional google.protobuf.Timestamp closed_at = 13;
+  IncidentSource created_by = 14;
+  repeated AlertDef alerts = 15;
+  repeated google.protobuf.StringValue tags = 16;
 }
 
 enum IncidentState {
