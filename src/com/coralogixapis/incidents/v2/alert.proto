@@ -9,7 +9,7 @@ message AlertDef {
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue title = 2;
   AlertType alert_type = 3;
-  AlertSeverity alert_severity = 4;
+  AlertPriority priority = 4;
   AlertMetaLabel meta_labels = 5;
   AlertState alert_state = 6;
   google.protobuf.Timestamp first_triggered_at = 7;
@@ -23,11 +23,6 @@ enum AlertPriority {
   ALERT_PRIORITY_P3 = 3;
   ALERT_PRIORITY_P2 = 4;
   ALERT_PRIORITY_P1 = 5;
-}
-
-message AlertSeverity {
-  google.protobuf.Int32Value severity = 1;
-  AlertPriority priority = 2;
 }
 
 message AlertMetaLabel {
