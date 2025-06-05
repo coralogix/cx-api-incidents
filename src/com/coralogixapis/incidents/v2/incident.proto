@@ -14,7 +14,7 @@ message Incident {
   IncidentState state = 5;
   IncidentStatus status = 6;
   IncidentPriority priority = 7;
-  IncidentUrgency urgency = 8;
+  repeated string categories = 8;
   google.protobuf.Timestamp created_at = 9;
   optional google.protobuf.Timestamp updated_at = 10;
   optional google.protobuf.Timestamp acknowledged_at = 11;
@@ -45,14 +45,6 @@ enum IncidentPriority {
   P3 = 3;
   P4 = 4;
   P5 = 5;
-}
-
-enum IncidentUrgency {
-  INCIDENT_URGENCY_UNSPECIFIED = 0;
-  LOW = 1;
-  MEDIUM = 2;
-  HIGH = 3;
-  CRITICAL = 4;
 }
 
 message UserDetails {
