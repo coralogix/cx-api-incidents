@@ -1,16 +1,78 @@
 syntax = "proto3";
 
-package com.coralogixapis.incidents.v1;
+package com.coralogixapis.incidents.v2;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/incidents/v2/incident.proto";
 
 service IncidentsService {
-// TBD add along when the new endpoints are being implemented
-//  rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {}
-//  rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse) {}
-//  rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {}
-//  rpc AssignIncident(AssignIncidentRequest) returns (AssignIncidentResponse) {}
-//  rpc UnassignIncident(UnassignIncidentRequest) returns (UnassignIncidentResponse) {}
-//  rpc AcknowledgeIncident(AcknowledgeIncidentRequest) returns (AcknowledgeIncidentResponse) {}
-//  rpc CloseIncident(CloseIncidentRequest) returns (CloseIncidentResponse) {}
-// For the manual resolve
-//  rpc ResolveIncident(ResolveIncidentRequest) returns (ResolveIncidentResponse) {}
+  rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {}
+  rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse) {}
+
+  rpc AssignIncident(AssignIncidentRequest) returns (AssignIncidentResponse) {}
+  rpc UnassignIncident(UnassignIncidentRequest) returns (UnassignIncidentResponse) {}
+
+  rpc AcknowledgeIncident(AcknowledgeIncidentRequest) returns (AcknowledgeIncidentResponse) {}
+  rpc CloseIncident(CloseIncidentRequest) returns (CloseIncidentResponse) {}
+  rpc ResolveIncident(ResolveIncidentRequest) returns (ResolveIncidentResponse) {}
+
+  // rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {}
+}
+
+// ─── Get / List ────────────────────────────────────────────────────────────────
+message GetIncidentRequest {
+  google.protobuf.StringValue id = 1;
+}
+message GetIncidentResponse {
+  Incident incident = 1;
+}
+
+message ListIncidentsRequest {
+  // pagination tbd
+  // filters tbd
+}
+message ListIncidentsResponse {
+  repeated Incident incidents = 1;
+}
+
+// ─── Assign / Unassign ─────────────────────────────────────────────────────────
+message AssignIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+  UserDetails assignee = 2;
+}
+message AssignIncidentResponse {
+  Incident incident = 1;
+}
+
+message UnassignIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+}
+message UnassignIncidentResponse {
+  Incident incident = 1;
+}
+
+// ─── Acknowledge ───────────────────────────────────────────────────────────────
+message AcknowledgeIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+  UserDetails actor = 2;
+}
+message AcknowledgeIncidentResponse {
+  Incident incident = 1;
+}
+
+// ─── Close ─────────────────────────────────────────────────────────────────────
+message CloseIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+}
+message CloseIncidentResponse {
+  Incident incident = 1;
+}
+
+// ─── Resolve ───────────────────────────────────────────────────────────────────
+message ResolveIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+}
+message ResolveIncidentResponse {
+  Incident incident = 1;
 }
