@@ -8,6 +8,7 @@ import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/meta_label.proto";
+import "com/coralogixapis/incidents/v1/group_by_tag.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
@@ -40,6 +41,8 @@ message IncidentQueryFilter {
   TimeRange incident_duration_range = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all active) incidents with the given duration range"}];
   repeated MetaLabel meta_labels = 14 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all incidents with the given meta labels"}];
   FilterOperator meta_labels_op = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The operator for the meta labels filter"}];
+  repeated GroupByTag group_by_tags = 16 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all incidents with the given group by fields"}];
+  FilterOperator group_by_tags_op = 17 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The operator for the group by fields filter"}];
 }
 message TimeRange {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {

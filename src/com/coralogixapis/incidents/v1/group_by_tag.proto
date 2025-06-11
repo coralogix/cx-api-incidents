@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v1;
+
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message GroupByTag {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Incident group by tag"}
+  };
+  google.protobuf.StringValue field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"field_name\""}];
+  google.protobuf.StringValue field_value = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"field_value\""}];
+}
