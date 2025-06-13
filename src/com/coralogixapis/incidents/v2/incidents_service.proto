@@ -10,6 +10,8 @@ service IncidentsService {
   rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {}
   rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse) {}
 
+  rpc UpdateIncident(UpdateIncidentRequest) returns (UpdateIncidentResponse) {}
+
   rpc AssignIncident(AssignIncidentRequest) returns (AssignIncidentResponse) {}
   rpc UnassignIncident(UnassignIncidentRequest) returns (UnassignIncidentResponse) {}
 
@@ -34,6 +36,20 @@ message ListIncidentsRequest {
 }
 message ListIncidentsResponse {
   repeated Incident incidents = 1;
+}
+
+// ─── Update ────────────────────────────────────────────────────────────────────
+message UpdateIncidentRequest {
+  message IncidentPatch {
+    google.protobuf.StringValue   title       = 1;
+    google.protobuf.StringValue   description = 2;
+    optional IncidentPriority     priority    = 3;
+  }
+  google.protobuf.StringValue incident_id = 1;
+  IncidentPatch patch = 2;
+}
+message UpdateIncidentResponse {
+  Incident incident = 1;
 }
 
 // ─── Assign / Unassign ─────────────────────────────────────────────────────────
