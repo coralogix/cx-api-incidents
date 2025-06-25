@@ -1,0 +1,121 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v2;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/incidents/v2/incident.proto";
+import "com/coralogixapis/incidents/v2/incident_filters.proto";
+import "com/coralogixapis/incidents/v2/pagination.proto";
+
+service IncidentsService {
+  rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {}
+  rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse) {}
+
+  rpc UpdateIncident(UpdateIncidentRequest) returns (UpdateIncidentResponse) {}
+
+  rpc AssignIncident(AssignIncidentRequest) returns (AssignIncidentResponse) {}
+  rpc UnassignIncident(UnassignIncidentRequest) returns (UnassignIncidentResponse) {}
+
+  rpc AcknowledgeIncident(AcknowledgeIncidentRequest) returns (AcknowledgeIncidentResponse) {}
+  rpc CloseIncident(CloseIncidentRequest) returns (CloseIncidentResponse) {}
+  rpc ResolveIncident(ResolveIncidentRequest) returns (ResolveIncidentResponse) {}
+
+   rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {}
+}
+
+// ─── Get / List ────────────────────────────────────────────────────────────────
+message GetIncidentRequest {
+  google.protobuf.StringValue id = 1;
+}
+message GetIncidentResponse {
+  Incident incident = 1;
+}
+
+message ListIncidentsRequest {
+  IncidentFilters filters = 1;
+  PaginationRequest pagination = 2;
+}
+message ListIncidentsResponse {
+  repeated Incident incidents = 1;
+  PaginationResponse pagination = 2;
+}
+
+// ─── Update ────────────────────────────────────────────────────────────────────
+message UpdateIncidentRequest {
+  message IncidentPatch {
+    google.protobuf.StringValue   title       = 1;
+    google.protobuf.StringValue   description = 2;
+    optional IncidentPriority     priority    = 3;
+  }
+  google.protobuf.StringValue incident_id = 1;
+  IncidentPatch patch = 2;
+}
+message UpdateIncidentResponse {
+  Incident incident = 1;
+}
+
+// ─── Assign / Unassign ─────────────────────────────────────────────────────────
+message AssignIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+  UserDetails assignee = 2;
+}
+message AssignIncidentResponse {
+  Incident incident = 1;
+}
+
+message UnassignIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+}
+message UnassignIncidentResponse {
+  Incident incident = 1;
+}
+
+// ─── Acknowledge ───────────────────────────────────────────────────────────────
+message AcknowledgeIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+  UserDetails actor = 2;
+}
+message AcknowledgeIncidentResponse {
+  Incident incident = 1;
+}
+
+// ─── Close ─────────────────────────────────────────────────────────────────────
+message CloseIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+}
+message CloseIncidentResponse {
+  Incident incident = 1;
+}
+
+// ─── Resolve ───────────────────────────────────────────────────────────────────
+message ResolveIncidentRequest {
+  google.protobuf.StringValue incident_id = 1;
+}
+message ResolveIncidentResponse {
+  Incident incident = 1;
+}
+
+// ── Filters ────────────────────────────────────────────────────────────────────
+message GetFilterValuesRequest {
+  IncidentFilters filters = 1;
+}
+
+message GetFilterValuesResponse {
+  message StateAgg {
+    IncidentState               state = 1;
+    google.protobuf.UInt32Value count = 2;
+  }
+  message PriorityAgg {
+    IncidentPriority            priority = 1;
+    google.protobuf.UInt32Value count    = 2;
+  }
+  message CategoryAgg {
+    google.protobuf.StringValue category = 1;
+    google.protobuf.UInt32Value count    = 2;
+  }
+
+  repeated StateAgg    state_aggs    = 1;
+  repeated PriorityAgg priority_aggs = 2;
+  repeated CategoryAgg category_aggs = 3;
+}
