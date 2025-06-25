@@ -5,6 +5,8 @@ package com.coralogixapis.incidents.v2;
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 import "com/coralogixapis/incidents/v2/incident.proto";
+import "com/coralogixapis/incidents/v2/incident_filters.proto";
+import "com/coralogixapis/incidents/v2/pagination.proto";
 
 service IncidentsService {
   rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {}
@@ -19,7 +21,7 @@ service IncidentsService {
   rpc CloseIncident(CloseIncidentRequest) returns (CloseIncidentResponse) {}
   rpc ResolveIncident(ResolveIncidentRequest) returns (ResolveIncidentResponse) {}
 
-  // rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {}
+   rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {}
 }
 
 // ─── Get / List ────────────────────────────────────────────────────────────────
@@ -31,11 +33,12 @@ message GetIncidentResponse {
 }
 
 message ListIncidentsRequest {
-  // pagination tbd
-  // filters tbd
+  IncidentFilters filters = 1;
+  PaginationRequest pagination = 2;
 }
 message ListIncidentsResponse {
   repeated Incident incidents = 1;
+  PaginationResponse pagination = 2;
 }
 
 // ─── Update ────────────────────────────────────────────────────────────────────
@@ -91,4 +94,28 @@ message ResolveIncidentRequest {
 }
 message ResolveIncidentResponse {
   Incident incident = 1;
+}
+
+// ── Filters ────────────────────────────────────────────────────────────────────
+message GetFilterValuesRequest {
+  IncidentFilters filters = 1;
+}
+
+message GetFilterValuesResponse {
+  message StateAgg {
+    IncidentState               state = 1;
+    google.protobuf.UInt32Value count = 2;
+  }
+  message PriorityAgg {
+    IncidentPriority            priority = 1;
+    google.protobuf.UInt32Value count    = 2;
+  }
+  message CategoryAgg {
+    google.protobuf.StringValue category = 1;
+    google.protobuf.UInt32Value count    = 2;
+  }
+
+  repeated StateAgg    state_aggs    = 1;
+  repeated PriorityAgg priority_aggs = 2;
+  repeated CategoryAgg category_aggs = 3;
 }
