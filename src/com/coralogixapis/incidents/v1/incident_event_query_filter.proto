@@ -24,6 +24,7 @@ message IncidentEventQueryFilter {
   google.protobuf.BoolValue is_muted = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Indicates if the incident is muted"}];
   TimeRange timestamp = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The time range of the incident"}];
   LabelsFilter labels = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The labels of the incident"}];
+  map<string, DisplayLabelValues> display_labels = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The display labels of the incident"}];
 }
 
 message LabelsFilter {
