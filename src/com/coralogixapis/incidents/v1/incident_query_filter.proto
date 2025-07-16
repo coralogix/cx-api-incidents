@@ -40,6 +40,7 @@ message IncidentQueryFilter {
   TimeRange incident_duration_range = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all active) incidents with the given duration range"}];
   repeated MetaLabel meta_labels = 14 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all incidents with the given meta labels"}];
   FilterOperator meta_labels_op = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The operator for the meta labels filter"}];
+  map<string, DisplayLabelValues> display_labels = 16 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by display labels"}];
 }
 message TimeRange {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -65,4 +66,15 @@ message ContextualLabelValues {
     }
   };
   repeated google.protobuf.StringValue contextual_label_values = 1;
+}
+
+message DisplayLabelValues {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Display label values"
+      description: "Represents display label values for filtering incidents"
+      required: ["display_label_values"]
+    }
+  };
+  repeated google.protobuf.StringValue display_label_values = 1;
 }
