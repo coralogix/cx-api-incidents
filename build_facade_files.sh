@@ -17,7 +17,7 @@ do
     if [[ $out_module == *"coralogix"* ]]; then
         mod_path="${out_module##*/com/}"
 	# For all other protos, the package path is the same as the directory path
-	openapi_args+="--openapiv2_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/${mod_path} "
+	openapi_args+="--openapiv3_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/${mod_path} "
     fi
 done
 
@@ -28,4 +28,4 @@ do
     protofile_list+="${proto_file} "
 done
 
-protoc --proto_path=$proto_dir --openapiv2_out=../ --openapiv2_opt=allow_merge=true $openapi_args $protofile_list
+protoc --proto_path=$proto_dir --openapiv3_out=../ --openapiv3_opt=allow_merge=true $openapi_args $protofile_list
