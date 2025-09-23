@@ -375,7 +375,7 @@ service IncidentsService {
     };
   }
 
-  rpc GetByEventIdIncident(GetIncidentByEventIdRequest) returns (GetIncidentByEventIdResponse) {
+  rpc GetIncidentByEventId(GetIncidentByEventIdRequest) returns (GetIncidentByEventIdResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get incident by event id";
     option (google.api.http) = {get: "/v1/incidents/by:event/{event_id}"};
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
