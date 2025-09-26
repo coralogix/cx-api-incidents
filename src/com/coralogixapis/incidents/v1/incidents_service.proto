@@ -412,8 +412,8 @@ service IncidentsService {
         value: {description: "Internal server error"}
       }
       tags: ["Incidents service"]
-      summary: "Get incident by ID"
-      description: "Retrieve detailed information about a single incident by its unique identifier."
+      summary: "Get incident by event ID"
+      description: "Retrieve detailed information about a single incident by related alert event id."
       extensions: {
         key: "x-coralogixPermissions"
         value: {
