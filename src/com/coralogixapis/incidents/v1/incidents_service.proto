@@ -163,7 +163,7 @@ service IncidentsService {
   rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get filter values";
     option (google.api.http) = {
-      get: "/incidents/incidents/v1/filter-values"
+      post: "/incidents/incidents/v1/filter-values"
       body: "*"
       additional_bindings: {post: "/v1/incidents:get-filter-values"}
     };
