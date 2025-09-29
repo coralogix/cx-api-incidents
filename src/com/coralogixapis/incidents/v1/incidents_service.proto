@@ -501,7 +501,7 @@ service IncidentsService {
   rpc ListIncidentEvents(ListIncidentEventsRequest) returns (ListIncidentEventsResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "List incident events";
     option (google.api.http) = {
-      get: "/incidents/incidents/v1/events"
+      post: "/incidents/incidents/v1/events"
       body: "*"
       additional_bindings: {post: "/v1/incidents:list-incident-events"}
     };
