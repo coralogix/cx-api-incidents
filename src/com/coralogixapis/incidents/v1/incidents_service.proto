@@ -569,7 +569,6 @@ service IncidentsService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "List incident events filter values";
     option (google.api.http) = {
       get: "/incidents/incidents/v1/events/filter-values"
-      body: "*"
       additional_bindings: {post: "/v1/incidents:list-incident-events-filter-values"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
